@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from './Header.js';
 import AddTask from './AddTask.js';
+import Tasks from './Tasks.js';
 
 class App extends Component {
   render() {
@@ -9,13 +10,12 @@ class App extends Component {
       <div class="App">
         <Header />
         <AddTask />
-        <TaskActions />
+        <Tasks />
 
         <input type="submit" value="Check All" />
         <input type="submit" value="Uncheck All" />
 
-        <input type="checkbox" />
-        <input type="text" />
+        
       </div>
     );
   }
