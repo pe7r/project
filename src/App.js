@@ -22,7 +22,13 @@ class App extends Component {
                 name: "Mr. Whiskerson",
                 imgUrl: "http://placekitten.com/300/200", 
                 phone: "(212) 555-1234", 
-                email: "mr.whiskaz@catnap.meow"
+                email: "mr.whiskaz@catnap.meow",
+                favouriteFood: "McDonalds"
+               }}
+
+               info = {{
+                adress: "Somewhere near McDonalds",
+                hobby: "sleep"
                }}
         />
         <SomeFunction
@@ -30,8 +36,14 @@ class App extends Component {
                 name: "Fluffykins", 
                 imgUrl: "http://placekitten.com/400/200", 
                 phone: "(212) 555-2345", 
-                email: "fluff@me.com"
+                email: "fluff@me.com",
+                favouriteFood: "Hello Burger"
                 }}
+
+                info = {{
+                adress: "Somewhere over the Rainbow",
+                hobby: "eat"
+               }}
          />
 
       </div>
