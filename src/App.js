@@ -3,6 +3,7 @@ import './App.css';
 import Header from './components/Header.js';
 import AddTask from './components/AddTask.js';
 import Tasks from './components/Tasks.js';
+import SomeFunction from './components/NonProject.js';
 
 class App extends Component {
   render() {
@@ -15,7 +16,7 @@ class App extends Component {
         <input type="submit" value="Check All" />
         <input type="submit" value="Uncheck All" />
 
-        
+        {/*<SomeFunction />*/}
       </div>
     );
   }

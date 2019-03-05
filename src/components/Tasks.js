@@ -1,11 +1,10 @@
-import React from 'react';
+import React from 'react'
+import ToDoItem from './ToDoItem.js'
 
 function Tasks() {
 	return (
-		<div>
-			<input type="checkbox" />
-        	<p>Task text will be here</p>
-		</div>
+		<ToDoItem />
+		
 	)
 }
 
