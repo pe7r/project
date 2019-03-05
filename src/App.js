@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import './App.css';
-import Header from './Header.js';
-import AddTask from './AddTask.js';
-import Tasks from './Tasks.js';
+import './components/App.css';
+import Header from './components/Header.js';
+import AddTask from './components/AddTask.js';
+import Tasks from './components/Tasks.js';
 
 class App extends Component {
   render() {
