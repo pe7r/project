@@ -2,7 +2,7 @@ import React from 'react';
 
 function AddTask() {
 	return (
-		<div>
+		<div className="add-task">
 			<input type="text" placeholder="Type here..." />
         	<input type="submit" value="Add" onclick="" />
 		</div>

@@ -2,7 +2,7 @@ import React from 'react';
 
 function ToDoItem() {
 	return (
-		<div>
+		<div className="todo-item">
 			<input type="checkbox" />
         	<p>Task text will be here</p>
 		</div>

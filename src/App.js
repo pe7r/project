@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from './components/Header.js';
 import AddTask from './components/AddTask.js';
-import Tasks from './components/ToDoList.js';
+import ToDoList from './components/ToDoList.js';
 import SomeFunction from './components/NonProject.js';
 
 class App extends Component {
@@ -11,11 +11,12 @@ class App extends Component {
       <div class="App">
         <Header />
         <AddTask />
-        <Tasks />
+        <ToDoList />
 
         <input type="submit" value="Check All" />
         <input type="submit" value="Uncheck All" />
 
+        
         {/*<SomeFunction />*/}
       </div>
     );
