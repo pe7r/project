@@ -19,18 +19,18 @@ class App extends Component {
         
         <SomeFunction 
                contact = {{
-                name="Mr. Whiskerson" 
-                imgUrl="http://placekitten.com/300/200" 
-                phone="(212) 555-1234" 
-                email="mr.whiskaz@catnap.meow"
+                name: "Mr. Whiskerson",
+                imgUrl: "http://placekitten.com/300/200", 
+                phone: "(212) 555-1234", 
+                email: "mr.whiskaz@catnap.meow"
                }}
         />
         <SomeFunction
                 contact = {{
-                name="Fluffykins" 
-                imgUrl="http://placekitten.com/400/200" 
-                phone="(212) 555-2345" 
-                email="fluff@me.com"
+                name: "Fluffykins", 
+                imgUrl: "http://placekitten.com/400/200", 
+                phone: "(212) 555-2345", 
+                email: "fluff@me.com"
                 }}
          />
 
