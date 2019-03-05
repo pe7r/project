@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './components/App.css';
+import './App.css';
 import Header from './components/Header.js';
 import AddTask from './components/AddTask.js';
 import Tasks from './components/Tasks.js';
