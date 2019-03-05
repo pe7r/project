@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from './components/Header.js';
 import AddTask from './components/AddTask.js';
-import Tasks from './components/Tasks.js';
+import Tasks from './components/ToDoList.js';
 import SomeFunction from './components/NonProject.js';
 
 class App extends Component {
