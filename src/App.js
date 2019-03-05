@@ -17,7 +17,7 @@ class App extends Component {
         <input type="submit" value="Uncheck All" />
 
         
-        {/*<SomeFunction />*/}
+        <SomeFunction />
       </div>
     );
   }
