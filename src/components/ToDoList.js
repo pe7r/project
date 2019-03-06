@@ -8,11 +8,11 @@ function ToDoList() {
 	const toDoItems = items.map(item => <ToDoItem key={item.id} text={item.text} completed={item.completed} />)
 
 	return (	
-			<div>
+			<div className="todo-list">
             	{toDoItems}
         	</div>
 		
 	)
 }
 
-export default ToDoList;
+export default ToDoList
