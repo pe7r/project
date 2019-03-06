@@ -6,7 +6,7 @@ function Product(props) {
 		<div className="todo-item">
 			<h3>Item: {props.name}</h3>
 			<hr />
-			<p>Price: {props.price} $</p>
+			<p>Price: {props.price} </p>
 			<hr />
 			<p>Description: {props.description}</p>
 			<hr />

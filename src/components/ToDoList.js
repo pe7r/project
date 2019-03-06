@@ -5,7 +5,7 @@ import items from '../items.js'
 
 function ToDoList() {
 
-	const toDoItems = items.map(item => <ToDoItem key={item.id} description={item.description} />)
+	const toDoItems = items.map(item => <ToDoItem key={item.id} text={item.text} completed={item.completed} />)
 
 	return (	
 			<div>

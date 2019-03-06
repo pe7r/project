@@ -12,14 +12,12 @@ class App extends Component {
 
     /*const jokeComponents = jokesData.map(joke => <Joke key={joke.id} question={joke.question} punchline={joke.punchline} />)*/
 
-
-
     return (
       <div className="App">
         <Header />
         <AddTask />
-        <ProductList />
         <ToDoList />
+        {/*<ProductList />*/}
 
         {/*<div>
             {jokeComponents}
