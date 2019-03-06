@@ -8,7 +8,7 @@ function Joke(props) {
 		        <h3 style={{display: props.question ? "block" : "none"}}>
 		         	Question: {props.question} 
 		        </h3>
-		        <h3> Answer: {props.punchline} </h3>
+		        <h3 style={{color: !props.question && "blue"}}> Answer: {props.punchline} </h3>
 		    	<hr/>            
         </div>
 	)
