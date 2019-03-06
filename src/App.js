@@ -3,7 +3,7 @@ import './App.css';
 import Header from './components/Header.js';
 import AddTask from './components/AddTask.js';
 import ToDoList from './components/ToDoList.js';
-import SomeFunction from './components/NonProject/NonProject.js';
+import Joke from './components/NonProject/NonProject.js';
 
 class App extends Component {
   render() {
@@ -17,33 +17,21 @@ class App extends Component {
         <input type="submit" value="Uncheck All" />
 
         
-        <SomeFunction 
-               contact = {{
-                name: "Mr. Whiskerson",
-                imgUrl: "http://placekitten.com/300/200", 
-                phone: "(212) 555-1234", 
-                email: "mr.whiskaz@catnap.meow",
-                favouriteFood: "McDonalds"
-               }}
-
-               info = {{
-                adress: "Somewhere near McDonalds",
-                hobby: "sleep"
-               }}
+        <Joke        
+          question="Q: What did the red light say to the green light?"
+          punchline="A: Don’t look, I’m changing."
         />
-        <SomeFunction
-                contact = {{
-                name: "Fluffykins", 
-                imgUrl: "http://placekitten.com/400/200", 
-                phone: "(212) 555-2345", 
-                email: "fluff@me.com",
-                favouriteFood: "Hello Burger"
-                }}
-
-                info = {{
-                adress: "Somewhere over the Rainbow",
-                hobby: "eat"
-               }}
+        <Joke         
+          question="Q: Did you hear about the mathematician who’s afraid of negative numbers?"
+          punchline="A: He’ll stop at nothing to avoid them."            
+         />
+        <Joke         
+          question="PATIENT: Doctor, I need your help. I’m addicted to checking my Twitter!"
+          punchline="DOCTOR: I’m so sorry, I don’t follow."            
+         />
+        <Joke         
+          question="Q: Why did the computer show up at work late?"
+          punchline="A: It had a  hard drive."            
          />
 
       </div>
