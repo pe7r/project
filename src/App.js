@@ -13,26 +13,27 @@ class App extends Component {
         <AddTask />
         <ToDoList />
 
-        <input type="submit" value="Check All" />
-        <input type="submit" value="Uncheck All" />
-
         
         <Joke        
-          question="Q: What did the red light say to the green light?"
-          punchline="A: Don’t look, I’m changing."
+          question="What did the red light say to the green light?"
+          punchline="Don’t look, I’m changing."
         />
         <Joke         
-          question="Q: Did you hear about the mathematician who’s afraid of negative numbers?"
-          punchline="A: He’ll stop at nothing to avoid them."            
-         />
+          question="Did you hear about the mathematician who’s afraid of negative numbers?"
+          punchline="He’ll stop at nothing to avoid them."            
+        />
         <Joke         
-          question="PATIENT: Doctor, I need your help. I’m addicted to checking my Twitter!"
-          punchline="DOCTOR: I’m so sorry, I don’t follow."            
-         />
+          question="Did you hear about the claustrophobic astronaut?"
+          punchline="He just needed a little space."            
+        />
         <Joke         
-          question="Q: Why did the computer show up at work late?"
-          punchline="A: It had a  hard drive."            
-         />
+          question="Why did the computer show up at work late?"
+          punchline="It had a  hard drive."            
+        />
+        <Joke         
+          question="What did sushi A say to sushi B?"
+          punchline="Wasabi!"            
+        />
 
       </div>
     );

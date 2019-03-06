@@ -1,8 +1,8 @@
-.joke {
+/* .joke {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-}
+} */
 
 .contact-card {
   flex-basis: 250px;
