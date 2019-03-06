@@ -34,7 +34,10 @@ class App extends Component {
           question="What did sushi A say to sushi B?"
           punchline="Wasabi!"            
         />
-
+        <Joke         
+          question=""
+          punchline="Corny jokes are a-maize-ing."            
+        />
       </div>
     );
   }
