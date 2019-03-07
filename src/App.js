@@ -8,14 +8,12 @@ import ToDoList from './components/ToDoList.js'
 class App extends Component {
   render() {
 
-    /*const jokeComponents = jokesData.map(joke => <Joke key={joke.id} question={joke.question} punchline={joke.punchline} />)*/
-
     return (
       <div className="App">
         <Header />
         <AddTask />
         <ToDoList />
-        {/*<ProductList />*/}
+       
 
         
       </div>
