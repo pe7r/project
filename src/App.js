@@ -3,9 +3,7 @@ import './App.css'
 import Header from './components/Header.js'
 import AddTask from './components/AddTask.js'
 import ToDoList from './components/ToDoList.js'
-import ProductList from './components/ProductList.js'
-/*import Joke from './components/NonProject/NonProject.js'
-import jokesData from "./jokesData"*/
+
 
 class App extends Component {
   render() {
@@ -19,9 +17,6 @@ class App extends Component {
         <ToDoList />
         {/*<ProductList />*/}
 
-        {/*<div>
-            {jokeComponents}
-        </div>*/}
         
       </div>
     )
