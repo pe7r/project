@@ -1,7 +1,7 @@
 import React from "react"
 import ReactDOM from "react-dom"
 
-// #1
+
 class App extends React.Component {
   render() {
     return (
@@ -14,7 +14,7 @@ class App extends React.Component {
     
 }
 
-// #2
+
 class Header extends React.Component {
   render() {
     return (
@@ -27,7 +27,7 @@ class Header extends React.Component {
     
 }
 
-// #3
+
 class Greeting extends React.Component {
   render() {
     const date = new Date()
