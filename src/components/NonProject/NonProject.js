@@ -1,17 +1,52 @@
-import React from 'react'
-import './NonProject.css'
+import React from "react"
+import ReactDOM from "react-dom"
 
-function Joke(props) {
-	console.log(props)
-	return (
-	    <div className="joke">
-		        <h3 style={{display: props.question ? "block" : "none"}}>
-		         	Question: {props.question} 
-		        </h3>
-		        <h3 style={{color: !props.question && "blue"}}> Answer: {props.punchline} </h3>
-		    	<hr/>            
-        </div>
-	)
+
+class App extends React.Component {
+  render() {
+    return (
+          <div>
+              <Header />
+              <Greeting />
+          </div>
+      )
+  }
+    
 }
 
-export default Joke;
+
+class Header extends React.Component {
+  render() {
+    return (
+          <header>
+              <p>Welcome, {this.props.username}!</p>
+          </header>
+      )
+  }
+
+    
+}
+
+
+class Greeting extends React.Component {
+  render() {
+    const date = new Date()
+      const hours = date.getHours()
+      let timeOfDay
+      
+      if (hours < 12) {
+          timeOfDay = "morning"
+      } else if (hours >= 12 && hours < 17) {
+          timeOfDay = "afternoon"
+      } else {
+          timeOfDay = "night"
+      }
+
+      return (
+          <h1>Good {timeOfDay} to you, sir or madam!</h1>
+      )
+  }
+    
+}
+
+ReactDOM.render(<App />, document.getElementById("root"))
