@@ -7,15 +7,11 @@ import ToDoList from './components/ToDoList.js'
 
 class App extends Component {
   render() {
-
     return (
       <div className="App">
         <Header />
         <AddTask />
-        <ToDoList />
-       
-
-        
+        <ToDoList />      
       </div>
     )
   }

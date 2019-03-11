@@ -1,7 +1,7 @@
 import React from 'react'
 import './ToDoItem.css'
 
-function ToDoItem(props) {
+const ToDoItem = (props) => {
 	console.log(props)
 	return (
 		<div className="todo-item">

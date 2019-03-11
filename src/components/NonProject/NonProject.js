@@ -4,8 +4,7 @@ class NonProject extends React.Component {
 	constructor() {
 		super()
 		this.state = {
-			isLoggedIn: true,
-			
+			isLoggedIn: false,	
 		}
 	}
 
@@ -13,19 +12,19 @@ class NonProject extends React.Component {
 
 
 	render() {
-			let wordDisplay
-			if (this.state.isLoggedIn) {
-				wordDisplay = "in"
-			} else {
-				wordDisplay = "out"
-			}
+		let wordDisplay
+		if (this.state.isLoggedIn) {
+			wordDisplay = "in"
+		} else {
+			wordDisplay = "out"
+		}
 
 
-		    return (
-		        <div>
-		            <h2>You are currently logged {wordDisplay}</h2>
-		        </div>
-    		)
+	    return (
+	        <div>
+	            <h2>You are currently logged {wordDisplay}</h2>
+	        </div>
+		)
 	}
 }
 

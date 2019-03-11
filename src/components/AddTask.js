@@ -1,15 +1,20 @@
 import React from 'react'
 import './AddTask.css'
 
-function AddTask() {
+class AddTask extends React.Component {
+	constructor(props) {
+		super(props)
+	}
 
 		
-	return (
-		<div className="add-task">
-			<input type="text" onMouseOver={} placeholder="Type here..." />
-        	<button onDoubleClick={() => alert("IT WORKS, WORKS!")}>Add task</button>
-		</div>
-	)
+	render() {
+		return (
+			<div className="add-task">
+				<input type="text" placeholder="Type here..." />
+    			<button onClick={() => alert("FBI DON'T MOVE")}>Add task</button>
+			</div>
+		)
+	}
 }
 
 export default AddTask
