@@ -1,23 +1,25 @@
-/* .joke {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-} */
-
-.contact-card {
-  flex-basis: 250px;
-  margin: 20px;
+div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-.contact-card > img {
-  width: 100%;
-  height: auto;
+h1 {
+    font-size: 3em;
 }
 
-.contact-card > h3 {
-  text-align: center;
+button {
+    border: 1px solid lightgray;
+    background-color: transparent;
+    padding: 10px;
+    border-radius: 4px;   
 }
 
-.contact-card > p {
-  font-size: 12px;
+button:hover {
+    cursor: pointer;
+}
+
+button:focus {
+    outline:0;
 }

@@ -1,31 +1,22 @@
 import React from "react"
+import './NonProject.css'
 
 class NonProject extends React.Component {
-	constructor() {
-		super()
-		this.state = {
-			isLoggedIn: false,	
-		}
-	}
-
-
-
-
-	render() {
-		let wordDisplay
-		if (this.state.isLoggedIn) {
-			wordDisplay = "in"
-		} else {
-			wordDisplay = "out"
-		}
-
-
-	    return (
-	        <div>
-	            <h2>You are currently logged {wordDisplay}</h2>
-	        </div>
-		)
-	}
+    constructor(props) {
+        super(props)
+        this.state = {
+            count: 0
+        }
+    }
+    
+    render() {
+        return (
+            <div>
+                <h1>{this.state.count}</h1>
+                <button>Change!</button>
+            </div>
+        )
+    }
 }
 
 export default NonProject
