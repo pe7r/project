@@ -4,8 +4,8 @@ import './ToDoList.css'
 import items from '../items.js'
 
 class ToDoList extends React.Component {
-	constructor() {
-		super()
+	constructor(props) {
+		super(props)
 		this.state = {
 			todos: items
 		}
