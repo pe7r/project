@@ -13,7 +13,7 @@ class ToDoList extends React.Component {
 
 
 	render() {
-		const toDoItems = this.state.todos.map(item => <ToDoItem key={item.id} text={item.text} completed={item.completed} />)
+		const toDoItems = this.state.todos.map(item => <ToDoItem key={item.id} text={item.text}/>)
 
 		return (	
 			<div className="todo-list">
