@@ -8,12 +8,16 @@ class NonProject extends React.Component {
             count: 0
         }
     }
+
+    handleClick = () => {
+    	console.log('Working!')
+    }
     
     render() {
         return (
             <div>
                 <h1>{this.state.count}</h1>
-                <button>Change!</button>
+                <button onClick={this.handleClick}>Change!</button>
             </div>
         )
     }
