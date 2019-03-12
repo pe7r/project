@@ -7,10 +7,11 @@ class NonProject extends React.Component {
         this.state = {
             count: 0
         }
+        this.handleClick = this.handleClick.bind(this)
     }
 
     handleClick = () => {
-    	console.log('Working!')
+    	this.setState({ count: 1 })
     }
     
     render() {
