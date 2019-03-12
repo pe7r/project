@@ -12,15 +12,27 @@ class ToDoList extends React.Component {
 	}
 
 	handleChange = (id) => {
-		console.log("Changed!", id)
+		this.setState(prevState => {
+			const updatedTodos = prevState.todos.map(todo => {
+				if (todo.id === id) {
+					todo.completed = !todo.completed
+				}
+				return todo
+			})
+			console.log(this.state.todos)
+			return {
+				todos: updatedTodos
+			}
+		})
 	}
 
 	render() {
 		const toDoItems = this.state.todos.map(item => <ToDoItem 
-														key={item.id}
-														id={item.id}
-														text={item.text}
-														handleChange={this.handleChange} />)
+			key={item.id}
+			id={item.id}
+			text={item.text}
+			completed={item.completed}
+			handleChange={this.handleChange} />)
 
 		return (	
 			<div className="todo-list">
