@@ -4,8 +4,8 @@ import './ToDoList.css'
 import items from '../items.js'
 
 class ToDoList extends React.Component {
-	constructor() {
-		super()
+	constructor(props) {
+		super(props)
 		this.state = {
 			todos: items
 		}
@@ -13,7 +13,7 @@ class ToDoList extends React.Component {
 
 
 	render() {
-		const toDoItems = this.state.todos.map(item => <ToDoItem key={item.id} text={item.text} completed={item.completed} />)
+		const toDoItems = this.state.todos.map(item => <ToDoItem key={item.id} text={item.text}/>)
 
 		return (	
 			<div className="todo-list">
