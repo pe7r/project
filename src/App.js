@@ -2,29 +2,38 @@ import React, { Component } from 'react'
 import './App.css'
 import Header from './components/Header.js'
 import AddTask from './components/AddTask.js'
-import ToDoList from './components/ToDoList.js'
-
+import ToDoItem from './components/ToDoItem'
 
 class App extends Component {
 	state = {
 		listOfTasks: []
 	}
 
-	addNewTaskToList = newTask => {
+	addTask = newTask => {
+		const newList = this.state.listOfTasks;
+		 newList.push(newTask);
 		this.setState({
-			listOfTasks: [...this.state.listOfTasks, newTask]
+			listOfTasks: newList
 		})
 		console.log(this.state.listOfTasks)
 	}
 
 	render() {
+
+		const toDoItems = this.state.listOfTasks.map(item => <ToDoItem 
+			key={item.date}
+			date={item.date}
+			text={item.title}
+			completed={item.completed}
+			/>)
+
 		return (
 			<div className="App">
 				<Header />
-				<AddTask handlerFromParentAddNewTask={this.addNewTaskToList} />
-				<ToDoList 
-				listOfTasks={this.state.listOfTasks}
-				/>      
+				<AddTask onCreate={this.addTask} />
+				<div className="todo-list">
+            	{toDoItems}
+        		</div>      
 			</div>
 		)
 	}

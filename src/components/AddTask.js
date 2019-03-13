@@ -16,7 +16,7 @@ class AddTask extends React.Component {
 			date: +new Date(),
 			completed: false
 		}
-		this.props.handlerFromParentAddNewTask(newTask)
+		this.props.onCreate(newTask)
 	}
 
 	render() {
@@ -27,6 +27,7 @@ class AddTask extends React.Component {
 				placeholder="Add Todo..."
 				value={this.state.title}
 				onChange={this.handleInputChange}
+				required
 				/>
     			<button onClick={this.addNewTask}>Add task</button>
 			</div>

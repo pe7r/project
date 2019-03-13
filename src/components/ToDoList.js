@@ -4,6 +4,8 @@ import './ToDoList.css'
 
 class ToDoList extends React.Component {
 
+
+
 	render() {
 		const toDoItems = this.props.listOfTasks.map(item => <ToDoItem 
 			key={item.date}
