@@ -1,15 +1,8 @@
 import React from 'react'
 import ToDoItem from './ToDoItem.js'
 import './ToDoList.css'
-import items from '../items.js'
 
 class ToDoList extends React.Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			todos: items
-		}
-	}
 
 	handleChange = (id) => {
 		this.setState(prevState => {
@@ -27,10 +20,10 @@ class ToDoList extends React.Component {
 	}
 
 	render() {
-		const toDoItems = this.state.todos.map(item => <ToDoItem 
-			key={item.id}
-			id={item.id}
-			text={item.text}
+		const toDoItems = this.props.listOfTasks.map(item => <ToDoItem 
+			key={item.date}
+			
+			text={item.title}
 			completed={item.completed}
 			handleChange={this.handleChange} />)
 
@@ -39,7 +32,7 @@ class ToDoList extends React.Component {
             	{toDoItems}
         	</div>
 		
-	)
+		)
 	}
 }
 

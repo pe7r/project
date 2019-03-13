@@ -14,6 +14,7 @@ class App extends Component {
 		this.setState({
 			listOfTasks: [...this.state.listOfTasks, newTask]
 		})
+		console.log(this.state.listOfTasks)
 	}
 
 	render() {
@@ -21,7 +22,9 @@ class App extends Component {
 			<div className="App">
 				<Header />
 				<AddTask handlerFromParentAddNewTask={this.addNewTaskToList} />
-				<ToDoList />      
+				<ToDoList 
+				listOfTasks={this.state.listOfTasks}
+				/>      
 			</div>
 		)
 	}

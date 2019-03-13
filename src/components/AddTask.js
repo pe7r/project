@@ -13,7 +13,9 @@ class AddTask extends React.Component {
 	addNewTask = () => {
 		let newTask = {
 			title: this.state.title,
-			data: +new Date()
+			date: +new Date(),
+			completed: false,
+
 		}
 		this.props.handlerFromParentAddNewTask(newTask)
 	}
