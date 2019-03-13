@@ -6,15 +6,25 @@ import ToDoList from './components/ToDoList.js'
 
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <Header />
-        <AddTask />
-        <ToDoList />      
-      </div>
-    )
-  }
+	state = {
+		listOfTasks: []
+	}
+
+	addNewTaskToList = newTask => {
+		this.setState({
+			listOfTasks: [...this.state.listOfTasks, newTask]
+		})
+	}
+
+	render() {
+		return (
+			<div className="App">
+				<Header />
+				<AddTask handlerFromParentAddNewTask={this.addNewTaskToList} />
+				<ToDoList />      
+			</div>
+		)
+	}
 }
 
 export default App
