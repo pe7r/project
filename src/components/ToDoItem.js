@@ -9,6 +9,10 @@ const ToDoItem = (props) => {
 				checked={props.completed}
 				onChange={() => props.onCheck(props.date)}/>
 			<h3>{props.text}</h3>
+			<button className="todo-item__button"
+					onClick={() => props.onDelete(props.date)}>
+				DELETE
+			</button>
 		</div>
 	)
 }

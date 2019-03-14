@@ -1,6 +1,6 @@
 .todo-item {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     padding: 30px 20px 0;
     width: 70%;
@@ -9,4 +9,8 @@
     font-weight: 100;
     font-size: 15px;
     color: #333333;
+}
+
+.todo-item__button {
+    
 }

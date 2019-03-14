@@ -23,13 +23,20 @@ class App extends Component {
 			const updatedTasks = prevState.tasks.map(task => {
 				if (task.date === date) {
 					task.completed = !task.completed
+					console.log(task)
 				}
-				console.log(task)
 				return task
 			})
 			return {
 				tasks: updatedTasks
 			}
+		})
+	}
+
+	onDelete = (date) => {
+		const newTasks = this.state.tasks.filter(task => task.date !== date)
+		this.setState({
+			tasks: newTasks
 		})
 	}
 
@@ -41,6 +48,7 @@ class App extends Component {
 			text={item.title}
 			completed={item.completed}
 			onCheck={this.onCheck}
+			onDelete={this.onDelete}
 			/>)
 
 		return (
