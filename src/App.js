@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import './App.css'
-import Header from './components/Header.js'
-import AddTask from './components/AddTask.js'
+import Header from './components/Header'
+import AddTask from './components/AddTask'
 import ToDoItem from './components/ToDoItem'
+import Filters from './components/Filters'
+
 
 class App extends Component {
 	state = {
@@ -54,6 +56,7 @@ class App extends Component {
 		return (
 			<div className="App">
 				<Header />
+				<Filters />
 				<AddTask onCreate={this.addTask} />
 				<div className="todo-list">
             		{toDoItems}

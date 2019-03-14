@@ -11,7 +11,7 @@ const ToDoItem = (props) => {
 			<h3>{props.text}</h3>
 			<button className="todo-item__button"
 					onClick={() => props.onDelete(props.date)}>
-				DELETE
+				Delete
 			</button>
 		</div>
 	)
