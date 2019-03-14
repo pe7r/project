@@ -1,0 +1,12 @@
+.filters {
+	display: flex;
+	justify-content: space-around;
+	margin-bottom: 15px;
+}
+
+.filters button {
+	background-color: black;
+	color: white;
+	margin-right: 10px;
+	border-radius: 8px;
+}

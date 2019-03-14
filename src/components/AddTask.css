@@ -2,6 +2,11 @@
 	margin-bottom: 15px;
 	display: flex;
 	justify-content: center;
+}
 
-
+.add-task button {
+	background-color: black;
+    color: white;
+    margin-right: 10px;
+    border-radius: 8px;
 }

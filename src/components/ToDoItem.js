@@ -7,8 +7,12 @@ const ToDoItem = (props) => {
 			<input 
 				type="checkbox" 
 				checked={props.completed}
-				onChange={() => props.handleChange(props.id)} />
+				onChange={() => props.onCheck(props.date)}/>
 			<h3>{props.text}</h3>
+			<button className="todo-item__button"
+					onClick={() => props.onDelete(props.date)}>
+				Delete
+			</button>
 		</div>
 	)
 }
