@@ -18,6 +18,21 @@ class App extends Component {
 		console.log(this.state.tasks)
 	}
 
+	onCheck = (date) => {
+		this.setState(prevState => {
+			const updatedTasks = prevState.tasks.map(task => {
+				if (task.date === date) {
+					task.completed = !task.completed
+				}
+				console.log(task)
+				return task
+			})
+			return {
+				tasks: updatedTasks
+			}
+		})
+	}
+
 	render() {
 
 		const toDoItems = this.state.tasks.map(item => <ToDoItem 
@@ -25,6 +40,7 @@ class App extends Component {
 			date={item.date}
 			text={item.title}
 			completed={item.completed}
+			onCheck={this.onCheck}
 			/>)
 
 		return (
@@ -32,7 +48,7 @@ class App extends Component {
 				<Header />
 				<AddTask onCreate={this.addTask} />
 				<div className="todo-list">
-            	{toDoItems}
+            		{toDoItems}
         		</div>      
 			</div>
 		)

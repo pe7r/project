@@ -7,7 +7,7 @@ const ToDoItem = (props) => {
 			<input 
 				type="checkbox" 
 				checked={props.completed}
-				onChange={() => {console.log('Checked')}}/>
+				onChange={() => props.onCheck(props.date)}/>
 			<h3>{props.text}</h3>
 		</div>
 	)
