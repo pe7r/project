@@ -3,3 +3,8 @@
 	justify-content: space-around;
 	margin-bottom: 15px;
 }
+
+.filters button {
+	color: white;
+	margin-right: 10px;
+}

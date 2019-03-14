@@ -57,6 +57,13 @@ class App extends Component {
 		console.log(this.state)
 	}
 
+	deleteSelected = (completed) => {
+		const leftTasks = this.state.tasks.filter(task => task.completed !== true)
+		this.setState({
+			tasks: leftTasks
+		}) 
+	}
+
 	onDelete = (date) => {
 		const newTasks = this.state.tasks.filter(task => task.date !== date)
 		this.setState({
@@ -81,6 +88,7 @@ class App extends Component {
 				<Filters 
 				onCheckAll={this.onCheckAll}
 				onUncheckAll={this.onUncheckAll}
+				deleteSelected={this.deleteSelected}
 				/>
 				<AddTask onCreate={this.addTask} />
 				<div className="todo-list">
