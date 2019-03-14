@@ -35,6 +35,19 @@ class App extends Component {
 		})
 	}
 
+	onCheckAll = () => {
+		const checkedTasks = [...this.state.tasks]
+		checkedTasks.forEach((item,i) => {
+			checkedTasks[i].completed = true
+		})
+		this.setState({
+			tasks: checkedTasks
+		})
+		console.log(this.state)
+	}
+
+
+
 	onDelete = (date) => {
 		const newTasks = this.state.tasks.filter(task => task.date !== date)
 		this.setState({
@@ -56,7 +69,10 @@ class App extends Component {
 		return (
 			<div className="App">
 				<Header />
-				<Filters />
+				<Filters 
+				onCheckAll={this.onCheckAll}
+				
+				/>
 				<AddTask onCreate={this.addTask} />
 				<div className="todo-list">
             		{toDoItems}
