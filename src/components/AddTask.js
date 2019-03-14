@@ -10,13 +10,30 @@ class AddTask extends React.Component {
 		this.setState({ title: event.target.value })
 	}
 
+	submit = () => {
+		if (this.isValid()) {
+			this.addNewTask()
+		} else {
+			alert("Length of task should be a minimum of 1 symbol")
+		}
+	}
+
 	addNewTask = () => {
 		let newTask = {
 			title: this.state.title,
 			date: +new Date(),
-			completed: false
+			completed: false,
+			checked: false
 		}
 		this.props.onCreate(newTask)
+	}
+
+	isValid = () => {
+		if (this.state.title.length <= 0) {
+			return false
+		} else {
+			return true
+		}
 	}
 
 	render() {
@@ -27,9 +44,9 @@ class AddTask extends React.Component {
 				placeholder="Add Todo..."
 				value={this.state.title}
 				onChange={this.handleInputChange}
-				required
+				maxLength="40"
 				/>
-    			<button onClick={this.addNewTask}>Add task</button>
+    			<button onClick={this.submit}>Add task</button>
 			</div>
 		)
 	}

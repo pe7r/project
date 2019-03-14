@@ -6,21 +6,21 @@ import ToDoItem from './components/ToDoItem'
 
 class App extends Component {
 	state = {
-		listOfTasks: []
+		tasks: []
 	}
 
 	addTask = newTask => {
-		const newList = this.state.listOfTasks;
+		const newList = this.state.tasks;
 		 newList.push(newTask);
 		this.setState({
-			listOfTasks: newList
+			tasks: newList
 		})
-		console.log(this.state.listOfTasks)
+		console.log(this.state.tasks)
 	}
 
 	render() {
 
-		const toDoItems = this.state.listOfTasks.map(item => <ToDoItem 
+		const toDoItems = this.state.tasks.map(item => <ToDoItem 
 			key={item.date}
 			date={item.date}
 			text={item.title}
