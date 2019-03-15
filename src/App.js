@@ -72,6 +72,20 @@ class App extends Component {
 		})
 	}
 
+	onShowAll = () => {
+		const allTasks = [...this.state.tasks]
+		this.setState({
+			tasks: allTasks
+		})
+	}
+
+	onShowActive = (completed) => {
+		const activeTasks = this.state.tasks.filter(task => task.completed == false)
+		this.setState({
+			tasks: activeTasks
+		})
+	}
+
 	render() {
 
 		const toDoItems = this.state.tasks.map(item => <ToDoItem 
@@ -91,8 +105,13 @@ class App extends Component {
 				onUncheckAll={this.onUncheckAll}
 				deleteSelected={this.deleteSelected}
 				/>
-				<AddTask onCreate={this.addTask} />
-				<Sort />
+				<AddTask 
+				onCreate={this.addTask} 
+				/>
+				<Sort 
+				onShowAll={this.onShowAll}
+				onShowActive={this.onShowActive}
+				/>
 				<div className="todo-list">
             		{toDoItems}
         		</div>      
