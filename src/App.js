@@ -9,16 +9,18 @@ import Sort from './components/Sort'
 
 class App extends Component {
 	state = {
-		tasks: []
+		tasks: [],
+		allTasks: []
 	}
 
 	addTask = newTask => {
 		const newList = this.state.tasks;
 		 newList.push(newTask);
 		this.setState({
-			tasks: newList
+			tasks: newList,
+			allTasks: newList
 		})
-		console.log(this.state.tasks)
+		console.log(this.state.allTasks)
 	}
 
 	onCheck = (date) => {
@@ -73,18 +75,26 @@ class App extends Component {
 	}
 
 	onShowAll = () => {
-		const allTasks = [...this.state.tasks]
+		const allTasks = this.state.allTasks.map()
 		this.setState({
 			tasks: allTasks
 		})
 	}
 
 	onShowActive = (completed) => {
-		const activeTasks = this.state.tasks.filter(task => task.completed == false)
+		const activeTasks = this.state.tasks.filter(task => task.completed === false)
 		this.setState({
 			tasks: activeTasks
 		})
 	}
+
+	onShowCompleted = (completed) => {
+		const completedTasks = this.state.tasks.filter(task => task.completed === true)
+		this.setState({
+			tasks: completedTasks
+		})
+	}
+
 
 	render() {
 
@@ -111,6 +121,7 @@ class App extends Component {
 				<Sort 
 				onShowAll={this.onShowAll}
 				onShowActive={this.onShowActive}
+				onShowCompleted={this.onShowCompleted}
 				/>
 				<div className="todo-list">
             		{toDoItems}

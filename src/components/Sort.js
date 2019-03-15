@@ -8,7 +8,7 @@ class Sort extends React.Component {
 			<div className="sortButtons">
 				<button onClick={this.props.onShowAll}> Show All </button>
 				<button onClick={this.props.onShowActive}> Show Active </button>
-				<button> Show Completed </button>
+				<button onClick={this.props.onShowCompleted}> Show Completed </button>
 			</div>
 		)
 	}
