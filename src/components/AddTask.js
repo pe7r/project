@@ -28,7 +28,13 @@ class AddTask extends React.Component {
 		}
 	}
 
+/*	handleKeyPress = (event) => {
+		if (event.key === 'Enter') {
+    		this.submit()
+	    }
+	}
 
+*/
 
 	isValid = () => {
 		if (this.state.title.length <= 0) {

@@ -10,8 +10,7 @@ import Sort from './components/Sort'
 class App extends Component {
 	state = {
 		tasks: [],
-		checkedTasks: [],
-		render: ''
+		checkedTasks: []
 	}
 
 	addTask = newTask => {
@@ -89,6 +88,8 @@ class App extends Component {
 		})
 	}
 
+	
+
 /*	onShowAll = (title) => {
 		const Alltasks = [...this.state.tasks]
 		this.setState({
@@ -139,8 +140,8 @@ class App extends Component {
 				onShowCompleted={this.onShowCompleted}
 				/>
 				<div className="todo-list">
-            		{items}
-        		</div>      
+	        		{items}
+	    		</div>      
 			</div>
 		)
 	}

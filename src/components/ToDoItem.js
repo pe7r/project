@@ -1,13 +1,16 @@
 import React from 'react'
 import './ToDoItem.css'
 
+
+
 const ToDoItem = (props) => {
 	return (
 		<div className="todo-item">
 			<input 
 				type="checkbox" 
 				checked={props.checked}
-				onChange={() => props.onCheck(props.date)}/>
+				onChange={() => props.onCheck(props.date)}
+				/>
 			<label className="switch">
 			  <input type="checkbox"
 			  		 checked={props.completed}
