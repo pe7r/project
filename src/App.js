@@ -10,38 +10,37 @@ import Sort from './components/Sort'
 class App extends Component {
 	state = {
 		tasks: [],
-		allTasks: []
+		checkedTasks: []
 	}
 
 	addTask = newTask => {
 		const newList = this.state.tasks;
 		 newList.push(newTask);
 		this.setState({
-			tasks: newList,
-			allTasks: newList
+			tasks: newList
 		})
-		console.log(this.state.allTasks)
 	}
 
 	onCheck = (date) => {
 		this.setState(prevState => {
 			const updatedTasks = prevState.tasks.map(task => {
 				if (task.date === date) {
-					task.completed = !task.completed
+					task.checked = !task.checked
 					console.log(task)
 				}
 				return task
 			})
 			return {
-				tasks: updatedTasks
+				checkedTasks: updatedTasks
 			}
 		})
+		console.log(this.state.checkedTasks)
 	}
 
 	onCheckAll = () => {
 		const checkedTasks = [...this.state.tasks]
 		checkedTasks.forEach((item,i) => {
-			checkedTasks[i].completed = true
+			checkedTasks[i].checked = true
 		})
 		this.setState({
 			tasks: checkedTasks
@@ -52,7 +51,7 @@ class App extends Component {
 	onUncheckAll = () => {
 		const checkedTasks = [...this.state.tasks]
 		checkedTasks.forEach((item,i) => {
-			checkedTasks[i].completed = false
+			checkedTasks[i].checked = false
 		})
 		this.setState({
 			tasks: checkedTasks
@@ -60,8 +59,8 @@ class App extends Component {
 		console.log(this.state)
 	}
 
-	deleteSelected = (completed) => {
-		const leftTasks = this.state.tasks.filter(task => task.completed !== true)
+	deleteSelected = (checked) => {
+		const leftTasks = this.state.tasks.filter(task => task.checked !== true)
 		this.setState({
 			tasks: leftTasks
 		}) 
@@ -74,26 +73,41 @@ class App extends Component {
 		})
 	}
 
-	onShowAll = () => {
-		const allTasks = this.state.allTasks.map()
+	onComplete = (date) => {
+		this.setState(prevState => {
+			const completedTasks = prevState.tasks.map(task => {
+				if (task.date === date) {
+					task.completed = !task.completed
+					console.log(task)
+				}
+				return task
+			})
+			return {
+				tasks: completedTasks
+			}
+		})
+	}
+
+/*	onShowAll = (title) => {
+		const Alltasks = [...this.state.tasks]
 		this.setState({
-			tasks: allTasks
+			tasks: Alltasks
 		})
 	}
 
 	onShowActive = (completed) => {
 		const activeTasks = this.state.tasks.filter(task => task.completed === false)
 		this.setState({
-			tasks: activeTasks
+			activeTasks: activeTasks
 		})
 	}
 
 	onShowCompleted = (completed) => {
 		const completedTasks = this.state.tasks.filter(task => task.completed === true)
 		this.setState({
-			tasks: completedTasks
+			completedTasks: completedTasks
 		})
-	}
+	}*/
 
 
 	render() {
@@ -102,9 +116,11 @@ class App extends Component {
 			key={item.date}
 			date={item.date}
 			text={item.title}
+			checked={item.checked}
 			completed={item.completed}
 			onCheck={this.onCheck}
 			onDelete={this.onDelete}
+			onComplete={this.onComplete}
 			/>)
 
 		return (

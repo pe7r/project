@@ -6,7 +6,17 @@ class AddTask extends React.Component {
 		title: ''
 	}
 
-	handleInputChange = event => {
+		addNewTask = () => {
+		let newTask = {
+			title: this.state.title,
+			date: +new Date(),
+			checked: false,
+			completed: false
+		}
+		this.props.onCreate(newTask)
+		}
+
+		handleInputChange = event => {
 		this.setState({ title: event.target.value })
 	}
 
@@ -18,14 +28,7 @@ class AddTask extends React.Component {
 		}
 	}
 
-	addNewTask = () => {
-		let newTask = {
-			title: this.state.title,
-			date: +new Date(),
-			completed: false
-		}
-		this.props.onCreate(newTask)
-	}
+
 
 	isValid = () => {
 		if (this.state.title.length <= 0) {
@@ -34,6 +37,7 @@ class AddTask extends React.Component {
 			return true
 		}
 	}
+
 
 	render() {
 		return (

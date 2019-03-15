@@ -6,9 +6,16 @@ const ToDoItem = (props) => {
 		<div className="todo-item">
 			<input 
 				type="checkbox" 
-				checked={props.completed}
+				checked={props.checked}
 				onChange={() => props.onCheck(props.date)}/>
-			<h3>{props.text}</h3>
+			<label className="switch">
+			  <input type="checkbox"
+			  		 checked={props.completed}
+			  		 onChange={() => props.onComplete(props.date)}
+			   />
+			  <span className="slider round"></span>
+			</label>	
+			<h2>{props.text}</h2>
 			<button className="todo-item__button"
 					onClick={() => props.onDelete(props.date)}>
 				Delete
