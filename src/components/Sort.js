@@ -9,6 +9,8 @@ class Sort extends React.Component {
 				<button onClick={this.props.onShowAll}> Show All </button>
 				<button onClick={this.props.onShowActive}> Show Active </button>
 				<button onClick={this.props.onShowCompleted}> Show Completed </button>
+				<button> Sort by date </button>
+				<button> Sort by Alphabet </button>
 			</div>
 		)
 	}

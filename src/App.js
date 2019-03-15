@@ -10,7 +10,8 @@ import Sort from './components/Sort'
 class App extends Component {
 	state = {
 		tasks: [],
-		checkedTasks: []
+		checkedTasks: [],
+		render: ''
 	}
 
 	addTask = newTask => {
@@ -102,17 +103,15 @@ class App extends Component {
 		})
 	}
 
-	onShowCompleted = (completed) => {
-		const completedTasks = this.state.tasks.filter(task => task.completed === true)
+	onShowCompleted = () => {
 		this.setState({
-			completedTasks: completedTasks
+			render: 'completed'
 		})
 	}*/
 
-
 	render() {
 
-		const toDoItems = this.state.tasks.map(item => <ToDoItem 
+		const items = this.state.tasks.map(item => <ToDoItem 
 			key={item.date}
 			date={item.date}
 			text={item.title}
@@ -140,7 +139,7 @@ class App extends Component {
 				onShowCompleted={this.onShowCompleted}
 				/>
 				<div className="todo-list">
-            		{toDoItems}
+            		{items}
         		</div>      
 			</div>
 		)
