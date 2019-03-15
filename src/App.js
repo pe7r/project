@@ -4,6 +4,7 @@ import Header from './components/Header'
 import AddTask from './components/AddTask'
 import ToDoItem from './components/ToDoItem'
 import Filters from './components/Filters'
+import Sort from './components/Sort'
 
 
 class App extends Component {
@@ -91,6 +92,7 @@ class App extends Component {
 				deleteSelected={this.deleteSelected}
 				/>
 				<AddTask onCreate={this.addTask} />
+				<Sort />
 				<div className="todo-list">
             		{toDoItems}
         		</div>      

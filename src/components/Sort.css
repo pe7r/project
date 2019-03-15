@@ -1,0 +1,8 @@
+.sortButtons {
+	display: flex;
+	justify-content: center;
+}
+
+.sortButtons button {
+	margin-right: 5px;
+}
