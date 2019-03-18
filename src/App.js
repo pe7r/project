@@ -10,7 +10,8 @@ import Sort from './components/Sort'
 class App extends Component {
 	state = {
 		tasks: [],
-		checkedTasks: []
+		sortedTasks: [],
+		showSortedTasks: false
 	}
 
 	addTask = newTask => {
@@ -86,6 +87,19 @@ class App extends Component {
 				tasks: completedTasks
 			}
 		})
+	}
+
+	setSorted = sorted => {
+		this.setState({
+			showSortedTasks: true
+		})
+	}
+
+	addSortedTasks = sortedTasks => {
+		this.setState({
+			sortedTasks: sortedTasks
+		})
+		this.setSorted(true)
 	}
 
 	
