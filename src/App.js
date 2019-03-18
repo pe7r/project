@@ -109,6 +109,11 @@ class App extends Component {
 		this.addSortedTasks(newTasks)
 	}
 
+	completedSort = (completed) => {
+		let newTasks = this.state.tasks.filter(item => item.completed === true )
+		this.addSortedTasks(newTasks)
+	}
+
 
 /*	onShowAll = (title) => {
 		const Alltasks = [...this.state.tasks]
@@ -170,6 +175,7 @@ class App extends Component {
 				onCreate={this.addTask} 
 				/>
 				<Sort
+				completedSortFromParent={this.completedSort}
 				activeSortFromParent={this.activeSort}
 				showAllFromParent={() => this.setSorted(false)}		
 				/>
