@@ -16,7 +16,7 @@ class App extends Component {
 
 	addTask = newTask => {
 		const newList = this.state.tasks;
-		 newList.push(newTask);
+		newList.push(newTask);
 		this.setState({
 			tasks: newList
 		})
@@ -91,18 +91,24 @@ class App extends Component {
 
 	setSorted = sorted => {
 		this.setState({
-			showSortedTasks: true
+			showSortedTasks: sorted
 		})
 	}
 
 	addSortedTasks = sortedTasks => {
+		console.log(sortedTasks)
 		this.setState({
 			sortedTasks: sortedTasks
 		})
+		console.log(this.state.sortedTasks)
 		this.setSorted(true)
 	}
 
-	
+	activeSort = (completed) => {
+		let newTasks = this.state.tasks.filter(item => item.completed === false )
+		this.addSortedTasks(newTasks)
+	}
+
 
 /*	onShowAll = (title) => {
 		const Alltasks = [...this.state.tasks]
@@ -126,7 +132,9 @@ class App extends Component {
 
 	render() {
 
-		const items = this.state.tasks.map(item => <ToDoItem 
+		let items = [];
+			if (this.state.showSortedTasks) {
+				items = this.state.sortedTasks.map(item => <ToDoItem 
 			key={item.date}
 			date={item.date}
 			text={item.title}
@@ -136,6 +144,19 @@ class App extends Component {
 			onDelete={this.onDelete}
 			onComplete={this.onComplete}
 			/>)
+			} else {
+				items = this.state.tasks.map(item => <ToDoItem 
+			key={item.date}
+			date={item.date}
+			text={item.title}
+			checked={item.checked}
+			completed={item.completed}
+			onCheck={this.onCheck}
+			onDelete={this.onDelete}
+			onComplete={this.onComplete}
+			/>)
+			}
+
 
 		return (
 			<div className="App">
@@ -148,14 +169,13 @@ class App extends Component {
 				<AddTask 
 				onCreate={this.addTask} 
 				/>
-				<Sort 
-				onShowAll={this.onShowAll}
-				onShowActive={this.onShowActive}
-				onShowCompleted={this.onShowCompleted}
+				<Sort
+				activeSortFromParent={this.activeSort}
+				showAllFromParent={() => this.setSorted(false)}		
 				/>
-				<div className="todo-list">
+				<ul className="todo-list">
 	        		{items}
-	    		</div>      
+	    		</ul>      
 			</div>
 		)
 	}
