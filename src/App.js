@@ -114,25 +114,11 @@ class App extends Component {
 		this.addSortedTasks(newTasks)
 	}
 
-
-/*	onShowAll = (title) => {
-		const Alltasks = [...this.state.tasks]
-		this.setState({
-			tasks: Alltasks
-		})
-	}
-
-	onShowActive = (completed) => {
-		const activeTasks = this.state.tasks.filter(task => task.completed === false)
-		this.setState({
-			activeTasks: activeTasks
-		})
-	}
-
-	onShowCompleted = () => {
-		this.setState({
-			render: 'completed'
-		})
+/*	titleSort = (text) => {
+		let newTasks = this.state.tasks.sort()
+		this.addSortedTasks(newTasks)
+		
+		DON'T FORGET TO ADD THIS INTO Sort element in App and Sort components
 	}*/
 
 	render() {
@@ -177,7 +163,7 @@ class App extends Component {
 				<Sort
 				completedSortFromParent={this.completedSort}
 				activeSortFromParent={this.activeSort}
-				showAllFromParent={() => this.setSorted(false)}		
+				showAllFromParent={() => this.setSorted(false)}	
 				/>
 				<ul className="todo-list">
 	        		{items}
