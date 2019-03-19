@@ -115,8 +115,8 @@ class App extends Component {
 
 	titleSort = (title) => {
         const newTasks = this.state.tasks.sort((a, b) => {
-             let taskA = a.title.toUpperCase()
-             let taskB = b.title.toUpperCase()
+            let taskA = a.title.toUpperCase()
+            let taskB = b.title.toUpperCase()
                  if (taskA < taskB) {
                    return -1
                  }
