@@ -113,20 +113,20 @@ class App extends Component {
 		this.addSortedTasks(newTasks)
 	}
 
-	titleSort = () => {
-		let newTasks = this.state.tasks.sort((a, b) => {
-		     let taskA = a.text.toUpperCase()
-		     let taskB = b.text.toUpperCase()
-			     if (taskA < taskB) {
-			       return -1
-			     }
-			     if (taskA > taskB) {
-			       return 1
-			     }
-			     return 0
-			})
-		this.addSortedTasks(newTasks)
-	}
+	 titleSort = (title) => {
+        const newTasks = this.state.tasks.sort((a, b) => {
+             let taskA = a.title.toUpperCase()
+             let taskB = b.title.toUpperCase()
+                 if (taskA < taskB) {
+                   return -1
+                 }
+                 if (taskA > taskB) {
+                   return 1
+                 }
+                 return 0
+            })
+        this.addSortedTasks(newTasks)
+    }
 
 	render() {
 
@@ -135,7 +135,7 @@ class App extends Component {
 				items = this.state.sortedTasks.map(item => <ToDoItem 
 			key={item.date}
 			date={item.date}
-			text={item.title}
+			title={item.title}
 			checked={item.checked}
 			completed={item.completed}
 			onCheck={this.onCheck}
@@ -146,7 +146,7 @@ class App extends Component {
 				items = this.state.tasks.map(item => <ToDoItem 
 			key={item.date}
 			date={item.date}
-			text={item.title}
+			title={item.title}
 			checked={item.checked}
 			completed={item.completed}
 			onCheck={this.onCheck}
