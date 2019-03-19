@@ -113,7 +113,7 @@ class App extends Component {
 		this.addSortedTasks(newTasks)
 	}
 
-	 titleSort = (title) => {
+	titleSort = (title) => {
         const newTasks = this.state.tasks.sort((a, b) => {
              let taskA = a.title.toUpperCase()
              let taskB = b.title.toUpperCase()
@@ -126,6 +126,11 @@ class App extends Component {
                  return 0
             })
         this.addSortedTasks(newTasks)
+    }
+
+    dateSort = (date) => {
+    	const newTasks = this.state.tasks.sort((a, b) => a.date - b.date)
+    	this.addSortedTasks(newTasks)
     }
 
 	render() {
@@ -172,6 +177,7 @@ class App extends Component {
 				activeSortFromParent={this.activeSort}
 				showAllFromParent={() => this.setSorted(false)}
 				titleSortFromParent={this.titleSort}
+				dateSortFromParent={this.dateSort}
 				/>
 				<ul className="todo-list">
 	        		{items}
