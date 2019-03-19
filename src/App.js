@@ -100,7 +100,6 @@ class App extends Component {
 		this.setState({
 			sortedTasks: sortedTasks
 		})
-		console.log(this.state.sortedTasks)
 		this.setSorted(true)
 	}
 
@@ -114,12 +113,20 @@ class App extends Component {
 		this.addSortedTasks(newTasks)
 	}
 
-/*	titleSort = (text) => {
-		let newTasks = this.state.tasks.sort()
+	titleSort = () => {
+		let newTasks = this.state.tasks.sort((a, b) => {
+		     let taskA = a.text.toUpperCase()
+		     let taskB = b.text.toUpperCase()
+			     if (taskA < taskB) {
+			       return -1
+			     }
+			     if (taskA > taskB) {
+			       return 1
+			     }
+			     return 0
+			})
 		this.addSortedTasks(newTasks)
-		
-		DON'T FORGET TO ADD THIS INTO Sort element in App and Sort components
-	}*/
+	}
 
 	render() {
 
@@ -163,7 +170,8 @@ class App extends Component {
 				<Sort
 				completedSortFromParent={this.completedSort}
 				activeSortFromParent={this.activeSort}
-				showAllFromParent={() => this.setSorted(false)}	
+				showAllFromParent={() => this.setSorted(false)}
+				titleSortFromParent={this.titleSort}
 				/>
 				<ul className="todo-list">
 	        		{items}

@@ -28,13 +28,13 @@ class AddTask extends React.Component {
 		}
 	}
 
-/*	handleKeyPress = (event) => {
+	handleKeyPress = (event) => {
 		if (event.key === 'Enter') {
     		this.submit()
 	    }
 	}
 
-*/
+
 
 	isValid = () => {
 		if (this.state.title.length <= 0) {
@@ -54,6 +54,7 @@ class AddTask extends React.Component {
 				value={this.state.title}
 				onChange={this.handleInputChange}
 				maxLength="40"
+				onKeyPress={this.handleKeyPress}
 				/>
     			<button onClick={this.submit}>Add task</button>
 			</div>

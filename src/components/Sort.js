@@ -10,7 +10,7 @@ class Sort extends React.Component {
 				<button onClick={this.props.activeSortFromParent}> Show Active </button>
 				<button onClick={this.props.completedSortFromParent}> Show Completed </button>
 				<button> Sort by date </button>
-				<button> Sort by a-z </button>
+				<button onClick={this.props.titleSortFromParent}> Sort by a-z </button>
 			</div>
 		)
 	}
