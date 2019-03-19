@@ -24,7 +24,7 @@ class AddTask extends React.Component {
 		if (this.isValid()) {
 			this.addNewTask()
 		} else {
-			alert("Length of task should be a minimum of 1 symbol")
+			alert("Task item can not be empty!")
 		}
 	}
 
