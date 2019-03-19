@@ -19,6 +19,7 @@ const ToDoItem = (props) => {
 			  <span className="slider round"></span>
 			</label>	
 			<h2>{props.title}</h2>
+			<button> Edit </button>
 			<button className="todo-item__button"
 					onClick={() => props.onDelete(props.date)}>
 				Delete
