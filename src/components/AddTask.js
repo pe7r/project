@@ -6,7 +6,17 @@ class AddTask extends React.Component {
 		title: ''
 	}
 
-	handleInputChange = event => {
+		addNewTask = () => {
+		let newTask = {
+			title: this.state.title,
+			date: +new Date(),
+			checked: false,
+			completed: false
+		}
+		this.props.onCreate(newTask)
+		}
+
+		handleInputChange = event => {
 		this.setState({ title: event.target.value })
 	}
 
@@ -18,14 +28,13 @@ class AddTask extends React.Component {
 		}
 	}
 
-	addNewTask = () => {
-		let newTask = {
-			title: this.state.title,
-			date: +new Date(),
-			completed: false
-		}
-		this.props.onCreate(newTask)
+	handleKeyPress = (event) => {
+		if (event.key === 'Enter') {
+    		this.submit()
+	    }
 	}
+
+
 
 	isValid = () => {
 		if (this.state.title.length <= 0) {
@@ -34,6 +43,7 @@ class AddTask extends React.Component {
 			return true
 		}
 	}
+
 
 	render() {
 		return (
@@ -44,6 +54,7 @@ class AddTask extends React.Component {
 				value={this.state.title}
 				onChange={this.handleInputChange}
 				maxLength="40"
+				onKeyPress={this.handleKeyPress}
 				/>
     			<button onClick={this.submit}>Add task</button>
 			</div>

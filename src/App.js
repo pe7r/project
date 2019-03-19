@@ -4,41 +4,44 @@ import Header from './components/Header'
 import AddTask from './components/AddTask'
 import ToDoItem from './components/ToDoItem'
 import Filters from './components/Filters'
+import Sort from './components/Sort'
 
 
 class App extends Component {
 	state = {
-		tasks: []
+		tasks: [],
+		sortedTasks: [],
+		showSortedTasks: false
 	}
 
 	addTask = newTask => {
 		const newList = this.state.tasks;
-		 newList.push(newTask);
+		newList.push(newTask);
 		this.setState({
 			tasks: newList
 		})
-		console.log(this.state.tasks)
 	}
 
 	onCheck = (date) => {
 		this.setState(prevState => {
 			const updatedTasks = prevState.tasks.map(task => {
 				if (task.date === date) {
-					task.completed = !task.completed
+					task.checked = !task.checked
 					console.log(task)
 				}
 				return task
 			})
 			return {
-				tasks: updatedTasks
+				checkedTasks: updatedTasks
 			}
 		})
+		console.log(this.state.checkedTasks)
 	}
 
 	onCheckAll = () => {
 		const checkedTasks = [...this.state.tasks]
 		checkedTasks.forEach((item,i) => {
-			checkedTasks[i].completed = true
+			checkedTasks[i].checked = true
 		})
 		this.setState({
 			tasks: checkedTasks
@@ -49,7 +52,7 @@ class App extends Component {
 	onUncheckAll = () => {
 		const checkedTasks = [...this.state.tasks]
 		checkedTasks.forEach((item,i) => {
-			checkedTasks[i].completed = false
+			checkedTasks[i].checked = false
 		})
 		this.setState({
 			tasks: checkedTasks
@@ -57,8 +60,8 @@ class App extends Component {
 		console.log(this.state)
 	}
 
-	deleteSelected = (completed) => {
-		const leftTasks = this.state.tasks.filter(task => task.completed !== true)
+	deleteSelected = (checked) => {
+		const leftTasks = this.state.tasks.filter(task => task.checked !== true)
 		this.setState({
 			tasks: leftTasks
 		}) 
@@ -71,16 +74,92 @@ class App extends Component {
 		})
 	}
 
+	onComplete = (date) => {
+		this.setState(prevState => {
+			const completedTasks = prevState.tasks.map(task => {
+				if (task.date === date) {
+					task.completed = !task.completed
+					console.log(task)
+				}
+				return task
+			})
+			return {
+				tasks: completedTasks
+			}
+		})
+	}
+
+	setSorted = sorted => {
+		this.setState({
+			showSortedTasks: sorted
+		})
+	}
+
+	addSortedTasks = sortedTasks => {
+		console.log(sortedTasks)
+		this.setState({
+			sortedTasks: sortedTasks
+		})
+		this.setSorted(true)
+	}
+
+	activeSort = (completed) => {
+		let newTasks = this.state.tasks.filter(item => item.completed === false )
+		this.addSortedTasks(newTasks)
+	}
+
+	completedSort = (completed) => {
+		let newTasks = this.state.tasks.filter(item => item.completed === true )
+		this.addSortedTasks(newTasks)
+	}
+
+	titleSort = (title) => {
+        const newTasks = this.state.tasks.sort((a, b) => {
+             let taskA = a.title.toUpperCase()
+             let taskB = b.title.toUpperCase()
+                 if (taskA < taskB) {
+                   return -1
+                 }
+                 if (taskA > taskB) {
+                   return 1
+                 }
+                 return 0
+            })
+        this.addSortedTasks(newTasks)
+    }
+
+    dateSort = (date) => {
+    	const newTasks = this.state.tasks.sort((a, b) => a.date - b.date)
+    	this.addSortedTasks(newTasks)
+    }
+
 	render() {
 
-		const toDoItems = this.state.tasks.map(item => <ToDoItem 
+		let items = [];
+			if (this.state.showSortedTasks) {
+				items = this.state.sortedTasks.map(item => <ToDoItem 
 			key={item.date}
 			date={item.date}
-			text={item.title}
+			title={item.title}
+			checked={item.checked}
 			completed={item.completed}
 			onCheck={this.onCheck}
 			onDelete={this.onDelete}
+			onComplete={this.onComplete}
 			/>)
+			} else {
+				items = this.state.tasks.map(item => <ToDoItem 
+			key={item.date}
+			date={item.date}
+			title={item.title}
+			checked={item.checked}
+			completed={item.completed}
+			onCheck={this.onCheck}
+			onDelete={this.onDelete}
+			onComplete={this.onComplete}
+			/>)
+			}
+
 
 		return (
 			<div className="App">
@@ -90,10 +169,19 @@ class App extends Component {
 				onUncheckAll={this.onUncheckAll}
 				deleteSelected={this.deleteSelected}
 				/>
-				<AddTask onCreate={this.addTask} />
-				<div className="todo-list">
-            		{toDoItems}
-        		</div>      
+				<AddTask 
+				onCreate={this.addTask} 
+				/>
+				<Sort
+				completedSortFromParent={this.completedSort}
+				activeSortFromParent={this.activeSort}
+				showAllFromParent={() => this.setSorted(false)}
+				titleSortFromParent={this.titleSort}
+				dateSortFromParent={this.dateSort}
+				/>
+				<ul className="todo-list">
+	        		{items}
+	    		</ul>      
 			</div>
 		)
 	}
