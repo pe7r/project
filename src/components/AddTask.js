@@ -11,7 +11,8 @@ class AddTask extends React.Component {
 			title: this.state.title,
 			date: +new Date(),
 			checked: false,
-			completed: false
+			completed: false,
+			edit: false
 		}
 		this.props.onCreate(newTask)
 		}
