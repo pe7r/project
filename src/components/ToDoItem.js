@@ -4,22 +4,26 @@ import './ToDoItem.css'
 
 
 class ToDoItem extends React.Component {
+
 	state = {
 		edit: false,
-		editedText: ''
+		editedText: '',
+		value: ''
 	}
 
 	handleEdit = () => {
-		this.setState(
-		 {	edit: !this.state.edit}
-		)
+		this.setState({ 
+			edit: !this.state.edit 
+		})
+		this.handleEditChange()
 	}
 
 	handleEditChange = event => {
-    this.setState({
-      edittedText: event.target.value
-    });
-  };
+		const title = this.props.title;
+	    this.setState({
+	      value: title
+	    })
+	}
 
 	render() {
 
@@ -35,24 +39,21 @@ class ToDoItem extends React.Component {
 					<label className="switch">
 					<input type="checkbox"
 					  	   checked={this.props.completed}
-					  	   onChange={this.handleEditChange}
-					  	   value={this.props.title}
-					/>
+					  	   onChange={this.handleEditChange}/>
 					<span className="slider round"></span>
 					</label>	
 					<input 
 						className="edit-input"
 						type="text" 
-						value={this.state.title}
+						value={this.state.value}
 						onChange={this.handleInputChange}
 						maxLength="40"
 						onKeyPress={this.handleKeyPress}
 					/>
-					<button onClick={() => this.handleEdit()}> Done </button>
+					<button onClick={() => this.handleEdit()}
+							className="todo-item__button"> Done </button>
 					<button className="todo-item__button"
-							onClick={() => console.log('Cancel')}>
-						Cancel
-					</button>
+							onClick={() => this.handleEdit()}> Cancel </button>
 				</div>
 			)
 		} else {
@@ -71,10 +72,11 @@ class ToDoItem extends React.Component {
 				<span className="slider round"></span>
 				</label>	
 				<h2>{this.props.title}</h2>
-				<button onClick={this.handleEdit}> Edit </button>
+				<button onClick={this.handleEdit}
+						className="todo-item__button"> Edit </button>
 				<button className="todo-item__button"
 						onClick={() => this.props.onDelete(this.props.date)}>
-					Delete
+				Delete
 				</button>
 			</div>
 		)
