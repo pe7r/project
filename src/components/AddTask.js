@@ -6,7 +6,7 @@ class AddTask extends React.Component {
 		title: ''
 	}
 
-		addNewTask = () => {
+	addNewTask = () => {
 		let newTask = {
 			title: this.state.title,
 			date: +new Date(),
@@ -15,7 +15,7 @@ class AddTask extends React.Component {
 			edit: false
 		}
 		this.props.onCreate(newTask)
-		}
+	}
 
 	handleInputChange = event => {
 		this.setState({ title: event.target.value })
