@@ -8,7 +8,8 @@ class ToDoItem extends React.Component {
 	state = {
 		edit: false,
 		saveChanges: false,
-		value: ''
+		value: '',
+		editedValue: ''
 	}
 
 	handleEdit = () => {
@@ -25,9 +26,10 @@ class ToDoItem extends React.Component {
 	    })
 	}
 
-	saveChanges = () => {
+	saveChanges = (event) => {
 		console.log('saveChanges');
 		this.setState({
+			editedValue: event.target.value,
 			saveChanges: true
 		})
 	}
@@ -47,14 +49,14 @@ class ToDoItem extends React.Component {
 					<label className="switch">
 					<input type="checkbox"
 					  	   checked={this.props.completed}
-					  	   onChange={this.handleEditChange}/>
+					  	   onChange={() =>this.props.onComplete(this.props.date)}/>
 					<span className="slider round"></span>
 					</label>	
 					<input 
 						className="edit-input"
 						type="text" 
 						value={this.state.value}
-						onChange={this.handleInputChange}
+						onChange={this.handleEditChange}
 						maxLength="40"
 						onKeyPress={this.handleKeyPress}
 					/>
@@ -79,7 +81,7 @@ class ToDoItem extends React.Component {
 					/>
 					<span className="slider round"></span>
 					</label>	
-					<h2>{this.props.title}</h2>
+					<h2>{this.value}</h2>
 					<button onClick={this.handleEdit}
 							className="todo-item__button"> Edit </button>
 					<button className="todo-item__button"
