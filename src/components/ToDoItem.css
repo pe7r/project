@@ -27,6 +27,10 @@
   height: 34px;
 }
 
+.edit-input {
+  width:20%;
+}
+
 /* Hide default HTML checkbox */
 .switch input {
   opacity: 0;

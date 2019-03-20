@@ -17,7 +17,7 @@ class AddTask extends React.Component {
 		this.props.onCreate(newTask)
 		}
 
-		handleInputChange = event => {
+	handleInputChange = event => {
 		this.setState({ title: event.target.value })
 	}
 
@@ -25,7 +25,7 @@ class AddTask extends React.Component {
 		if (this.isValid()) {
 			this.addNewTask()
 		} else {
-			alert("Task item can not be empty!")
+			alert("Task item can not be empty")
 		}
 	}
 

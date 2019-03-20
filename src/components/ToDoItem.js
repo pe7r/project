@@ -5,26 +5,21 @@ import './ToDoItem.css'
 
 class ToDoItem extends React.Component {
 	state = {
-		edit: false
+		edit: false,
+		editedText: ''
 	}
 
 	handleEdit = () => {
-		this.setState(prevState => 
-			this.state.edit = !this.state.edit
+		this.setState(
+		 {	edit: !this.state.edit}
 		)
 	}
 
-	onEdit = (date) => {
-		this.setState(prevState => {
-			const editedTasks = prevState.tasks.map(task => {
-				if (task.date === date) {
-					this.editTrue(true)
-				}
-				return task
-			})
-			this.addSortedTasks(editedTasks)
-		})
-	}
+	handleEditChange = event => {
+    this.setState({
+      edittedText: event.target.value
+    });
+  };
 
 	render() {
 
@@ -35,22 +30,25 @@ class ToDoItem extends React.Component {
 						type="checkbox" 
 						checked={this.props.checked}
 						onChange={() => this.props.onCheck(this.props.date)}
+						value={this.props.title}
 						/>
 					<label className="switch">
 					<input type="checkbox"
 					  	   checked={this.props.completed}
-					  	   onChange={() => this.props.onComplete(this.props.date)}
+					  	   onChange={this.handleEditChange}
+					  	   value={this.props.title}
 					/>
 					<span className="slider round"></span>
 					</label>	
 					<input 
+						className="edit-input"
 						type="text" 
 						value={this.state.title}
 						onChange={this.handleInputChange}
 						maxLength="40"
 						onKeyPress={this.handleKeyPress}
 					/>
-					<button onClick={() => this.handleEdit()}> Edit </button>
+					<button onClick={() => this.handleEdit()}> Done </button>
 					<button className="todo-item__button"
 							onClick={() => console.log('Cancel')}>
 						Cancel
