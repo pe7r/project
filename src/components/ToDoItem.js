@@ -13,9 +13,9 @@ class ToDoItem extends React.Component {
 	}
 
 	handleEdit = () => {
-		this.setState({ 
-			edit: !this.state.edit 
-		})
+		this.setState(prevState => ({ 
+			edit: !prevState.edit 
+		}))
 		this.handleEditChange()
 	}
 

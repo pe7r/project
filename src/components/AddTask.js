@@ -15,6 +15,9 @@ class AddTask extends React.Component {
 			edit: false
 		}
 		this.props.onCreate(newTask)
+		// this.setState({
+		// 	title: ''
+		// })
 	}
 
 	handleInputChange = event => {
