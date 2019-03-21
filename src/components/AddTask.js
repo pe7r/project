@@ -6,17 +6,21 @@ class AddTask extends React.Component {
 		title: ''
 	}
 
-		addNewTask = () => {
+	addNewTask = () => {
 		let newTask = {
 			title: this.state.title,
 			date: +new Date(),
 			checked: false,
-			completed: false
+			completed: false,
+			edit: false
 		}
 		this.props.onCreate(newTask)
-		}
+		// this.setState({
+		// 	title: ''
+		// })
+	}
 
-		handleInputChange = event => {
+	handleInputChange = event => {
 		this.setState({ title: event.target.value })
 	}
 
@@ -24,7 +28,7 @@ class AddTask extends React.Component {
 		if (this.isValid()) {
 			this.addNewTask()
 		} else {
-			alert("Task item can not be empty!")
+			alert("Task item can not be empty")
 		}
 	}
 

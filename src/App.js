@@ -89,6 +89,24 @@ class App extends Component {
 		})
 	}
 
+	/*editTasks = (selected) => {
+		this.setState({
+			edit: selected
+		})
+	}
+
+	onEdit = (date) => {
+		this.setState(prevState => {
+			const editedTasks = prevState.tasks.map(task => {
+				if (task.date === date) {
+					this.editTrue(true)
+				}
+				return task
+			})
+			this.addSortedTasks(editedTasks)
+		})
+	}*/
+
 	setSorted = sorted => {
 		this.setState({
 			showSortedTasks: sorted
@@ -143,6 +161,7 @@ class App extends Component {
 			title={item.title}
 			checked={item.checked}
 			completed={item.completed}
+			edited={item.edited}
 			onCheck={this.onCheck}
 			onDelete={this.onDelete}
 			onComplete={this.onComplete}
@@ -154,6 +173,7 @@ class App extends Component {
 			title={item.title}
 			checked={item.checked}
 			completed={item.completed}
+			edited={item.edited}
 			onCheck={this.onCheck}
 			onDelete={this.onDelete}
 			onComplete={this.onComplete}
