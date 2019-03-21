@@ -200,8 +200,8 @@ class App extends Component {
 				dateSortFromParent={this.dateSort}
 				/>
 				<ul className="todo-list">
-	        		{items}
-	    		</ul>      
+	        {items}
+	    	</ul>      
 			</div>
 		)
 	}

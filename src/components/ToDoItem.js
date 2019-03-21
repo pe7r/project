@@ -1,5 +1,6 @@
 import React from 'react'
 import './ToDoItem.css'
+import ToEditItem from './ToEditItem'
 
 
 
@@ -40,31 +41,18 @@ class ToDoItem extends React.Component {
 
 		if (this.state.edit) {
 			return (
-				<div className="todo-item">
-					<input 
-						type="checkbox" 
-						checked={this.props.checked}
-						onChange={() => this.props.onCheck(this.props.date)}
-						/>
-					<label className="switch">
-					<input type="checkbox"
-					  	   checked={this.props.completed}
-					  	   onChange={() =>this.props.onComplete(this.props.date)}/>
-					<span className="slider round"></span>
-					</label>	
-					<input 
-						className="edit-input"
-						type="text" 
-						value={this.state.value}
-						onChange={this.handleEditChange}
-						maxLength="40"
-						onKeyPress={this.handleKeyPress}
-					/>
-					<button onClick={this.saveChanges}
-							className="todo-item__button"> Save </button>
-					<button className="todo-item__button"
-							onClick={() => this.handleEdit()}> Cancel </button>
-				</div>
+				<ToEditItem 
+				value={this.state.value}
+				completed={this.completed}
+				date={this.props.date}
+				checked={this.checked}
+				onChange={this.handleEditChange}
+				handleEdit={this.handleEdit}
+				handleKeyPress={this.handleKeyPress}
+				onComplete={this.onComplete}
+				onCheck={this.onCheck}
+				saveChanges={this.saveChanges}
+				/>
 			)
 		} else if (this.state.saveChanges) {
 			return (
