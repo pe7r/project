@@ -1,7 +1,8 @@
 import React from 'react'
 import './ToDoItem.css'
 import ToEditForm from './ToEditForm'
-import EditedForm from './EditedForm';
+import EditedForm from './EditedForm'
+import ItemForm from './ItemForm'
 
 
 
@@ -14,9 +15,6 @@ class ToDoItem extends React.Component {
 	}
 
 	handleCancel = () => {
-		this.setState({
-			title: this.props.item.title
-		})
 		this.handleEdit()
 	}
 
@@ -36,7 +34,8 @@ class ToDoItem extends React.Component {
 	handleSave = () => {
 		console.log('handleSave');
 		this.setState({
-			saveChanges: true
+			saveChanges: true,
+			itemTitle: this.state.title
 		})
 		this.handleEdit()
 	}
@@ -57,7 +56,6 @@ class ToDoItem extends React.Component {
 				item={this.props.item}
 				onChange={this.handleEditChange}
 				handleEdit={this.handleEdit}
-				handleKeyPress={this.handleKeyPress}
 				onComplete={this.props.onComplete}
 				onCheck={this.props.onCheck}
 				handleSave={this.handleSave}
@@ -79,27 +77,13 @@ class ToDoItem extends React.Component {
 			)
 		} else {
 		return (
-			<div className="todo-item">
-				<input 
-					type="checkbox" 
-					checked={this.checked}
-					onChange={() => this.props.onCheck(this.props.item.date)}
-				/>
-				<label className="switch">
-				<input type="checkbox"
-				  	   checked={this.completed}
-				  	   onChange={() => this.props.onComplete(this.props.item.date)}
-				/>
-				<span className="slider round"></span>
-				</label>	
-				<h2>{this.props.item.title}</h2>
-				<button onClick={this.handleClickEdit}
-						className="todo-item__button"> Edit </button>
-				<button className="todo-item__button"
-						onClick={() => this.props.onDelete(this.props.item.date)}>
-				Delete
-				</button>
-			</div>
+			<ItemForm 
+			item={this.props.item}
+			onComplete={this.props.onComplete}
+			onCheck={this.props.onCheck}
+			onDelete={this.props.onDelete}
+			handleClickEdit={this.handleClickEdit}
+			/>
 		)
 		}
 	}
