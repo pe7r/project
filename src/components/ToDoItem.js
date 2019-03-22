@@ -16,7 +16,7 @@ class ToDoItem extends React.Component {
 
 	handleCancel = () => {
 		this.setState({
-			title: ''
+			title: this.props.item.title
 		})
 		this.handleEdit()
 	}
