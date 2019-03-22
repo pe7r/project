@@ -11,7 +11,21 @@ class ToDoItem extends React.Component {
 		edit: false,
 		saveChanges: false,
 		title: '',
-		editedValue: ''
+		itemTitle: ''
+	}
+
+	handleCancel = () => {
+		this.setState({
+			title: ''
+		})
+		this.handleEdit()
+	}
+
+	handleClickEdit = () => {
+		this.setState({
+			title: this.props.item.title
+		})
+		this.handleEdit()
 	}
 
 	handleEdit = () => {
@@ -40,7 +54,7 @@ class ToDoItem extends React.Component {
 		if (this.state.edit) {
 			return (
 				<ToEditForm
-				parentStateTitle={this.state.title}
+				title={this.state.title}
 				item={this.props.item}
 				onChange={this.handleEditChange}
 				handleEdit={this.handleEdit}
@@ -49,6 +63,7 @@ class ToDoItem extends React.Component {
 				onCheck={this.props.onCheck}
 				handleSave={this.handleSave}
 				handleInputChange={this.handleInputChange}
+				handleCancel={this.handleCancel}
 				/>
 			)
 		} else if (this.state.saveChanges) {
@@ -68,18 +83,18 @@ class ToDoItem extends React.Component {
 			<div className="todo-item">
 				<input 
 					type="checkbox" 
-					checked={this.props.item.checked}
+					checked={this.checked}
 					onChange={() => this.props.onCheck(this.props.item.date)}
 				/>
 				<label className="switch">
 				<input type="checkbox"
-				  	   checked={this.props.item.completed}
+				  	   checked={this.completed}
 				  	   onChange={() => this.props.onComplete(this.props.item.date)}
 				/>
 				<span className="slider round"></span>
 				</label>	
 				<h2>{this.props.item.title}</h2>
-				<button onClick={this.handleEdit}
+				<button onClick={this.handleClickEdit}
 						className="todo-item__button"> Edit </button>
 				<button className="todo-item__button"
 						onClick={() => this.props.onDelete(this.props.item.date)}>

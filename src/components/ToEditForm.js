@@ -22,7 +22,8 @@ class ToEditForm extends React.Component {
 					</label>	
 					<input 
 						className="edit-input"
-						type="text" 
+						type="text"
+						value={this.props.title}
 						onChange={this.props.handleInputChange}
 						maxLength="40"
 					/>
@@ -30,7 +31,7 @@ class ToEditForm extends React.Component {
 							onClick={this.props.handleSave}
 							> Save </button>
 					<button className="todo-item__button"
-							onClick={this.props.handleEdit}> Cancel </button>
+							onClick={this.props.handleCancel}> Cancel </button>
 				</div>
         )
     }
