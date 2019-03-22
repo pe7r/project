@@ -6,7 +6,6 @@ import EditedForm from './EditedForm';
 
 
 class ToDoItem extends React.Component {
-
 	state = {
 		edit: false,
 		saveChanges: false,

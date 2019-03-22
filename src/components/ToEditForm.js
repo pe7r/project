@@ -2,24 +2,10 @@ import React from 'react'
 import './ToDoItem.css'
 
 class ToEditForm extends React.Component {
-	state = {
-		
-	}
-
     render() {
         return (
             <div className="todo-item">
-					<input 
-						type="checkbox" 
-						checked={this.props.item.checked}
-						onChange={() => this.props.onCheck(this.props.item.date)}
-						/>
-					<label className="switch">
-					<input type="checkbox"
-					  	   checked={this.props.item.completed}
-					  	   onChange={() => this.props.onComplete(this.props.item.date)}/>
-					<span className="slider round"></span>
-					</label>	
+					
 					<input 
 						className="edit-input"
 						type="text"

@@ -8,7 +8,7 @@ class EditedForm extends React.Component {
 					<input 
 						type="checkbox" 
 						checked={this.props.item.checked}
-						onChange={() => this.onCheck(this.props.item.date)}
+						onChange={() => this.props.onCheck(this.props.item.date)}
 						/>
 					<label className="switch">
 					<input type="checkbox"
