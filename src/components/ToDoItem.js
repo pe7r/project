@@ -1,118 +1,89 @@
 import React from 'react'
 import './ToDoItem.css'
+import FormForEdit from './FormForEdit.js'
+import FormForEditedItem from './FormForEditedItem.js'
+import FormForItem from './FormForItem.js'
 
 
 
 class ToDoItem extends React.Component {
-
 	state = {
 		edit: false,
 		saveChanges: false,
-		value: '',
-		editedValue: ''
+		title: '',
+		itemTitle: ''
+	}
+
+	handleCancel = () => {
+		this.handleEdit()
+	}
+
+	handleClickEdit = () => {
+		this.setState({
+			title: this.props.item.title
+		})
+		this.handleEdit()
 	}
 
 	handleEdit = () => {
 		this.setState(prevState => ({ 
 			edit: !prevState.edit 
 		}))
-		this.handleEditChange()
 	}
 
-	handleEditChange = event => {
-		const title = this.props.title;
-	    this.setState({
-	      value: title
-	    })
-	}
-
-	saveChanges = (event) => {
-		console.log('saveChanges');
+	handleSave = () => {
+		console.log('handleSave');
 		this.setState({
-			editedValue: event.target.value,
-			saveChanges: true
+			saveChanges: true,
+			itemTitle: this.state.title
+		})
+		this.handleEdit()
+	}
+
+	handleInputChange = event => {
+		this.setState({
+			title: event.target.value
 		})
 	}
-
 
 
 	render() {
 
 		if (this.state.edit) {
 			return (
-				<div className="todo-item">
-					<input 
-						type="checkbox" 
-						checked={this.props.checked}
-						onChange={() => this.props.onCheck(this.props.date)}
-						/>
-					<label className="switch">
-					<input type="checkbox"
-					  	   checked={this.props.completed}
-					  	   onChange={() =>this.props.onComplete(this.props.date)}/>
-					<span className="slider round"></span>
-					</label>	
-					<input 
-						className="edit-input"
-						type="text" 
-						value={this.state.value}
-						onChange={this.handleEditChange}
-						maxLength="40"
-						onKeyPress={this.handleKeyPress}
-					/>
-					<button onClick={this.saveChanges}
-							className="todo-item__button"> Save </button>
-					<button className="todo-item__button"
-							onClick={() => this.handleEdit()}> Cancel </button>
-				</div>
+				<FormForEdit
+				title={this.state.title}
+				item={this.props.item}
+				onChange={this.handleEditChange}
+				handleEdit={this.handleEdit}
+				onComplete={this.props.onComplete}
+				onCheck={this.props.onCheck}
+				handleSave={this.handleSave}
+				handleInputChange={this.handleInputChange}
+				handleCancel={this.handleCancel}
+				/>
 			)
 		} else if (this.state.saveChanges) {
 			return (
-				<div className="todo-item">
-					<input 
-						type="checkbox" 
-						checked={this.props.checked}
-						onChange={() => this.props.onCheck(this.props.date)}
-					/>
-					<label className="switch">
-					<input type="checkbox"
-					  	   checked={this.props.completed}
-					  	   onChange={() => this.props.onComplete(this.props.date)}
-					/>
-					<span className="slider round"></span>
-					</label>	
-					<h2>{this.value}</h2>
-					<button onClick={this.handleEdit}
-							className="todo-item__button"> Edit </button>
-					<button className="todo-item__button"
-							onClick={() => this.props.onDelete(this.props.date)}>
-					Delete
-					</button>
-				</div>
+				<FormForEditedItem
+				item={this.props.item}
+				title={this.state.title}
+				onComplete={this.props.onComplete}
+				onCheck={this.props.onCheck}
+				handleEdit={this.handleEdit}
+				onChange={this.handleEditChange}
+				onDelete={this.props.onDelete}
+				/>
 			)
 		} else {
 		return (
-			<div className="todo-item">
-				<input 
-					type="checkbox" 
-					checked={this.props.checked}
-					onChange={() => this.props.onCheck(this.props.date)}
-				/>
-				<label className="switch">
-				<input type="checkbox"
-				  	   checked={this.props.completed}
-				  	   onChange={() => this.props.onComplete(this.props.date)}
-				/>
-				<span className="slider round"></span>
-				</label>	
-				<h2>{this.props.title}</h2>
-				<button onClick={this.handleEdit}
-						className="todo-item__button"> Edit </button>
-				<button className="todo-item__button"
-						onClick={() => this.props.onDelete(this.props.date)}>
-				Delete
-				</button>
-			</div>
+			<FormForItem 
+			item={this.props.item}
+			onComplete={this.props.onComplete}
+			onCheck={this.props.onCheck}
+			onDelete={this.props.onDelete}
+			handleClickEdit={this.handleClickEdit}
+			/>
 		)
 		}
 	}

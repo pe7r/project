@@ -89,24 +89,6 @@ class App extends Component {
 		})
 	}
 
-	/*editTasks = (selected) => {
-		this.setState({
-			edit: selected
-		})
-	}
-
-	onEdit = (date) => {
-		this.setState(prevState => {
-			const editedTasks = prevState.tasks.map(task => {
-				if (task.date === date) {
-					this.editTrue(true)
-				}
-				return task
-			})
-			this.addSortedTasks(editedTasks)
-		})
-	}*/
-
 	setSorted = sorted => {
 		this.setState({
 			showSortedTasks: sorted
@@ -121,17 +103,17 @@ class App extends Component {
 		this.setSorted(true)
 	}
 
-	activeSort = (completed) => {
+	activeSort = (item) => {
 		let newTasks = this.state.tasks.filter(item => item.completed === false )
 		this.addSortedTasks(newTasks)
 	}
 
-	completedSort = (completed) => {
+	completedSort = (item) => {
 		let newTasks = this.state.tasks.filter(item => item.completed === true )
 		this.addSortedTasks(newTasks)
 	}
 
-	titleSort = (title) => {
+	titleSort = (item) => {
         const newTasks = this.state.tasks.sort((a, b) => {
             let taskA = a.title.toUpperCase()
             let taskB = b.title.toUpperCase()
@@ -146,7 +128,7 @@ class App extends Component {
         this.addSortedTasks(newTasks)
     }
 
-    dateSort = (date) => {
+    dateSort = (item) => {
     	const newTasks = this.state.tasks.sort((a, b) => a.date - b.date)
     	this.addSortedTasks(newTasks)
     }
@@ -157,11 +139,7 @@ class App extends Component {
 			if (this.state.showSortedTasks) {
 				items = this.state.sortedTasks.map(item => <ToDoItem 
 			key={item.date}
-			date={item.date}
-			title={item.title}
-			checked={item.checked}
-			completed={item.completed}
-			edited={item.edited}
+			item={item}
 			onCheck={this.onCheck}
 			onDelete={this.onDelete}
 			onComplete={this.onComplete}
@@ -169,11 +147,7 @@ class App extends Component {
 			} else {
 				items = this.state.tasks.map(item => <ToDoItem 
 			key={item.date}
-			date={item.date}
-			title={item.title}
-			checked={item.checked}
-			completed={item.completed}
-			edited={item.edited}
+			item={item}
 			onCheck={this.onCheck}
 			onDelete={this.onDelete}
 			onComplete={this.onComplete}
@@ -200,8 +174,8 @@ class App extends Component {
 				dateSortFromParent={this.dateSort}
 				/>
 				<ul className="todo-list">
-	        		{items}
-	    		</ul>      
+	        {items}
+	    	</ul>      
 			</div>
 		)
 	}

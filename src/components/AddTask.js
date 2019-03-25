@@ -11,13 +11,12 @@ class AddTask extends React.Component {
 			title: this.state.title,
 			date: +new Date(),
 			checked: false,
-			completed: false,
-			edit: false
+			completed: false
 		}
 		this.props.onCreate(newTask)
-		// this.setState({
-		// 	title: ''
-		// })
+		this.setState({
+			title: ''
+		})
 	}
 
 	handleInputChange = event => {
