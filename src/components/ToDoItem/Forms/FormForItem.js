@@ -7,8 +7,8 @@ class FormForItem extends React.Component {
             <div className="todo-item">
 				<input 
 					type="checkbox" 
-					checked={this.props.item.checked}
-					onChange={() => this.props.onCheck(this.props.item.date)}
+					checked={this.props.checked}
+					onChange={this.props.handleCheck}
 				/>
 				<label className="switch">
 				<input type="checkbox"
