@@ -1,8 +1,8 @@
 import React from 'react'
 import './ToDoItem.css'
-import ToEditForm from './ToEditForm'
-import EditedForm from './EditedForm'
-import ItemForm from './ItemForm'
+import FormForEdit from './FormForEdit.js'
+import FormForEditedItem from './FormForEditedItem.js'
+import FormForItem from './FormForItem.js'
 
 
 
@@ -51,7 +51,7 @@ class ToDoItem extends React.Component {
 
 		if (this.state.edit) {
 			return (
-				<ToEditForm
+				<FormForEdit
 				title={this.state.title}
 				item={this.props.item}
 				onChange={this.handleEditChange}
@@ -65,7 +65,7 @@ class ToDoItem extends React.Component {
 			)
 		} else if (this.state.saveChanges) {
 			return (
-				<EditedForm
+				<FormForEditedItem
 				item={this.props.item}
 				title={this.state.title}
 				onComplete={this.props.onComplete}
@@ -77,7 +77,7 @@ class ToDoItem extends React.Component {
 			)
 		} else {
 		return (
-			<ItemForm 
+			<FormForItem 
 			item={this.props.item}
 			onComplete={this.props.onComplete}
 			onCheck={this.props.onCheck}

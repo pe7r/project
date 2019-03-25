@@ -1,7 +1,7 @@
 import React from 'react'
 import './ToDoItem.css'
 
-class ItemForm extends React.Component {
+class FormForItem extends React.Component {
     render() {
         return (
             <div className="todo-item">
@@ -29,4 +29,4 @@ class ItemForm extends React.Component {
     }
 }
 
-export default ItemForm
+export default FormForItem

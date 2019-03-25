@@ -1,7 +1,7 @@
 import React from 'react'
 import './ToDoItem.css'
 
-class EditedForm extends React.Component {
+class FormForEditedItem extends React.Component {
     render() {
         return (
             <div className="todo-item">
@@ -28,4 +28,4 @@ class EditedForm extends React.Component {
     }
 }
 
-export default EditedForm
+export default FormForEditedItem

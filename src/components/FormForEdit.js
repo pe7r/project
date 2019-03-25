@@ -1,7 +1,7 @@
 import React from 'react'
 import './ToDoItem.css'
 
-class ToEditForm extends React.Component {
+class FormForEdit extends React.Component {
     render() {
         return (
             <div className="todo-item">
@@ -23,4 +23,4 @@ class ToEditForm extends React.Component {
     }
 }
 
-export default ToEditForm
+export default FormForEdit
