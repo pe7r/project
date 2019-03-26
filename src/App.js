@@ -89,6 +89,21 @@ class App extends Component {
 		})
 	}
 
+	onChange = (item, editedTitle) => {
+		this.setState(prevState => {
+			const editedTasks = prevState.tasks.map(task => {
+				if (task.date === item.date) {
+					task.title = editedTitle
+					console.log(task)
+				}
+				return task
+			})
+			return {
+				tasks: editedTasks
+			}
+		})
+	}
+
 	setSorted = sorted => {
 		this.setState({
 			showSortedTasks: sorted
@@ -143,6 +158,7 @@ class App extends Component {
 			onCheck={this.onCheck}
 			onDelete={this.onDelete}
 			onComplete={this.onComplete}
+			onChange={this.onChange}
 			/>)
 			} else {
 				items = this.state.tasks.map(item => <ToDoItem 
@@ -151,6 +167,7 @@ class App extends Component {
 			onCheck={this.onCheck}
 			onDelete={this.onDelete}
 			onComplete={this.onComplete}
+			onChange={this.onChange}
 			/>)
 			}
 
