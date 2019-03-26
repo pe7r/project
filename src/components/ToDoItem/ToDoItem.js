@@ -45,7 +45,6 @@ class ToDoItem extends React.Component {
 
 
 	render() {
-
 		if (this.state.edit) {
 			return (
 				<FormForEdit
@@ -55,7 +54,7 @@ class ToDoItem extends React.Component {
 				handleEdit={this.handleEdit}
 				onComplete={this.props.onComplete}
 				onCheck={this.props.onCheck}
-				onChange={this.props.onChange}
+				handleChange={this.props.onChange}
 				handleInputChange={this.handleInputChange}
 				handleCancel={this.handleCancel}
 				/>

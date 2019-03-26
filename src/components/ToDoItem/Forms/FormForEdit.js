@@ -15,7 +15,7 @@ class FormForEdit extends React.Component {
 					/>
 					<button className="todo-item__button"
 							onClick={() => {
-								this.props.onChange(this.props.item, this.props.title)
+								this.props.handleChange(this.props.item, this.props.title)
 								this.props.handleEdit()
 							}}
 							> Save </button>
