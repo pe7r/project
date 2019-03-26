@@ -13,6 +13,12 @@ class ToDoItem extends React.Component {
 		itemTitle: ''
 	}
 
+	checkAll = () => {
+		this.setState({
+			checked: true
+		})
+	}
+
 	handleCheck = () => {
 		this.setState(prevState => ({ 
 			checked: !prevState.checked 

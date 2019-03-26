@@ -9,7 +9,73 @@ import Sort from './components/Sort/Sort.js'
 
 class App extends Component {
 	state = {
-		tasks: [],
+		tasks: [
+		{
+        title: 'Buy horse',
+        date: 1553171609032,
+        completed: false,
+      },
+      {
+        title: 'Become markup developer',
+        date: 155317124040,
+        completed: true,
+      },
+      {
+        title: 'Do this',
+        date: 15532543209040,
+        completed: true,
+      },
+      {
+        title: 'Make that',
+        date: 1534571609040,
+        completed: true,
+      },
+      {
+        title: 'Learn JS Promises',
+        date: 1553154309040,
+        completed: true,
+      },
+      {
+        title: 'Watch a movie',
+        date: 15531609040,
+        completed: true,
+      },
+      {
+        title: 'Learn a verse',
+        date: 155317165432040,
+        completed: true,
+      },
+      {
+        title: 'Read a book',
+        date: 1553432040,
+        completed: true,
+      },
+      {
+        title: 'Do ToDoList',
+        date: 15531715342040,
+        completed: true,
+      },
+      {
+        title: 'Become markup developer',
+        date: 15531753240,
+        completed: true,
+      },
+      {
+        title: 'Watch football',
+        date: 15554329040,
+        completed: true,
+      },
+      {
+        title: 'Be focused',
+        date: 155532609040,
+        completed: true,
+      },
+      {
+        title: 'Stop dreaming',
+        date: 15531532409040,
+        completed: true,
+      },
+		],
 		checkedTasks: [],
 		sortedTasks: [],
 		showSortedTasks: false
@@ -39,6 +105,7 @@ class App extends Component {
 		console.log(this.state.checkedTasks)
 	}
 
+
 	/*onCheckAll = (item) => {
 		const checkedTasks = [...this.state.tasks]
 		checkedTasks.forEach((item,i) => {
@@ -50,11 +117,7 @@ class App extends Component {
 		console.log(this.state.checkedTasks)
 	}*/
 
-/*	onCheckAll = (item, itemDate) => {
-		const checkedItems = this.state.tasks.map(task => if)
-	}*/
-
-	/*onUncheckAll = (item) => {
+	onUncheckAll = (item) => {
 		const checkedTasks = [...this.state.tasks]
 		checkedTasks.forEach((item,i) => {
 			this.props.checked = false
@@ -70,7 +133,7 @@ class App extends Component {
 		this.setState({
 			tasks: leftTasks
 		}) 
-	}*/
+	}
 
 	onDelete = (date) => {
 		const newTasks = this.state.tasks.filter(task => task.date !== date)

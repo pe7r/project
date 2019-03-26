@@ -5,7 +5,7 @@ class Filters extends React.Component {
 	render() {
 		return (
 			<div className="filters">
-				<button onClick={this.props.onCheckAll}>
+				<button onClick={() => this.props.onCheckAll(this.item)}>
 				Check All
 				</button>
 				<button onClick={this.props.onUncheckAll}>
