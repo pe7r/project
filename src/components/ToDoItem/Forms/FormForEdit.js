@@ -14,7 +14,10 @@ class FormForEdit extends React.Component {
 						maxLength="40"
 					/>
 					<button className="todo-item__button"
-							onClick={this.props.handleSave}
+							onClick={() => {
+								this.props.handleChange(this.props.item, this.props.title)
+								this.props.handleEdit()
+							}}
 							> Save </button>
 					<button className="todo-item__button"
 							onClick={this.props.handleCancel}> Cancel </button>

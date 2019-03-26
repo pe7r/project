@@ -5,11 +5,79 @@ import AddTask from './components/AddTask/AddTask'
 import ToDoItem from './components/ToDoItem/ToDoItem'
 import Filters from './components/Filters/Filters'
 import Sort from './components/Sort/Sort.js'
+import Pagination from './components/Pagination/Pagination.js'
 
 
 class App extends Component {
 	state = {
-		tasks: [],
+		tasks: [
+		{
+        title: 'Buy horse',
+        date: 1553171609032,
+        completed: false,
+      },
+      {
+        title: 'Become better human',
+        date: 155317124040,
+        completed: true,
+      },
+      {
+        title: 'Do this',
+        date: 15532543209040,
+        completed: false,
+      },
+      {
+        title: 'Make that',
+        date: 1534571609040,
+        completed: true,
+      },
+      {
+        title: 'Learn JS Promises',
+        date: 1553154309040,
+        completed: false,
+      },
+      {
+        title: 'Watch a movie',
+        date: 15531609040,
+        completed: true,
+      },
+      {
+        title: 'Learn a verse',
+        date: 155317165432040,
+        completed: false,
+      },
+      {
+        title: 'Read a book',
+        date: 1553432040,
+        completed: true,
+      },
+      {
+        title: 'Do ToDoList',
+        date: 15531715342040,
+        completed: false,
+      },
+      {
+        title: 'Become markup developer',
+        date: 15531753240,
+        completed: false,
+      },
+      {
+        title: 'Watch football',
+        date: 15554329040,
+        completed: true,
+      },
+      {
+        title: 'Be focused',
+        date: 155532609040,
+        completed: true,
+      },
+      {
+        title: 'Stop dreaming',
+        date: 15531532409040,
+        completed: false,
+      },
+		],
+		checkedTasks: [],
 		sortedTasks: [],
 		showSortedTasks: false
 	}
@@ -26,8 +94,8 @@ class App extends Component {
 		this.setState(prevState => {
 			const updatedTasks = prevState.tasks.map(task => {
 				if (task.date === date) {
-					task.checked = !task.checked
-					console.log(task)
+					updatedTasks.push(task)
+					console.log(updatedTasks)
 				}
 				return task
 			})
@@ -38,26 +106,27 @@ class App extends Component {
 		console.log(this.state.checkedTasks)
 	}
 
-	onCheckAll = () => {
-		const checkedTasks = [...this.state.tasks]
-		checkedTasks.forEach((item,i) => {
-			checkedTasks[i].checked = true
-		})
-		this.setState({
-			tasks: checkedTasks
-		})
-		console.log(this.state)
-	}
 
-	onUncheckAll = () => {
+	/*onCheckAll = (item) => {
 		const checkedTasks = [...this.state.tasks]
 		checkedTasks.forEach((item,i) => {
-			checkedTasks[i].checked = false
+			this.props.checked = true
 		})
 		this.setState({
-			tasks: checkedTasks
+			checkedTasks: checkedTasks
 		})
-		console.log(this.state)
+		console.log(this.state.checkedTasks)
+	}*/
+
+	onUncheckAll = (item) => {
+		const checkedTasks = [...this.state.tasks]
+		checkedTasks.forEach((item,i) => {
+			this.props.checked = false
+		})
+		this.setState({
+			checkedTasks: checkedTasks
+		})
+		console.log(this.state.checkedTasks)
 	}
 
 	deleteSelected = (checked) => {
@@ -85,6 +154,21 @@ class App extends Component {
 			})
 			return {
 				tasks: completedTasks
+			}
+		})
+	}
+
+	onChange = (item, editedTitle) => {
+		this.setState(prevState => {
+			const editedTasks = prevState.tasks.map(task => {
+				if (task.date === item.date) {
+					task.title = editedTitle
+					console.log(task)
+				}
+				return task
+			})
+			return {
+				tasks: editedTasks
 			}
 		})
 	}
@@ -143,6 +227,7 @@ class App extends Component {
 			onCheck={this.onCheck}
 			onDelete={this.onDelete}
 			onComplete={this.onComplete}
+			onChange={this.onChange}
 			/>)
 			} else {
 				items = this.state.tasks.map(item => <ToDoItem 
@@ -151,12 +236,13 @@ class App extends Component {
 			onCheck={this.onCheck}
 			onDelete={this.onDelete}
 			onComplete={this.onComplete}
+			onChange={this.onChange}
 			/>)
 			}
 
 
 		return (
-			<div className="App">
+			<div className="app">
 				<Header />
 				<Filters 
 				onCheckAll={this.onCheckAll}
@@ -174,8 +260,9 @@ class App extends Component {
 				dateSortFromParent={this.dateSort}
 				/>
 				<ul className="todo-list">
-	        {items}
-	    	</ul>      
+		    	    {items}
+		    	</ul>
+		    	<Pagination />     
 			</div>
 		)
 	}

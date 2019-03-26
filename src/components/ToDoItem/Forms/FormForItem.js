@@ -8,7 +8,7 @@ class FormForItem extends React.Component {
 				<input 
 					type="checkbox" 
 					checked={this.props.checked}
-					onChange={this.props.handleCheck}
+					onChange={() => this.props.onCheck(this.props.item)}
 				/>
 				<label className="switch">
 				<input type="checkbox"

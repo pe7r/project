@@ -10,7 +10,6 @@ class AddTask extends React.Component {
 		let newTask = {
 			title: this.state.title,
 			date: +new Date(),
-			checked: false,
 			completed: false
 		}
 		this.props.onCreate(newTask)
