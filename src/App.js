@@ -10,6 +10,7 @@ import Sort from './components/Sort/Sort.js'
 class App extends Component {
 	state = {
 		tasks: [],
+		checkedTasks: [],
 		sortedTasks: [],
 		showSortedTasks: false
 	}
@@ -26,8 +27,8 @@ class App extends Component {
 		this.setState(prevState => {
 			const updatedTasks = prevState.tasks.map(task => {
 				if (task.date === date) {
-					task.checked = !task.checked
-					console.log(task)
+					updatedTasks.push(task)
+					console.log(updatedTasks)
 				}
 				return task
 			})
@@ -38,26 +39,30 @@ class App extends Component {
 		console.log(this.state.checkedTasks)
 	}
 
-	onCheckAll = () => {
+	/*onCheckAll = (item) => {
 		const checkedTasks = [...this.state.tasks]
 		checkedTasks.forEach((item,i) => {
-			checkedTasks[i].checked = true
+			this.props.checked = true
 		})
 		this.setState({
-			tasks: checkedTasks
+			checkedTasks: checkedTasks
 		})
-		console.log(this.state)
-	}
+		console.log(this.state.checkedTasks)
+	}*/
 
-	onUncheckAll = () => {
+/*	onCheckAll = (item, itemDate) => {
+		const checkedItems = this.state.tasks.map(task => if)
+	}*/
+
+	/*onUncheckAll = (item) => {
 		const checkedTasks = [...this.state.tasks]
 		checkedTasks.forEach((item,i) => {
-			checkedTasks[i].checked = false
+			this.props.checked = false
 		})
 		this.setState({
-			tasks: checkedTasks
+			checkedTasks: checkedTasks
 		})
-		console.log(this.state)
+		console.log(this.state.checkedTasks)
 	}
 
 	deleteSelected = (checked) => {
@@ -65,7 +70,7 @@ class App extends Component {
 		this.setState({
 			tasks: leftTasks
 		}) 
-	}
+	}*/
 
 	onDelete = (date) => {
 		const newTasks = this.state.tasks.filter(task => task.date !== date)
@@ -191,8 +196,8 @@ class App extends Component {
 				dateSortFromParent={this.dateSort}
 				/>
 				<ul className="todo-list">
-	        {items}
-	    	</ul>      
+		    	    {items}
+		    	</ul>     
 			</div>
 		)
 	}
