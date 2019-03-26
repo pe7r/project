@@ -15,6 +15,13 @@ class ToDoItem extends React.Component {
 		itemTitle: ''
 	}
 
+	handleCheck = () => {
+		this.setState(prevState => ({ 
+			checked: !prevState.checked 
+		}))
+		console.log('Handle Check')
+	}
+
 	handleCancel = () => {
 		this.handleEdit()
 	}
@@ -72,6 +79,7 @@ class ToDoItem extends React.Component {
 				onComplete={this.props.onComplete}
 				onCheck={this.props.onCheck}
 				handleEdit={this.handleEdit}
+				handleCheck={this.handleCheck}
 				onChange={this.handleEditChange}
 				onDelete={this.props.onDelete}
 				/>
@@ -84,6 +92,7 @@ class ToDoItem extends React.Component {
 			onCheck={this.props.onCheck}
 			onDelete={this.props.onDelete}
 			handleClickEdit={this.handleClickEdit}
+			handleCheck={this.handleCheck}
 			/>
 		)
 		}

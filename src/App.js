@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import './App.css'
-import Header from './components/Header'
-import AddTask from './components/AddTask'
-import ToDoItem from './components/ToDoItem'
-import Filters from './components/Filters'
-import Sort from './components/Sort'
+import Header from './components/Header/Header'
+import AddTask from './components/AddTask/AddTask'
+import ToDoItem from './components/ToDoItem/ToDoItem'
+import Filters from './components/Filters/Filters'
+import Sort from './components/Sort/Sort.js'
 
 
 class App extends Component {
