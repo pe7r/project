@@ -5,6 +5,7 @@ import AddTask from './components/AddTask/AddTask'
 import ToDoItem from './components/ToDoItem/ToDoItem'
 import Filters from './components/Filters/Filters'
 import Sort from './components/Sort/Sort.js'
+import Pagination from './components/Pagination/Pagination.js'
 
 
 class App extends Component {
@@ -16,14 +17,14 @@ class App extends Component {
         completed: false,
       },
       {
-        title: 'Become markup developer',
+        title: 'Become better human',
         date: 155317124040,
         completed: true,
       },
       {
         title: 'Do this',
         date: 15532543209040,
-        completed: true,
+        completed: false,
       },
       {
         title: 'Make that',
@@ -33,7 +34,7 @@ class App extends Component {
       {
         title: 'Learn JS Promises',
         date: 1553154309040,
-        completed: true,
+        completed: false,
       },
       {
         title: 'Watch a movie',
@@ -43,7 +44,7 @@ class App extends Component {
       {
         title: 'Learn a verse',
         date: 155317165432040,
-        completed: true,
+        completed: false,
       },
       {
         title: 'Read a book',
@@ -53,12 +54,12 @@ class App extends Component {
       {
         title: 'Do ToDoList',
         date: 15531715342040,
-        completed: true,
+        completed: false,
       },
       {
         title: 'Become markup developer',
         date: 15531753240,
-        completed: true,
+        completed: false,
       },
       {
         title: 'Watch football',
@@ -73,7 +74,7 @@ class App extends Component {
       {
         title: 'Stop dreaming',
         date: 15531532409040,
-        completed: true,
+        completed: false,
       },
 		],
 		checkedTasks: [],
@@ -241,7 +242,7 @@ class App extends Component {
 
 
 		return (
-			<div className="App">
+			<div className="app">
 				<Header />
 				<Filters 
 				onCheckAll={this.onCheckAll}
@@ -260,7 +261,8 @@ class App extends Component {
 				/>
 				<ul className="todo-list">
 		    	    {items}
-		    	</ul>     
+		    	</ul>
+		    	<Pagination />     
 			</div>
 		)
 	}
