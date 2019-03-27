@@ -72,7 +72,7 @@ class App extends Component {
         completed: true,
       },
       {
-        title: 'Stop dreaming',
+        title: 'New one',
         date: 15531532409040,
         completed: false,
       },
@@ -219,9 +219,15 @@ class App extends Component {
 
 	render() {
 
+		const {
+			showSortedTasks,
+			sortedTasks,
+			tasks,
+		} = this.state;
+
 		let items = [];
-			if (this.state.showSortedTasks) {
-				items = this.state.sortedTasks.map(item => <ToDoItem 
+			if (showSortedTasks) {
+				items = sortedTasks.map(item => <ToDoItem 
 			key={item.date}
 			item={item}
 			onCheck={this.onCheck}
@@ -230,7 +236,7 @@ class App extends Component {
 			onChange={this.onChange}
 			/>)
 			} else {
-				items = this.state.tasks.map(item => <ToDoItem 
+				items = tasks.map(item => <ToDoItem 
 			key={item.date}
 			item={item}
 			onCheck={this.onCheck}
