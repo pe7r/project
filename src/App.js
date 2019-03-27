@@ -77,7 +77,8 @@ class App extends Component {
         completed: false,
       },
 		],
-		checkedTasks: []
+		checkedTasks: [],
+		currentPage: 1
 	}
 
 	addTask = newTask => {
@@ -172,11 +173,6 @@ class App extends Component {
 		})
 	}
 
-	changeSortOrder = () => {
-		this.setState(prevState => {
-			return {isSorted: !prevState.isSorted}
-		})
-	}
 
 	activeSort = (item) => {
 		let newTasks = this.state.tasks.filter(item => item.completed === false )
@@ -204,14 +200,24 @@ class App extends Component {
     }
 
    
+	changeSortOrder = () => {
+		this.setState(prevState => {
+			return {isSorted: !prevState.isSorted}
+		})
+	}
 
-
+	changeCurrentPage = (page) => {
+		this.setState({
+			currentPage: page
+		})
+	}
 
 	render() {
 
 		const {
 			showSortedTasks,
 			tasks,
+			currentPage
 		} = this.state;
 
 		let sortedItems = [...this.state.tasks]
@@ -221,6 +227,14 @@ class App extends Component {
 			sortedItems.sort((a, b) => b.date - a.date > 0 ? -1 : 1)
 		}
 
+		let paginatedItems = [];
+		if (currentPage === 2) {
+			paginatedItems = sortedItems.slice(10,20)
+		} else if (currentPage === 3) {
+			paginatedItems = sortedItems.slice(20,30)
+		} else {
+			paginatedItems = sortedItems.slice(0,10)
+		}
 
 
 //1. sort. items -> sortedItems(this.state.isSorted, items)
@@ -229,7 +243,7 @@ class App extends Component {
 
 		let items = [];
 			
-				items = sortedItems.map(item => <ToDoItem
+				items = paginatedItems.map(item => <ToDoItem
 			tasks={tasks} 
 			key={item.date}
 			item={item}
@@ -264,9 +278,9 @@ class App extends Component {
 		    	    }
 		    	</ul>
 		    	<div className="pagination">
-				<button onClick={() => this.goToPage(1)}> 1 </button>
-				<button> 2 </button>
-				<button> 3 </button>
+				<button onClick={() => this.changeCurrentPage(1)}> 1 </button>
+				<button onClick={() => this.changeCurrentPage(2)}> 2 </button>
+				<button onClick={() => this.changeCurrentPage(3)}> 3 </button>
 			</div>
 			</div>
 		)
