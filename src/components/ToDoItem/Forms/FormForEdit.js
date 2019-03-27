@@ -3,24 +3,32 @@ import '../ToDoItem.css'
 
 class FormForEdit extends React.Component {
     render() {
+    	const {
+    		title,
+    		item,
+    		handleInputChange,
+    		handleChange,
+    		handleEdit,
+    		handleCancel
+    	} = this.props;
         return (
             <div className="todo-item">
 					
 					<input 
 						className="edit-input"
 						type="text"
-						value={this.props.title}
-						onChange={this.props.handleInputChange}
+						value={title}
+						onChange={handleInputChange}
 						maxLength="40"
 					/>
 					<button className="todo-item__button"
 							onClick={() => {
-								this.props.handleChange(this.props.item, this.props.title)
-								this.props.handleEdit()
+								handleChange(item, title)
+								handleEdit()
 							}}
 							> Save </button>
 					<button className="todo-item__button"
-							onClick={this.props.handleCancel}> Cancel </button>
+							onClick={handleCancel}> Cancel </button>
 				</div>
         )
     }
