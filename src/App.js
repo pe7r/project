@@ -77,16 +77,15 @@ class App extends Component {
         completed: false,
       },
 		],
-		checkedTasks: [],
-		sortedTasks: [],
-		showSortedTasks: false
+		checkedTasks: []
 	}
 
 	addTask = newTask => {
 		const newList = this.state.tasks;
 		newList.push(newTask);
 		this.setState({
-			tasks: newList
+			tasks: newList,
+			isSorted: false,
 		})
 	}
 
@@ -173,18 +172,10 @@ class App extends Component {
 		})
 	}
 
-	setSorted = sorted => {
-		this.setState({
-			showSortedTasks: sorted
+	changeSortOrder = () => {
+		this.setState(prevState => {
+			return {isSorted: !prevState.isSorted}
 		})
-	}
-
-	addSortedTasks = sortedTasks => {
-		console.log(sortedTasks)
-		this.setState({
-			sortedTasks: sortedTasks
-		})
-		this.setSorted(true)
 	}
 
 	activeSort = (item) => {
@@ -212,22 +203,34 @@ class App extends Component {
         this.addSortedTasks(newTasks)
     }
 
-    dateSort = (item) => {
-    	const newTasks = this.state.tasks.sort((a, b) => a.date - b.date)
-    	this.addSortedTasks(newTasks)
-    }
+   
+
+
 
 	render() {
 
 		const {
 			showSortedTasks,
-			sortedTasks,
 			tasks,
 		} = this.state;
 
+		let sortedItems = [...this.state.tasks]
+		if (this.state.isSorted) {
+			sortedItems.sort((a, b) => a.date - b.date > 0 ? -1 : 1)
+		} else {
+			sortedItems.sort((a, b) => b.date - a.date > 0 ? -1 : 1)
+		}
+
+
+
+//1. sort. items -> sortedItems(this.state.isSorted, items)
+//2. filter -> sortedItems -> filteredtems(true/false)
+//3. paginate -> filteredItems -> paginatedItems(currentPage/1/2/3)
+
 		let items = [];
-			if (showSortedTasks) {
-				items = sortedTasks.map(item => <ToDoItem 
+			
+				items = sortedItems.map(item => <ToDoItem
+			tasks={tasks} 
 			key={item.date}
 			item={item}
 			onCheck={this.onCheck}
@@ -235,16 +238,6 @@ class App extends Component {
 			onComplete={this.onComplete}
 			onChange={this.onChange}
 			/>)
-			} else {
-				items = tasks.map(item => <ToDoItem 
-			key={item.date}
-			item={item}
-			onCheck={this.onCheck}
-			onDelete={this.onDelete}
-			onComplete={this.onComplete}
-			onChange={this.onChange}
-			/>)
-			}
 
 		return (
 			<div className="app">
@@ -261,13 +254,20 @@ class App extends Component {
 				completedSortFromParent={this.completedSort}
 				activeSortFromParent={this.activeSort}
 				showAllFromParent={() => this.setSorted(false)}
-				titleSortFromParent={this.titleSort}
-				dateSortFromParent={this.dateSort}
+				changeSortOrder={this.changeSortOrder}
 				/>
 				<ul className="todo-list">
-		    	    {items}
+		    	    {
+		    	    	items.length > 0 
+		    	    	? items
+		    	    	: <h2> No tasks yet... </h2>
+		    	    }
 		    	</ul>
-		    	<Pagination />     
+		    	<div className="pagination">
+				<button onClick={() => this.goToPage(1)}> 1 </button>
+				<button> 2 </button>
+				<button> 3 </button>
+			</div>
 			</div>
 		)
 	}

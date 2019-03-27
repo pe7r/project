@@ -8,16 +8,14 @@ class Sort extends React.Component {
 			showAllFromParent,
 			activeSortFromParent,
 			completedSortFromParent,
-			dateSortFromParent,
-			titleSortFromParent
+			changeSortOrder
 		} = this.props;
 		return (
 			<div className="sortButtons">
 				<button onClick={showAllFromParent}> Show All </button>
 				<button onClick={activeSortFromParent}> Show Active </button>
 				<button onClick={completedSortFromParent}> Show Completed </button>
-				<button onClick={dateSortFromParent}> Sort by date </button>
-				<button onClick={titleSortFromParent}> Sort by a-z </button>
+				<button onClick={changeSortOrder}> Sort by date </button>
 			</div>
 		)
 	}

@@ -7,7 +7,6 @@ import FormForItem from './Forms/FormForItem.js'
 
 class ToDoItem extends React.Component {
 	state = {
-		checked: false,
 		edit: false,
 		title: '',
 		itemTitle: ''
@@ -40,11 +39,12 @@ class ToDoItem extends React.Component {
 
 	render() {
 		const {
+			tasks,
 			item,
 			onComplete,
 			onCheck,
 			onChange,
-			onDelete,
+			onDelete
 		} = this.props;
 		const {
 			title,
