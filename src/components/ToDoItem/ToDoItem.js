@@ -13,26 +13,14 @@ class ToDoItem extends React.Component {
 		itemTitle: ''
 	}
 
-	checkAll = () => {
-		this.setState({
-			checked: true
-		})
-	}
-
-	handleCheck = () => {
-		this.setState(prevState => ({ 
-			checked: !prevState.checked 
-		}))
-		console.log('Handle Check')
-	}
-
 	handleCancel = () => {
 		this.handleEdit()
 	}
 
 	handleClickEdit = () => {
+		const { item } = this.props;
 		this.setState({
-			title: this.props.item.title
+			title: item.title
 		})
 		this.handleEdit()
 	}
@@ -51,16 +39,28 @@ class ToDoItem extends React.Component {
 
 
 	render() {
-		if (this.state.edit) {
+		const {
+			item,
+			onComplete,
+			onCheck,
+			onChange,
+			onDelete,
+		} = this.props;
+		const {
+			title,
+			edit
+		} = this.state;
+
+		if (edit) {
 			return (
 				<FormForEdit
-				title={this.state.title}
-				item={this.props.item}
+				title={title}
+				item={item}
 				onChange={this.handleEditChange}
 				handleEdit={this.handleEdit}
-				onComplete={this.props.onComplete}
-				onCheck={this.props.onCheck}
-				handleChange={this.props.onChange}
+				onComplete={onComplete}
+				onCheck={onCheck}
+				handleChange={onChange}
 				handleInputChange={this.handleInputChange}
 				handleCancel={this.handleCancel}
 				/>
@@ -68,10 +68,10 @@ class ToDoItem extends React.Component {
 		} else {
 		return (
 			<FormForItem 
-			item={this.props.item}
-			onComplete={this.props.onComplete}
-			onCheck={this.props.onCheck}
-			onDelete={this.props.onDelete}
+			item={item}
+			onComplete={onComplete}
+			onCheck={onCheck}
+			onDelete={onDelete}
 			handleClickEdit={this.handleClickEdit}
 			handleCheck={this.handleCheck}
 			/>
