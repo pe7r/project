@@ -5,22 +5,24 @@ import AddTask from './components/AddTask/AddTask'
 import ToDoItem from './components/ToDoItem/ToDoItem'
 import Filters from './components/Filters/Filters'
 import Sort from './components/Sort/Sort.js'
+import defaultItems from './defaultItems.js'
 
 
 class App extends Component {
 	state = {
-		tasks: [],
+		tasks: defaultItems,
 		checkedTasks: [],
 		currentPage: 1,
-		isFiltered: 'all'
+		showRules: 'all',
+		isDateSorted: false,
+		isAlpha: false
 	}
 
 	addTask = newTask => {
 		const newList = this.state.tasks;
 		newList.push(newTask);
 		this.setState({
-			tasks: newList,
-			isSorted: false
+			tasks: newList
 		})
 	}
 
@@ -107,25 +109,21 @@ class App extends Component {
 		})
 	}
 
-	titleSort = (item) => {
-        const newTasks = this.state.tasks.sort((a, b) => {
-            let taskA = a.title.toUpperCase()
-            let taskB = b.title.toUpperCase()
-                 if (taskA < taskB) {
-                   return -1
-                 }
-                 if (taskA > taskB) {
-                   return 1
-                 }
-                 return 0
-            })
-        this.addSortedTasks(newTasks)
-    }
-
-   
 	changeSortOrder = () => {
 		this.setState(prevState => {
-			return {isSorted: !prevState.isSorted}
+			return {isDateSorted: !prevState.isDateSorted}
+		})
+		this.setState({
+			showRules: 'date'
+		})
+	}
+
+	alphabetOrder = () => {
+		this.setState(prevState => {
+			return {isAlpha: !prevState.isAlpha}
+		})
+		this.setState({
+			showRules: 'alpha'
 		})
 	}
 
@@ -137,47 +135,91 @@ class App extends Component {
 
 	filterActive = () => {
 		this.setState({
-			isFiltered: 'active'
+			showRules: 'active'
 		})
 	}
 
 	filterCompleted = () => {
 		this.setState({
-			isFiltered: 'completed'
+			showRules: 'completed'
 		})
 	}
 
 	showAll = () => {
 		this.setState({
-			isFiltered: 'all'
+			showRules: 'all'
+		})
+	}
+
+	sortDate = () => {
+		this.setState({
+			showRules: 'date'
 		})
 	}
 
 	render() {
 
 		const {
-			showSortedTasks,
 			tasks,
 			currentPage,
-			isFiltered,
-			isSorted
+			showRules,
+			isDateSorted,
+			isAlpha
 		} = this.state;
 
 		let filteredItems = []
-		if (isFiltered === 'active') {
+		if (showRules === 'active') {
 			filteredItems = tasks.filter(item => item.completed === false)
-		} else if (isFiltered === 'completed') {
+		} else if (showRules === 'completed') {
 			filteredItems = tasks.filter(item => item.completed === true)
 		} else {
 			filteredItems = tasks.slice()
 		}
 
-		let sortedItems = []
-		if (isSorted) {
-			sortedItems = filteredItems.sort((a, b) => a.date - b.date > 0 ? -1 : 1)
-		} else {
-			sortedItems = filteredItems.sort((a, b) => b.date - a.date > 0 ? -1 : 1)
-		}
+    	let sortedItems = []
+    	if (showRules === 'date') {
+	    	let sortedDateItems = []
+
+			if (isDateSorted) {
+				sortedDateItems = filteredItems.sort((a, b) => a.date - b.date > 0 ? -1 : 1)
+			} else {
+				sortedDateItems = filteredItems.sort((a, b) => b.date - a.date > 0 ? -1 : 1)
+			}
+
+			sortedItems = sortedDateItems.slice()
+
+    	} else if (showRules === 'alpha') {
+    		let sortedAlphabetItems = []
+
+    		if (isAlpha) {
+    			sortedAlphabetItems = filteredItems.sort((a, b) => {
+			        let taskA = a.title.toUpperCase()
+			        let taskB = b.title.toUpperCase()
+		             if (taskA < taskB) {
+		               return -1
+		             }
+		             if (taskA > taskB) {
+		               return 1
+		             }
+		             return 0
+		        })
+    		} else {
+    			sortedAlphabetItems = filteredItems.sort((a, b) => {
+			        let taskA = a.title.toUpperCase()
+			        let taskB = b.title.toUpperCase()
+		             if (taskB < taskA) {
+		               return -1
+		             }
+		             if (taskB > taskA) {
+		               return 1
+		             }
+		             return 0
+		        })
+    		}
+	        sortedItems = sortedAlphabetItems.slice()
+    	} else {
+    		sortedItems = filteredItems.slice()
+    	}
 
 		let paginatedItems = []
 		if (currentPage === 2) {
@@ -189,9 +231,9 @@ class App extends Component {
 		}
 
 
-//1. sort. items -> sortedItems(this.state.isSorted, items)
-//2. filter -> sortedItems -> filteredtems(true/false)
-//3. paginate -> filteredItems -> paginatedItems(currentPage/1/2/3)
+// 1. sort. items -> sortedItems(this.state.isSorted, items)
+// 2. filter -> sortedItems -> filteredtems(true/false)
+// 3. paginate -> filteredItems -> paginatedItems(currentPage/1/2/3)
 
 		let items = [];
 			
@@ -217,12 +259,15 @@ class App extends Component {
 				onCreate={this.addTask} 
 				/>
 				<Sort
-				completedSortFromParent={this.completedSort}
-				activeSortFromParent={this.activeSort}
+				isDateSorted={isDateSorted}
 				showAll={this.showAll}
+				isAlpha={isAlpha}
 				filterCompleted={this.filterCompleted}
-				changeSortOrder={this.changeSortOrder}
 				filterActive={this.filterActive}
+				changeSortOrder={this.changeSortOrder}
+				sortDate={this.sortDate}
+				alphabetOrder={this.alphabetOrder}
+				onClickSortDate={this.onClickSortDate}
 				/>
 				<ul className="todo-list">
 		    	    {
@@ -242,3 +287,10 @@ class App extends Component {
 }
 
 export default App
+
+
+/*{ items.length > 10
+		    	  ? <button onClick={() => this.changeCurrentPage(1)}> 1 </button>
+		    	  <button onClick={() => this.changeCurrentPage(2)}> 2 </button>
+		    	  : <div></div>
+		    	}*/

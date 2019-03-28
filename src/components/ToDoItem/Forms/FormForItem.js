@@ -25,12 +25,12 @@ class FormForItem extends React.Component {
 				/>
 				<span className="slider round"></span>
 				</label>	
-				<h2> { item.title } </h2>
+				<h2 onDoubleClick={handleClickEdit}> { item.title } </h2>
 				<button onClick={handleClickEdit}
-						className="todo-item__button"> Edit </button>
+						className="todo-item__button"> 🖉 </button>
 				<button className="todo-item__button"
 						onClick={() => onDelete(item.date)}>
-				Delete
+				✖
 				</button>
 			</div>
         )
