@@ -5,88 +5,23 @@ import AddTask from './components/AddTask/AddTask'
 import ToDoItem from './components/ToDoItem/ToDoItem'
 import Filters from './components/Filters/Filters'
 import Sort from './components/Sort/Sort.js'
+import defaultItems from './defaultItems.js'
 
 
 class App extends Component {
 	state = {
-		tasks: [
-		{
-        title: 'First one',
-        date: 1,
-        completed: false,
-      },
-      {
-        title: 'Become better human',
-        date: 2,
-        completed: true,
-      },
-      {
-        title: 'Do this',
-        date: 3,
-        completed: false,
-      },
-      {
-        title: 'Make that',
-        date: 4,
-        completed: true,
-      },
-      {
-        title: 'Learn JS Promises',
-        date: 5,
-        completed: false,
-      },
-      {
-        title: 'Watch a movie',
-        date: 6,
-        completed: true,
-      },
-      {
-        title: 'Learn a verse',
-        date: 7,
-        completed: false,
-      },
-      {
-        title: 'Read a book',
-        date: 8,
-        completed: true,
-      },
-      {
-        title: 'Do ToDoList',
-        date: 9,
-        completed: false,
-      },
-      {
-        title: 'Write presents list',
-        date: 10,
-        completed: false,
-      },
-      {
-        title: 'Watch football',
-        date: 11,
-        completed: true,
-      },
-      {
-        title: 'Be focused',
-        date: 12,
-        completed: true,
-      },
-      {
-        title: 'Last one',
-        date: 13,
-        completed: false,
-      },
-		],
+		tasks: [],
 		checkedTasks: [],
 		currentPage: 1,
-		showRules: 'all'
+		showRules: 'all',
+		isDateSorted: false
 	}
 
 	addTask = newTask => {
 		const newList = this.state.tasks;
 		newList.push(newTask);
 		this.setState({
-			tasks: newList,
-			isDateSorted: false
+			tasks: newList
 		})
 	}
 
@@ -173,25 +108,12 @@ class App extends Component {
 		})
 	}
 
-	titleSort = (item) => {
-        const newTasks = this.state.tasks.sort((a, b) => {
-            let taskA = a.title.toUpperCase()
-            let taskB = b.title.toUpperCase()
-                 if (taskA < taskB) {
-                   return -1
-                 }
-                 if (taskA > taskB) {
-                   return 1
-                 }
-                 return 0
-            })
-        this.addSortedTasks(newTasks)
-    }
-
-   
 	changeSortOrder = () => {
 		this.setState(prevState => {
-			return {isSorted: !prevState.isSorted}
+			return {isDateSorted: !prevState.isDateSorted}
+		})
+		this.setState({
+			showRules: 'date'
 		})
 	}
 
@@ -234,8 +156,6 @@ class App extends Component {
 	render() {
 
 		const {
-			sort,
-			showSortedTasks,
 			tasks,
 			currentPage,
 			showRules,
@@ -260,6 +180,7 @@ class App extends Component {
 			} else {
 				sortedDateItems = filteredItems.sort((a, b) => b.date - a.date > 0 ? -1 : 1)
 			}
+
 			sortedItems = sortedDateItems.slice()
 
     	} else if (showRules === 'alpha') {
@@ -326,6 +247,7 @@ class App extends Component {
 				changeSortOrder={this.changeSortOrder}
 				sortDate={this.sortDate}
 				sortAlphabet={this.sortAlphabet}
+				onClickSortDate={this.onClickSortDate}
 				/>
 				<ul className="todo-list">
 		    	    {

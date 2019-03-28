@@ -20,7 +20,7 @@ class Sort extends React.Component {
 			filterCompleted,
 			changeSortOrder,
 			isDateSorted,
-			sortAlphabet
+			sortAlphabet,
 		} = this.props; 
 
 		return (
