@@ -2,16 +2,6 @@ import React from 'react'
 import './Sort.css'
 
 class Sort extends React.Component {
-	state = {
-		sortView: false,
-		filterView: false
-	} 
-
-	changeSortView = () => {
-		this.setState(prevState => {
-			return {sortView: !prevState.sortView}
-		})
-	}
 
 	render() {
 		const {
@@ -20,7 +10,8 @@ class Sort extends React.Component {
 			filterCompleted,
 			changeSortOrder,
 			isDateSorted,
-			sortAlphabet,
+			isAlpha,
+			alphabetOrder,
 		} = this.props; 
 
 		return (
@@ -33,7 +24,10 @@ class Sort extends React.Component {
 					? 'Sort by first'
 					: 'Sort by last'
 				} </button>
-				<button onClick={sortAlphabet}> Sort by a-z </button>
+				<button onClick={alphabetOrder}> { isAlpha 
+					? 'Z - A' 
+					: 'A - Z' 
+				} </button>
 			</div>
 		)
 	}

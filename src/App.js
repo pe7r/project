@@ -10,11 +10,12 @@ import defaultItems from './defaultItems.js'
 
 class App extends Component {
 	state = {
-		tasks: [],
+		tasks: defaultItems,
 		checkedTasks: [],
 		currentPage: 1,
 		showRules: 'all',
-		isDateSorted: false
+		isDateSorted: false,
+		isAlpha: false
 	}
 
 	addTask = newTask => {
@@ -117,6 +118,15 @@ class App extends Component {
 		})
 	}
 
+	alphabetOrder = () => {
+		this.setState(prevState => {
+			return {isAlpha: !prevState.isAlpha}
+		})
+		this.setState({
+			showRules: 'alpha'
+		})
+	}
+
 	changeCurrentPage = (page) => {
 		this.setState({
 			currentPage: page
@@ -147,19 +157,14 @@ class App extends Component {
 		})
 	}
 
-	sortAlphabet = () => {
-		this.setState({
-			showRules: 'alpha'
-		})
-	}
-
 	render() {
 
 		const {
 			tasks,
 			currentPage,
 			showRules,
-			isDateSorted
+			isDateSorted,
+			isAlpha
 		} = this.state;
 
 		let filteredItems = []
@@ -186,17 +191,31 @@ class App extends Component {
     	} else if (showRules === 'alpha') {
     		let sortedAlphabetItems = []
 
-    		sortedAlphabetItems = filteredItems.sort((a, b) => {
-		        let taskA = a.title.toUpperCase()
-		        let taskB = b.title.toUpperCase()
-	             if (taskA < taskB) {
-	               return -1
-	             }
-	             if (taskA > taskB) {
-	               return 1
-	             }
-	             return 0
-	        })
+    		if (isAlpha) {
+    			sortedAlphabetItems = filteredItems.sort((a, b) => {
+			        let taskA = a.title.toUpperCase()
+			        let taskB = b.title.toUpperCase()
+		             if (taskA < taskB) {
+		               return -1
+		             }
+		             if (taskA > taskB) {
+		               return 1
+		             }
+		             return 0
+		        })
+    		} else {
+    			sortedAlphabetItems = filteredItems.sort((a, b) => {
+			        let taskA = a.title.toUpperCase()
+			        let taskB = b.title.toUpperCase()
+		             if (taskB < taskA) {
+		               return -1
+		             }
+		             if (taskB > taskA) {
+		               return 1
+		             }
+		             return 0
+		        })
+    		}
 	        sortedItems = sortedAlphabetItems.slice()
     	} else {
     		sortedItems = filteredItems.slice()
@@ -242,11 +261,12 @@ class App extends Component {
 				<Sort
 				isDateSorted={isDateSorted}
 				showAll={this.showAll}
+				isAlpha={isAlpha}
 				filterCompleted={this.filterCompleted}
 				filterActive={this.filterActive}
 				changeSortOrder={this.changeSortOrder}
 				sortDate={this.sortDate}
-				sortAlphabet={this.sortAlphabet}
+				alphabetOrder={this.alphabetOrder}
 				onClickSortDate={this.onClickSortDate}
 				/>
 				<ul className="todo-list">

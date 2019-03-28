@@ -25,12 +25,12 @@ export default [
         completed: false,
       },
       {
-        title: 'Watch a movie',
+        title: 'Attack beast',
         date: 6,
         completed: true,
       },
       {
-        title: 'Learn a verse',
+        title: 'Create something',
         date: 7,
         completed: false,
       },
@@ -45,7 +45,7 @@ export default [
         completed: false,
       },
       {
-        title: 'Write gift wishes list',
+        title: 'Gift wishes list',
         date: 10,
         completed: false,
       },
@@ -55,7 +55,7 @@ export default [
         completed: true,
       },
       {
-        title: 'Be focused',
+        title: 'Zombies death',
         date: 12,
         completed: true,
       },
