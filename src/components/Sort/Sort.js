@@ -18,7 +18,9 @@ class Sort extends React.Component {
 			showAll,
 			filterActive,
 			filterCompleted,
-			changeSortOrder
+			changeSortOrder,
+			isDateSorted,
+			sortAlphabet
 		} = this.props; 
 
 		return (
@@ -26,11 +28,12 @@ class Sort extends React.Component {
 				<button onClick={showAll}> Show All </button>
 				<button onClick={filterActive}> Show Active </button>
 				<button onClick={filterCompleted}> Show Completed </button>
-				<button onClick={changeSortOrder, this.changeSortView}> {
-					this.state.sortView
-					? 'Show last'
-					: 'Show first'
+				<button onClick={changeSortOrder}> {
+					isDateSorted
+					? 'Sort by first'
+					: 'Sort by last'
 				} </button>
+				<button onClick={sortAlphabet}> Sort by a-z </button>
 			</div>
 		)
 	}

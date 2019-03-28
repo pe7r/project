@@ -9,10 +9,76 @@ import Sort from './components/Sort/Sort.js'
 
 class App extends Component {
 	state = {
-		tasks: [],
+		tasks: [
+		{
+        title: 'First one',
+        date: 1,
+        completed: false,
+      },
+      {
+        title: 'Become better human',
+        date: 2,
+        completed: true,
+      },
+      {
+        title: 'Do this',
+        date: 3,
+        completed: false,
+      },
+      {
+        title: 'Make that',
+        date: 4,
+        completed: true,
+      },
+      {
+        title: 'Learn JS Promises',
+        date: 5,
+        completed: false,
+      },
+      {
+        title: 'Watch a movie',
+        date: 6,
+        completed: true,
+      },
+      {
+        title: 'Learn a verse',
+        date: 7,
+        completed: false,
+      },
+      {
+        title: 'Read a book',
+        date: 8,
+        completed: true,
+      },
+      {
+        title: 'Do ToDoList',
+        date: 9,
+        completed: false,
+      },
+      {
+        title: 'Write presents list',
+        date: 10,
+        completed: false,
+      },
+      {
+        title: 'Watch football',
+        date: 11,
+        completed: true,
+      },
+      {
+        title: 'Be focused',
+        date: 12,
+        completed: true,
+      },
+      {
+        title: 'Last one',
+        date: 13,
+        completed: false,
+      },
+		],
 		checkedTasks: [],
 		currentPage: 1,
-		isFiltered: 'all'
+		showRules: 'all'
 	}
 
 	addTask = newTask => {
@@ -20,7 +86,7 @@ class App extends Component {
 		newList.push(newTask);
 		this.setState({
 			tasks: newList,
-			isSorted: false
+			isDateSorted: false
 		})
 	}
 
@@ -137,47 +203,83 @@ class App extends Component {
 
 	filterActive = () => {
 		this.setState({
-			isFiltered: 'active'
+			showRules: 'active'
 		})
 	}
 
 	filterCompleted = () => {
 		this.setState({
-			isFiltered: 'completed'
+			showRules: 'completed'
 		})
 	}
 
 	showAll = () => {
 		this.setState({
-			isFiltered: 'all'
+			showRules: 'all'
+		})
+	}
+
+	sortDate = () => {
+		this.setState({
+			showRules: 'date'
+		})
+	}
+
+	sortAlphabet = () => {
+		this.setState({
+			showRules: 'alpha'
 		})
 	}
 
 	render() {
 
 		const {
+			sort,
 			showSortedTasks,
 			tasks,
 			currentPage,
-			isFiltered,
-			isSorted
+			showRules,
+			isDateSorted
 		} = this.state;
 
 		let filteredItems = []
-		if (isFiltered === 'active') {
+		if (showRules === 'active') {
 			filteredItems = tasks.filter(item => item.completed === false)
-		} else if (isFiltered === 'completed') {
+		} else if (showRules === 'completed') {
 			filteredItems = tasks.filter(item => item.completed === true)
 		} else {
 			filteredItems = tasks.slice()
 		}
 
-		let sortedItems = []
-		if (isSorted) {
-			sortedItems = filteredItems.sort((a, b) => a.date - b.date > 0 ? -1 : 1)
-		} else {
-			sortedItems = filteredItems.sort((a, b) => b.date - a.date > 0 ? -1 : 1)
-		}
+    	let sortedItems = []
+    	if (showRules === 'date') {
+	    	let sortedDateItems = []
+
+			if (isDateSorted) {
+				sortedDateItems = filteredItems.sort((a, b) => a.date - b.date > 0 ? -1 : 1)
+			} else {
+				sortedDateItems = filteredItems.sort((a, b) => b.date - a.date > 0 ? -1 : 1)
+			}
+			sortedItems = sortedDateItems.slice()
+
+    	} else if (showRules === 'alpha') {
+    		let sortedAlphabetItems = []
+
+    		sortedAlphabetItems = filteredItems.sort((a, b) => {
+		        let taskA = a.title.toUpperCase()
+		        let taskB = b.title.toUpperCase()
+	             if (taskA < taskB) {
+	               return -1
+	             }
+	             if (taskA > taskB) {
+	               return 1
+	             }
+	             return 0
+	        })
+	        sortedItems = sortedAlphabetItems.slice()
+    	} else {
+    		sortedItems = filteredItems.slice()
+    	}
 
 		let paginatedItems = []
 		if (currentPage === 2) {
@@ -189,9 +291,9 @@ class App extends Component {
 		}
 
 
-//1. sort. items -> sortedItems(this.state.isSorted, items)
-//2. filter -> sortedItems -> filteredtems(true/false)
-//3. paginate -> filteredItems -> paginatedItems(currentPage/1/2/3)
+// 1. sort. items -> sortedItems(this.state.isSorted, items)
+// 2. filter -> sortedItems -> filteredtems(true/false)
+// 3. paginate -> filteredItems -> paginatedItems(currentPage/1/2/3)
 
 		let items = [];
 			
@@ -217,12 +319,13 @@ class App extends Component {
 				onCreate={this.addTask} 
 				/>
 				<Sort
-				completedSortFromParent={this.completedSort}
-				activeSortFromParent={this.activeSort}
+				isDateSorted={isDateSorted}
 				showAll={this.showAll}
 				filterCompleted={this.filterCompleted}
-				changeSortOrder={this.changeSortOrder}
 				filterActive={this.filterActive}
+				changeSortOrder={this.changeSortOrder}
+				sortDate={this.sortDate}
+				sortAlphabet={this.sortAlphabet}
 				/>
 				<ul className="todo-list">
 		    	    {
@@ -242,3 +345,10 @@ class App extends Component {
 }
 
 export default App
+
+
+/*{ items.length > 10
+		    	  ? <button onClick={() => this.changeCurrentPage(1)}> 1 </button>
+		    	  <button onClick={() => this.changeCurrentPage(2)}> 2 </button>
+		    	  : <div></div>
+		    	}*/
