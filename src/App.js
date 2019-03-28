@@ -5,80 +5,14 @@ import AddTask from './components/AddTask/AddTask'
 import ToDoItem from './components/ToDoItem/ToDoItem'
 import Filters from './components/Filters/Filters'
 import Sort from './components/Sort/Sort.js'
-import Pagination from './components/Pagination/Pagination.js'
 
 
 class App extends Component {
 	state = {
-		tasks: [
-		{
-        title: 'Buy horse',
-        date: 1553171609032,
-        completed: false,
-      },
-      {
-        title: 'Become better human',
-        date: 155317124040,
-        completed: true,
-      },
-      {
-        title: 'Do this',
-        date: 15532543209040,
-        completed: false,
-      },
-      {
-        title: 'Make that',
-        date: 1534571609040,
-        completed: true,
-      },
-      {
-        title: 'Learn JS Promises',
-        date: 1553154309040,
-        completed: false,
-      },
-      {
-        title: 'Watch a movie',
-        date: 15531609040,
-        completed: true,
-      },
-      {
-        title: 'Learn a verse',
-        date: 155317165432040,
-        completed: false,
-      },
-      {
-        title: 'Read a book',
-        date: 1553432040,
-        completed: true,
-      },
-      {
-        title: 'Do ToDoList',
-        date: 15531715342040,
-        completed: false,
-      },
-      {
-        title: 'Become markup developer',
-        date: 15531753240,
-        completed: false,
-      },
-      {
-        title: 'Watch football',
-        date: 15554329040,
-        completed: true,
-      },
-      {
-        title: 'Be focused',
-        date: 155532609040,
-        completed: true,
-      },
-      {
-        title: 'New one',
-        date: 15531532409040,
-        completed: false,
-      },
-		],
+		tasks: [],
 		checkedTasks: [],
-		currentPage: 1
+		currentPage: 1,
+		isFiltered: 'all'
 	}
 
 	addTask = newTask => {
@@ -86,7 +20,7 @@ class App extends Component {
 		newList.push(newTask);
 		this.setState({
 			tasks: newList,
-			isSorted: false,
+			isSorted: false
 		})
 	}
 
@@ -173,17 +107,6 @@ class App extends Component {
 		})
 	}
 
-
-	activeSort = (item) => {
-		let newTasks = this.state.tasks.filter(item => item.completed === false )
-		this.addSortedTasks(newTasks)
-	}
-
-	completedSort = (item) => {
-		let newTasks = this.state.tasks.filter(item => item.completed === true )
-		this.addSortedTasks(newTasks)
-	}
-
 	titleSort = (item) => {
         const newTasks = this.state.tasks.sort((a, b) => {
             let taskA = a.title.toUpperCase()
@@ -212,22 +135,51 @@ class App extends Component {
 		})
 	}
 
+	filterActive = () => {
+		this.setState({
+			isFiltered: 'active'
+		})
+	}
+
+	filterCompleted = () => {
+		this.setState({
+			isFiltered: 'completed'
+		})
+	}
+
+	showAll = () => {
+		this.setState({
+			isFiltered: 'all'
+		})
+	}
+
 	render() {
 
 		const {
 			showSortedTasks,
 			tasks,
-			currentPage
+			currentPage,
+			isFiltered,
+			isSorted
 		} = this.state;
 
-		let sortedItems = [...this.state.tasks]
-		if (this.state.isSorted) {
-			sortedItems.sort((a, b) => a.date - b.date > 0 ? -1 : 1)
+		let filteredItems = []
+		if (isFiltered === 'active') {
+			filteredItems = tasks.filter(item => item.completed === false)
+		} else if (isFiltered === 'completed') {
+			filteredItems = tasks.filter(item => item.completed === true)
 		} else {
-			sortedItems.sort((a, b) => b.date - a.date > 0 ? -1 : 1)
+			filteredItems = tasks.slice()
 		}
 
-		let paginatedItems = [];
+		let sortedItems = []
+		if (isSorted) {
+			sortedItems = filteredItems.sort((a, b) => a.date - b.date > 0 ? -1 : 1)
+		} else {
+			sortedItems = filteredItems.sort((a, b) => b.date - a.date > 0 ? -1 : 1)
+		}
+
+		let paginatedItems = []
 		if (currentPage === 2) {
 			paginatedItems = sortedItems.slice(10,20)
 		} else if (currentPage === 3) {
@@ -267,8 +219,10 @@ class App extends Component {
 				<Sort
 				completedSortFromParent={this.completedSort}
 				activeSortFromParent={this.activeSort}
-				showAllFromParent={() => this.setSorted(false)}
+				showAll={this.showAll}
+				filterCompleted={this.filterCompleted}
 				changeSortOrder={this.changeSortOrder}
+				filterActive={this.filterActive}
 				/>
 				<ul className="todo-list">
 		    	    {

@@ -39,7 +39,6 @@ class ToDoItem extends React.Component {
 
 	render() {
 		const {
-			tasks,
 			item,
 			onComplete,
 			onCheck,
