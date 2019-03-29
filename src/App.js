@@ -279,10 +279,16 @@ class App extends Component {
 		    	    }
 		    	</ul>
 		    	<div className="pagination">
-				<button onClick={() => this.changeCurrentPage(1)}> 1 </button>
-				<button onClick={() => this.changeCurrentPage(2)}> 2 </button>
-				<button onClick={() => this.changeCurrentPage(3)}> 3 </button>
-			</div>
+			        {[...Array(Math.ceil(sortedItems.length / 10))].map((x, i) => (
+			          <button
+			            key={i}
+			            id={i + 1}
+			            onClick={() => this.changeCurrentPage(Math.ceil(sortedItems.length / 10))}
+			          >
+			            {i + 1}
+			          </button>
+			        ))}
+			    </div>
 			</div>
 		)
 	}
@@ -295,4 +301,8 @@ export default App
 		    	  ? <button onClick={() => this.changeCurrentPage(1)}> 1 </button>
 		    	  <button onClick={() => this.changeCurrentPage(2)}> 2 </button>
 		    	  : <div></div>
+
+		    	  <button onClick={() => this.changeCurrentPage(1)}> 1 </button>
+					<button onClick={() => this.changeCurrentPage(2)}> 2 </button>
+					<button onClick={() => this.changeCurrentPage(3)}> 3 </button>
 		    	}*/
