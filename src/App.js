@@ -222,13 +222,15 @@ class App extends Component {
     	}
 
 		let paginatedItems = []
-		if (currentPage === 2) {
-			paginatedItems = sortedItems.slice(10,20)
-		} else if (currentPage === 3) {
-			paginatedItems = sortedItems.slice(20,30)
-		} else {
-			paginatedItems = sortedItems.slice(0,10)
+
+		function paginate (array, page_size, page_number) {
+		  --page_number;
+		  return array.slice(page_number * page_size, (page_number + 1) * page_size);
 		}
+
+		paginatedItems = paginate(sortedItems, 10, currentPage)
+		console.log(paginatedItems)
+
 
 
 // 1. sort. items -> sortedItems(this.state.isSorted, items)
