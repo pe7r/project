@@ -127,9 +127,20 @@ class App extends Component {
 		})
 	}
 
-	changeCurrentPage = (page) => {
-		this.setState({
-			currentPage: page
+	changeCurrentPagePrev = () => {
+		this.setState(prevState => {
+			return {currentPage: prevState.currentPage - 1}
+		})
+		if (this.state.currentPage === 0) {
+			this.setState({
+				currentPage: 1
+			})
+		}
+	}
+
+	changeCurrentPageNext = () => {
+		this.setState(prevState => {
+			return {currentPage: prevState.currentPage + 1}
 		})
 	}
 
@@ -222,13 +233,15 @@ class App extends Component {
     	}
 
 		let paginatedItems = []
-		if (currentPage === 2) {
-			paginatedItems = sortedItems.slice(10,20)
-		} else if (currentPage === 3) {
-			paginatedItems = sortedItems.slice(20,30)
-		} else {
-			paginatedItems = sortedItems.slice(0,10)
+
+		function paginate (array, page_size, page_number) {
+		  --page_number;
+		  return array.slice(page_number * page_size, (page_number + 1) * page_size);
 		}
+
+		paginatedItems = paginate(sortedItems, 10, currentPage)
+		console.log(paginatedItems)
+
 
 
 // 1. sort. items -> sortedItems(this.state.isSorted, items)
@@ -276,11 +289,15 @@ class App extends Component {
 		    	    	: <h2> No tasks yet... </h2>
 		    	    }
 		    	</ul>
-		    	<div className="pagination">
-				<button onClick={() => this.changeCurrentPage(1)}> 1 </button>
-				<button onClick={() => this.changeCurrentPage(2)}> 2 </button>
-				<button onClick={() => this.changeCurrentPage(3)}> 3 </button>
-			</div>
+		    	<div >
+			        { currentPage > 1 
+			        	? <div className="pagination">
+			        		<button onClick={this.changeCurrentPagePrev}> ← </button>
+			        	    <button onClick={this.changeCurrentPageNext}> → </button>	
+			              </div>
+			        	: <button onClick={this.changeCurrentPageNext}> → </button>
+			        }
+			    </div>
 			</div>
 		)
 	}
@@ -293,4 +310,8 @@ export default App
 		    	  ? <button onClick={() => this.changeCurrentPage(1)}> 1 </button>
 		    	  <button onClick={() => this.changeCurrentPage(2)}> 2 </button>
 		    	  : <div></div>
+
+		    	  <button onClick={() => this.changeCurrentPage(1)}> 1 </button>
+					<button onClick={() => this.changeCurrentPage(2)}> 2 </button>
+					<button onClick={() => this.changeCurrentPage(3)}> 3 </button>
 		    	}*/
