@@ -127,9 +127,20 @@ class App extends Component {
 		})
 	}
 
-	changeCurrentPage = (page) => {
-		this.setState({
-			currentPage: page
+	changeCurrentPagePrev = () => {
+		this.setState(prevState => {
+			return {currentPage: prevState.currentPage - 1}
+		})
+		if (this.state.currentPage === 0) {
+			this.setState({
+				currentPage: 1
+			})
+		}
+	}
+
+	changeCurrentPageNext = () => {
+		this.setState(prevState => {
+			return {currentPage: prevState.currentPage + 1}
 		})
 	}
 
@@ -278,16 +289,14 @@ class App extends Component {
 		    	    	: <h2> No tasks yet... </h2>
 		    	    }
 		    	</ul>
-		    	<div className="pagination">
-			        {[...Array(Math.ceil(sortedItems.length / 10))].map((x, i) => (
-			          <button
-			            key={i}
-			            id={i + 1}
-			            onClick={() => this.changeCurrentPage(Math.ceil(sortedItems.length / 10))}
-			          >
-			            {i + 1}
-			          </button>
-			        ))}
+		    	<div >
+			        { sortedItems.length > 10 
+			        	? <div className="pagination">
+			        		<button onClick={this.changeCurrentPagePrev}> Prev </button>
+			        	    <button onClick={this.changeCurrentPageNext}> Next </button>	
+			              </div>
+			        	: <button onClick={this.changeCurrentPageNext}> Next </button>
+			        }
 			    </div>
 			</div>
 		)
