@@ -290,12 +290,12 @@ class App extends Component {
 		    	    }
 		    	</ul>
 		    	<div >
-			        { sortedItems.length > 10 
+			        { currentPage > 1 
 			        	? <div className="pagination">
-			        		<button onClick={this.changeCurrentPagePrev}> Prev </button>
-			        	    <button onClick={this.changeCurrentPageNext}> Next </button>	
+			        		<button onClick={this.changeCurrentPagePrev}> ← </button>
+			        	    <button onClick={this.changeCurrentPageNext}> → </button>	
 			              </div>
-			        	: <button onClick={this.changeCurrentPageNext}> Next </button>
+			        	: <button onClick={this.changeCurrentPageNext}> → </button>
 			        }
 			    </div>
 			</div>
