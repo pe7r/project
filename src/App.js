@@ -121,7 +121,8 @@ class App extends Component {
 			return {isAlpha: !prevState.isAlpha}
 		})
 		this.setState({
-			showRules: 'alpha'
+			showRules: 'alpha',
+			currentPage: 1
 		})
 	}
 
