@@ -252,8 +252,6 @@ class App extends Component {
 	        	this.changeCurrentPagePrev()
 	        } else if (tasks.length < 11 && currentPage === 1) {
 	        	pagination = false
-	        } else if (currentPage !== 1 && paginatedItems.length < 10) {
-	        	pagination = <button onClick={this.changeCurrentPagePrev}> ← </button>
 	        } else if (currentPage !== 1 && sortedItems.length > 10) {
 	        	pagination = <div className="pagination">
 	        		<button onClick={this.changeCurrentPagePrev}> ← </button>
