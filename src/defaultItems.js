@@ -64,4 +64,54 @@ export default [
         date: 13,
         completed: false,
       },
+      {
+        title: 'Fourteen',
+        date: 14,
+        completed: true,
+      },
+      {
+        title: 'Fifteen',
+        date: 15,
+        completed: false,
+      },
+      {
+        title: 'Sixteen',
+        date: 16,
+        completed: true,
+      },
+      {
+        title: 'Seventeen',
+        date: 17,
+        completed: false,
+      },
+      {
+        title: 'Eighteen',
+        date: 18,
+        completed: true,
+      },
+      {
+        title: 'Nineteen',
+        date: 19,
+        completed: false,
+      },
+      {
+        title: 'Twenty',
+        date: 20,
+        completed: true,
+      },
+      {
+        title: 'Twenty one',
+        date: 21,
+        completed: false,
+      },
+      {
+        title: 'Twenty two',
+        date: 22,
+        completed: true,
+      },
+      {
+        title: 'Twenty three',
+        date: 23,
+        completed: false,
+      },
 		]

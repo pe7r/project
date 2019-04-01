@@ -113,9 +113,7 @@ class App extends Component {
 		this.setState(prevState => {
 			return {isDateSorted: !prevState.isDateSorted}
 		})
-		this.setState({
-			showRules: 'date'
-		})
+		this.sortDate()
 	}
 
 	alphabetOrder = () => {
@@ -141,25 +139,29 @@ class App extends Component {
 
 	filterActive = () => {
 		this.setState({
-			showRules: 'active'
+			showRules: 'active',
+			currentPage: 1
 		})
 	}
 
 	filterCompleted = () => {
 		this.setState({
-			showRules: 'completed'
+			showRules: 'completed',
+			currentPage: 1
 		})
 	}
 
 	showAll = () => {
 		this.setState({
-			showRules: 'all'
+			showRules: 'all',
+			currentPage: 1
 		})
 	}
 
 	sortDate = () => {
 		this.setState({
-			showRules: 'date'
+			showRules: 'date',
+			currentPage: 1
 		})
 	}
 
@@ -248,14 +250,14 @@ class App extends Component {
 		let pagination = null
 		    if (currentPage === 1 && tasks.length > 10) {
 	        	pagination = <button onClick={this.changeCurrentPageNext}> → </button>	
-	        } else if (sortedLength !== 11 && currentPage === 1) {
+	        } else if (tasks.length < 11 && currentPage === 1) {
 	        	pagination = null
 	        } else if (currentPage !== 1 && sortedLength > 10) {
 	        	pagination = <div className="pagination">
 	        		<button onClick={this.changeCurrentPagePrev}> ← </button>
 	        	    <button onClick={this.changeCurrentPageNext}> → </button>	
 	            </div>
-	        } else if (paginatedItems.length < 10 && currentPage !== 1) {
+	        } else if (sortedItems.length < 10 && currentPage !== 1) {
 	        	pagination = <button onClick={this.changeCurrentPagePrev}> ← </button>
 	        } else if (paginatedItems.length < 1) {
 	        	this.changeCurrentPagePrev()
