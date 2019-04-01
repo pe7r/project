@@ -255,9 +255,9 @@ class App extends Component {
 	        		<button onClick={this.changeCurrentPagePrev}> ← </button>
 	        	    <button onClick={this.changeCurrentPageNext}> → </button>	
 	            </div>
-	        } else if (sortedItems.length < 10 && currentPage !== 1) {
+	        } else if (paginatedItems.length < 10 && currentPage !== 1) {
 	        	pagination = <button onClick={this.changeCurrentPagePrev}> ← </button>
-	        } else if (sortedItems.length < 1) {
+	        } else if (paginatedItems.length < 1) {
 	        	this.changeCurrentPagePrev()
 	        }
 
