@@ -29,10 +29,12 @@
 }
 
 .edit-input {
-  width:60%;
-  height: 30px;
-  font-size: 20px;
-  border-color: black;
+  font-size: 16px;
+  padding: 10px;
+  display: block;
+  width: 300px;
+  border: none;
+  border-bottom: 1px solid #ccc;
 }
 
 /* Hide default HTML checkbox */

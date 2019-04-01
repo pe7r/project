@@ -3,6 +3,11 @@
   margin: 0 auto;
 }
 
+:active, :hover, :focus {
+    outline: 0;
+    outline-offset: 0;
+}
+
 .todo-list {
 background-color: white;
 margin: auto;
