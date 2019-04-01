@@ -248,8 +248,10 @@ class App extends Component {
 		let pagination = null
 		    if (currentPage === 1 && tasks.length > 10) {
 	        	pagination = <button onClick={this.changeCurrentPageNext}> → </button>	
+	        } else if (currentPage !== 1 && paginatedItems.length < 1) {
+	        	this.changeCurrentPagePrev()
 	        } else if (tasks.length < 11 && currentPage === 1) {
-	        	pagination = null
+	        	pagination = false
 	        } else if (currentPage !== 1 && paginatedItems.length < 10) {
 	        	pagination = <button onClick={this.changeCurrentPagePrev}> ← </button>
 	        } else if (currentPage !== 1 && sortedItems.length > 10) {
@@ -257,9 +259,7 @@ class App extends Component {
 	        		<button onClick={this.changeCurrentPagePrev}> ← </button>
 	        	    <button onClick={this.changeCurrentPageNext}> → </button>	
 	            </div>
-	        } else if (paginatedItems.length < 1) {
-	        	this.changeCurrentPagePrev()
-	        }
+	        } 
 
 // 1. sort. items -> sortedItems(this.state.isSorted, items)
 // 2. filter -> sortedItems -> filteredtems(true/false)
