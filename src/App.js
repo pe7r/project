@@ -245,21 +245,18 @@ class App extends Component {
 		paginatedItems = paginate(sortedItems, 10, currentPage)
 		console.log(paginatedItems)
 
-		let sortedLength = sortedItems.length
-		console.log(sortedLength);
-
 		let pagination = null
 		    if (currentPage === 1 && tasks.length > 10) {
 	        	pagination = <button onClick={this.changeCurrentPageNext}> → </button>	
 	        } else if (tasks.length < 11 && currentPage === 1) {
 	        	pagination = null
-	        } else if (currentPage !== 1 && sortedLength > 10) {
+	        } else if (currentPage !== 1 && paginatedItems.length < 10) {
+	        	pagination = <button onClick={this.changeCurrentPagePrev}> ← </button>
+	        } else if (currentPage !== 1 && sortedItems.length > 10) {
 	        	pagination = <div className="pagination">
 	        		<button onClick={this.changeCurrentPagePrev}> ← </button>
 	        	    <button onClick={this.changeCurrentPageNext}> → </button>	
 	            </div>
-	        } else if (sortedItems.length < 10 && currentPage !== 1) {
-	        	pagination = <button onClick={this.changeCurrentPagePrev}> ← </button>
 	        } else if (paginatedItems.length < 1) {
 	        	this.changeCurrentPagePrev()
 	        }
