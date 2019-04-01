@@ -2,9 +2,6 @@ import React from 'react'
 import '../ToDoItem.css'
 
 class FormForEdit extends React.Component {
-
-
-
     render() {
     	const {
     		title,
@@ -15,7 +12,7 @@ class FormForEdit extends React.Component {
     		handleCancel
     	} = this.props;
         return (
-            <div className="todo-item">
+            <div className="edit-form">
 					
 					<input 
 						className="edit-input"

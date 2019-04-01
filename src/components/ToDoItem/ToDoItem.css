@@ -30,6 +30,8 @@
 
 .edit-input {
   width:60%;
+  height: 30px;
+  font-size: 20px;
   border-color: black;
 }
 

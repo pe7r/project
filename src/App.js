@@ -13,9 +13,10 @@ class App extends Component {
 		tasks: defaultItems,
 		checkedTasks: [],
 		currentPage: 1,
-		showRules: 'all',
+		filterRules: 'all',
 		isDateSorted: false,
-		isAlpha: false
+		isAlpha: false,
+		sortRules: null
 	}
 
 	addTask = newTask => {
@@ -121,7 +122,7 @@ class App extends Component {
 			return {isAlpha: !prevState.isAlpha}
 		})
 		this.setState({
-			showRules: 'alpha',
+			sortRules: 'alpha',
 			currentPage: 1
 		})
 	}
@@ -140,28 +141,28 @@ class App extends Component {
 
 	filterActive = () => {
 		this.setState({
-			showRules: 'active',
+			filterRules: 'active',
 			currentPage: 1
 		})
 	}
 
 	filterCompleted = () => {
 		this.setState({
-			showRules: 'completed',
+			filterRules: 'completed',
 			currentPage: 1
 		})
 	}
 
 	showAll = () => {
 		this.setState({
-			showRules: 'all',
+			filterRules: 'all',
 			currentPage: 1
 		})
 	}
 
 	sortDate = () => {
 		this.setState({
-			showRules: 'date',
+			sortRules: 'date',
 			currentPage: 1
 		})
 	}
@@ -171,22 +172,23 @@ class App extends Component {
 		const {
 			tasks,
 			currentPage,
-			showRules,
+			filterRules,
 			isDateSorted,
-			isAlpha
+			isAlpha,
+			sortRules
 		} = this.state;
 
 		let filteredItems = []
-		if (showRules === 'active') {
+		if (filterRules === 'active') {
 			filteredItems = tasks.filter(item => item.completed === false)
-		} else if (showRules === 'completed') {
+		} else if (filterRules === 'completed') {
 			filteredItems = tasks.filter(item => item.completed === true)
 		} else {
 			filteredItems = tasks.slice()
 		}
 
     	let sortedItems = []
-    	if (showRules === 'date') {
+    	if (sortRules === 'date') {
 	    	let sortedDateItems = []
 
 			if (isDateSorted) {
@@ -197,7 +199,7 @@ class App extends Component {
 
 			sortedItems = sortedDateItems.slice()
 
-    	} else if (showRules === 'alpha') {
+    	} else if (sortRules === 'alpha') {
     		let sortedAlphabetItems = []
 
     		if (isAlpha) {
