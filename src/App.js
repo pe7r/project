@@ -167,6 +167,12 @@ class App extends Component {
 		})
 	}
 
+	filtersChange = (event) => {
+		this.setState({
+			filterRules: event.target.value
+		})
+	}
+
 	render() {
 
 		const {
@@ -301,8 +307,7 @@ class App extends Component {
 				<section className="sorts-filters">
 					<form>
 					<h3> Filter by </h3>
-					<select id="list"> 
-					  <option > ... </option>
+					<select id="filters" onChange={this.filtersChange} value={this.state.filterRules}> 
 					  <option value="all"> All </option>
 					  <option value="active"> Active </option>
 					  <option value="completed"> Completed </option>
@@ -310,7 +315,7 @@ class App extends Component {
 				</form>
 				<form>
 					<h3> Sort by </h3>
-					<select id="list"> 
+					<select id="sorts"> 
 					  <option > ... </option>
 					  <option value="a-z"> A-Z </option>
 					  <option value="z-a"> Z-A </option>
