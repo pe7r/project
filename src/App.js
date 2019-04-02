@@ -13,9 +13,10 @@ class App extends Component {
 		tasks: defaultItems,
 		checkedTasks: [],
 		currentPage: 1,
-		showRules: 'all',
+		filterRules: 'all',
 		isDateSorted: false,
-		isAlpha: false
+		isAlpha: false,
+		sortRules: null
 	}
 
 	addTask = newTask => {
@@ -113,9 +114,7 @@ class App extends Component {
 		this.setState(prevState => {
 			return {isDateSorted: !prevState.isDateSorted}
 		})
-		this.setState({
-			showRules: 'date'
-		})
+		this.sortDate()
 	}
 
 	alphabetOrder = () => {
@@ -123,7 +122,8 @@ class App extends Component {
 			return {isAlpha: !prevState.isAlpha}
 		})
 		this.setState({
-			showRules: 'alpha'
+			sortRules: 'alpha',
+			currentPage: 1
 		})
 	}
 
@@ -131,11 +131,6 @@ class App extends Component {
 		this.setState(prevState => {
 			return {currentPage: prevState.currentPage - 1}
 		})
-		if (this.state.currentPage === 0) {
-			this.setState({
-				currentPage: 1
-			})
-		}
 	}
 
 	changeCurrentPageNext = () => {
@@ -146,25 +141,29 @@ class App extends Component {
 
 	filterActive = () => {
 		this.setState({
-			showRules: 'active'
+			filterRules: 'active',
+			currentPage: 1
 		})
 	}
 
 	filterCompleted = () => {
 		this.setState({
-			showRules: 'completed'
+			filterRules: 'completed',
+			currentPage: 1
 		})
 	}
 
 	showAll = () => {
 		this.setState({
-			showRules: 'all'
+			filterRules: 'all',
+			currentPage: 1
 		})
 	}
 
 	sortDate = () => {
 		this.setState({
-			showRules: 'date'
+			sortRules: 'date',
+			currentPage: 1
 		})
 	}
 
@@ -173,22 +172,23 @@ class App extends Component {
 		const {
 			tasks,
 			currentPage,
-			showRules,
+			filterRules,
 			isDateSorted,
-			isAlpha
+			isAlpha,
+			sortRules
 		} = this.state;
 
 		let filteredItems = []
-		if (showRules === 'active') {
+		if (filterRules === 'active') {
 			filteredItems = tasks.filter(item => item.completed === false)
-		} else if (showRules === 'completed') {
+		} else if (filterRules === 'completed') {
 			filteredItems = tasks.filter(item => item.completed === true)
 		} else {
 			filteredItems = tasks.slice()
 		}
 
     	let sortedItems = []
-    	if (showRules === 'date') {
+    	if (sortRules === 'date') {
 	    	let sortedDateItems = []
 
 			if (isDateSorted) {
@@ -199,7 +199,7 @@ class App extends Component {
 
 			sortedItems = sortedDateItems.slice()
 
-    	} else if (showRules === 'alpha') {
+    	} else if (sortRules === 'alpha') {
     		let sortedAlphabetItems = []
 
     		if (isAlpha) {
@@ -231,6 +231,11 @@ class App extends Component {
     	} else {
     		sortedItems = filteredItems.slice()
     	}
+    	console.log(sortedItems);
+
+
+
+    	
 
 		let paginatedItems = []
 
@@ -241,12 +246,21 @@ class App extends Component {
 
 		paginatedItems = paginate(sortedItems, 10, currentPage)
 		console.log(paginatedItems)
-
-
+ 
+	        const PaginationHtml = (<div className="pagination">
+	        	{ currentPage === 1 && tasks.length > 10 ? <button onClick={this.changeCurrentPageNext}> → </button> : false }
+	        	{ currentPage !== 1 && paginatedItems.length < 1 ? () => this.changeCurrentPagePrev() : false }
+	        	{ tasks.length < 11 && currentPage === 1 ? false : null}
+				{ currentPage !== 1 && sortedItems.length > 10 ? <div className="pagination">
+	        		<button onClick={this.changeCurrentPagePrev}> ← </button>
+	        	    <button onClick={this.changeCurrentPageNext}> → </button>	
+	            </div> : false }
+	        </div>);
 
 // 1. sort. items -> sortedItems(this.state.isSorted, items)
 // 2. filter -> sortedItems -> filteredtems(true/false)
-// 3. paginate -> filteredItems -> paginatedItems(currentPage/1/2/3)
+// 3. paginate -> filteredItems -> paginatedItems(currentPage/1/2/3)	
+
 
 		let items = [];
 			
@@ -259,6 +273,8 @@ class App extends Component {
 			onComplete={this.onComplete}
 			onChange={this.onChange}
 			/>)
+
+				
 
 		return (
 			<div className="app">
@@ -282,6 +298,27 @@ class App extends Component {
 				alphabetOrder={this.alphabetOrder}
 				onClickSortDate={this.onClickSortDate}
 				/>
+				<section className="sorts-filters">
+					<form>
+					<h3> Filter by </h3>
+					<select id="list"> 
+					  <option > ... </option>
+					  <option value="all"> All </option>
+					  <option value="active"> Active </option>
+					  <option value="completed"> Completed </option>
+					</select>
+				</form>
+				<form>
+					<h3> Sort by </h3>
+					<select id="list"> 
+					  <option > ... </option>
+					  <option value="a-z"> A-Z </option>
+					  <option value="z-a"> Z-A </option>
+					  <option value="last"> Last </option>
+					  <option value="first"> First </option>
+					</select>
+				</form>
+				</section>
 				<ul className="todo-list">
 		    	    {
 		    	    	items.length > 0 
@@ -289,29 +326,15 @@ class App extends Component {
 		    	    	: <h2> No tasks yet... </h2>
 		    	    }
 		    	</ul>
-		    	<div >
-			        { currentPage > 1 
-			        	? <div className="pagination">
-			        		<button onClick={this.changeCurrentPagePrev}> ← </button>
-			        	    <button onClick={this.changeCurrentPageNext}> → </button>	
-			              </div>
-			        	: <button onClick={this.changeCurrentPageNext}> → </button>
-			        }
-			    </div>
+		    	<div>
+		    		{	items.length > 0
+		    			? PaginationHtml
+		    			: null
+		    		}
+		    	</div>    
 			</div>
 		)
 	}
 }
 
 export default App
-
-
-/*{ items.length > 10
-		    	  ? <button onClick={() => this.changeCurrentPage(1)}> 1 </button>
-		    	  <button onClick={() => this.changeCurrentPage(2)}> 2 </button>
-		    	  : <div></div>
-
-		    	  <button onClick={() => this.changeCurrentPage(1)}> 1 </button>
-					<button onClick={() => this.changeCurrentPage(2)}> 2 </button>
-					<button onClick={() => this.changeCurrentPage(3)}> 3 </button>
-		    	}*/

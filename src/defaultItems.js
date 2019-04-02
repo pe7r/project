@@ -1,67 +1,117 @@
 export default [
 		{
-        title: 'First one',
+        title: 'Взять ручку на работу',
         date: 1,
         completed: false,
       },
       {
-        title: 'Become better human',
+        title: 'Take a pen at work',
         date: 2,
         completed: true,
       },
       {
-        title: 'Do this',
+        title: 'Three',
         date: 3,
         completed: false,
       },
       {
-        title: 'Make that',
+        title: 'Four',
         date: 4,
         completed: true,
       },
       {
-        title: 'Learn JS Promises',
+        title: 'Five',
         date: 5,
         completed: false,
       },
       {
-        title: 'Attack beast',
+        title: 'Six',
         date: 6,
         completed: true,
       },
       {
-        title: 'Create something',
+        title: 'Seven',
         date: 7,
         completed: false,
       },
       {
-        title: 'Read a book',
+        title: 'Eight',
         date: 8,
         completed: true,
       },
       {
-        title: 'Do ToDoList',
+        title: 'Nine',
         date: 9,
         completed: false,
       },
       {
-        title: 'Gift wishes list',
+        title: 'Ten',
         date: 10,
         completed: false,
       },
       {
-        title: 'Watch football',
+        title: 'Eleven',
         date: 11,
         completed: true,
       },
       {
-        title: 'Zombies death',
+        title: 'Twelve',
         date: 12,
         completed: true,
       },
       {
-        title: 'Last one',
+        title: 'Thirteen',
         date: 13,
+        completed: false,
+      },
+      {
+        title: 'Fourteen',
+        date: 14,
+        completed: true,
+      },
+      {
+        title: 'Fifteen',
+        date: 15,
+        completed: false,
+      },
+      {
+        title: 'Sixteen',
+        date: 16,
+        completed: true,
+      },
+      {
+        title: 'Seventeen',
+        date: 17,
+        completed: false,
+      },
+      {
+        title: 'Eighteen',
+        date: 18,
+        completed: true,
+      },
+      {
+        title: 'Nineteen',
+        date: 19,
+        completed: false,
+      },
+      {
+        title: 'Twenty',
+        date: 20,
+        completed: true,
+      },
+      {
+        title: 'Twenty one',
+        date: 21,
+        completed: false,
+      },
+      {
+        title: 'Twenty two',
+        date: 22,
+        completed: true,
+      },
+      {
+        title: 'Twenty three',
+        date: 23,
         completed: false,
       },
 		]
