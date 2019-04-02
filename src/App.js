@@ -13,8 +13,7 @@ class App extends Component {
 		checkedTasks: [],
 		currentPage: 1,
 		filterRules: 'all',
-		isDateSorted: false,
-		isAlpha: false,
+		checkRules: null,
 		sortRules: null
 	}
 
@@ -160,7 +159,8 @@ class App extends Component {
 			filterRules,
 			isDateSorted,
 			isAlpha,
-			sortRules
+			sortRules,
+			checkRules
 		} = this.state;
 
 		let filteredItems = []
@@ -222,9 +222,9 @@ class App extends Component {
 
 
 
-            if (currentPage !== 1 && paginatedItems.length < 1) {
-                this.changeCurrentPagePrev()
-            }
+        if (currentPage !== 1 && paginatedItems.length < 1) {
+            this.changeCurrentPagePrev()
+        }
 
         const PaginationHtml = (<div className="pagination">
         	{ currentPage === 1 && tasks.length > 10 ? <button onClick={this.changeCurrentPageNext}> → </button> : false }
@@ -257,34 +257,38 @@ class App extends Component {
 		return (
 			<div className="app">
 				<Header />
-				<Filters 
-				onCheckAll={this.onCheckAll}
-				onUncheckAll={this.onUncheckAll}
-				deleteSelected={this.deleteSelected}
-				/>
 				<AddTask 
 				onCreate={this.addTask} 
 				/>
 				<section className="sorts-filters">
 					<form>
-					<h3> Filter by </h3>
-					<select id="filters" onChange={this.filtersChange} value={filterRules}> 
-					  <option value="all"> All </option>
-					  <option value="active"> Active </option>
-					  <option value="completed"> Completed </option>
-					</select>
-				</form>
-				<form>
-					<h3> Sort by </h3>
-					<select id="sorts" onChange={this.sortChange} value={sortRules}> 
-					  <option value="first"> First </option>
-					  <option value="last"> Last </option>
-					  <option value="a-z"> A - Z </option>
-					  <option value="z-a"> Z - A </option>
-					  
-					 
-					</select>
-				</form>
+						<h3> Filter by </h3>
+						<select id="filters" onChange={this.filtersChange} value={filterRules}> 
+							<option value="all"> All </option>
+							<option value="active"> Active </option>
+							<option value="completed"> Completed </option>
+						</select>
+					</form>
+					<form>
+						<h3> Sort by </h3>
+						<select id="sorts" onChange={this.sortChange} value={sortRules}> 
+						    <option value="first"> First </option>
+						    <option value="last"> Last </option>
+						    <option value="a-z"> A - Z </option>
+						    <option value="z-a"> Z - A </option>
+						</select>
+					</form>
+				</section>
+				<section>
+					<form className="check">
+						<h5> With checked: </h5>
+						<select id="sorts" onChange={this.checkAction} value={checkRules}> 
+						    <option value="first"> ... </option>
+						    <option value="last"> Check All </option>
+						    <option value="a-z"> Uncheck All </option>
+						    <option value="z-a"> Delete Selected </option>
+						</select>
+					</form>
 				</section>
 				<ul className="todo-list">
 		    	    {
