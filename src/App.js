@@ -4,7 +4,6 @@ import Header from './components/Header/Header'
 import AddTask from './components/AddTask/AddTask'
 import ToDoItem from './components/ToDoItem/ToDoItem'
 import Filters from './components/Filters/Filters'
-import Sort from './components/Sort/Sort.js'
 import defaultItems from './defaultItems.js'
 
 
@@ -287,17 +286,6 @@ class App extends Component {
 				<AddTask 
 				onCreate={this.addTask} 
 				/>
-				<Sort
-				isDateSorted={isDateSorted}
-				showAll={this.showAll}
-				isAlpha={isAlpha}
-				filterCompleted={this.filterCompleted}
-				filterActive={this.filterActive}
-				changeSortOrder={this.changeSortOrder}
-				sortDate={this.sortDate}
-				alphabetOrder={this.alphabetOrder}
-				onClickSortDate={this.onClickSortDate}
-				/>
 				<section className="sorts-filters">
 					<form>
 					<h3> Filter by </h3>
@@ -310,11 +298,12 @@ class App extends Component {
 				<form>
 					<h3> Sort by </h3>
 					<select id="sorts" onChange={this.sortChange} value={sortRules}> 
-					  <option > ... </option>
+					  <option value="first"> First </option>
+					  <option value="last"> Last </option>
 					  <option value="a-z"> A - Z </option>
 					  <option value="z-a"> Z - A </option>
-					  <option value="last"> Last </option>
-					  <option value="first"> First </option>
+					  
+					 
 					</select>
 				</form>
 				</section>
