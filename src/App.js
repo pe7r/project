@@ -167,6 +167,11 @@ class App extends Component {
 		})
 	}
 
+	getSelectValue = () => {
+		let selectedValue = document.getElementById('list');
+		console.log(selectedValue.ref)
+	}
+
 	render() {
 
 		const {
@@ -301,6 +306,15 @@ class App extends Component {
 				alphabetOrder={this.alphabetOrder}
 				onClickSortDate={this.onClickSortDate}
 				/>
+				<form>
+					<h3> Filter by </h3>
+					<select id="list" onChange={this.getSelectValue()}> 
+					  <option ref=""> ... </option>
+					  <option ref="all"> All </option>
+					  <option ref="active"> Active </option>
+					  <option ref="completed"> Completed </option>
+					</select>
+				</form>
 				<ul className="todo-list">
 		    	    {
 		    	    	items.length > 0 
