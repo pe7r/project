@@ -1,11 +1,11 @@
 export default [
 		{
-        title: 'One',
+        title: 'Взять ручку на работу',
         date: 1,
         completed: false,
       },
       {
-        title: 'Two',
+        title: 'Take a pen at work',
         date: 2,
         completed: true,
       },

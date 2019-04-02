@@ -167,11 +167,6 @@ class App extends Component {
 		})
 	}
 
-	getSelectValue = () => {
-		let selectedValue = document.getElementById('list');
-		console.log(selectedValue.ref)
-	}
-
 	render() {
 
 		const {
@@ -251,20 +246,16 @@ class App extends Component {
 
 		paginatedItems = paginate(sortedItems, 10, currentPage)
 		console.log(paginatedItems)
-
-		let pagination = null
-		    if (currentPage === 1 && tasks.length > 10) {
-	        	pagination = <button onClick={this.changeCurrentPageNext}> → </button>	
-	        } else if (currentPage !== 1 && paginatedItems.length < 1) {
-	        	this.changeCurrentPagePrev()
-	        } else if (tasks.length < 11 && currentPage === 1) {
-	        	pagination = false
-	        } else if (currentPage !== 1 && sortedItems.length > 10) {
-	        	pagination = <div className="pagination">
+ 
+	        const PaginationHtml = (<div className="pagination">
+	        	{ currentPage === 1 && tasks.length > 10 ? <button onClick={this.changeCurrentPageNext}> → </button> : false }
+	        	{ currentPage !== 1 && paginatedItems.length < 1 ? () => this.changeCurrentPagePrev() : false }
+	        	{ tasks.length < 11 && currentPage === 1 ? false : null}
+				{ currentPage !== 1 && sortedItems.length > 10 ? <div className="pagination">
 	        		<button onClick={this.changeCurrentPagePrev}> ← </button>
 	        	    <button onClick={this.changeCurrentPageNext}> → </button>	
-	            </div>
-	        } 
+	            </div> : false }
+	        </div>);
 
 // 1. sort. items -> sortedItems(this.state.isSorted, items)
 // 2. filter -> sortedItems -> filteredtems(true/false)
@@ -282,7 +273,8 @@ class App extends Component {
 			onComplete={this.onComplete}
 			onChange={this.onChange}
 			/>)
-    	
+
+				
 
 		return (
 			<div className="app">
@@ -306,15 +298,27 @@ class App extends Component {
 				alphabetOrder={this.alphabetOrder}
 				onClickSortDate={this.onClickSortDate}
 				/>
-				<form>
+				<section className="sorts-filters">
+					<form>
 					<h3> Filter by </h3>
-					<select id="list" onChange={this.getSelectValue()}> 
-					  <option ref=""> ... </option>
-					  <option ref="all"> All </option>
-					  <option ref="active"> Active </option>
-					  <option ref="completed"> Completed </option>
+					<select id="list"> 
+					  <option > ... </option>
+					  <option value="all"> All </option>
+					  <option value="active"> Active </option>
+					  <option value="completed"> Completed </option>
 					</select>
 				</form>
+				<form>
+					<h3> Sort by </h3>
+					<select id="list"> 
+					  <option > ... </option>
+					  <option value="a-z"> A-Z </option>
+					  <option value="z-a"> Z-A </option>
+					  <option value="last"> Last </option>
+					  <option value="first"> First </option>
+					</select>
+				</form>
+				</section>
 				<ul className="todo-list">
 		    	    {
 		    	    	items.length > 0 
@@ -324,7 +328,7 @@ class App extends Component {
 		    	</ul>
 		    	<div>
 		    		{	items.length > 0
-		    			? pagination
+		    			? PaginationHtml
 		    			: null
 		    		}
 		    	</div>    

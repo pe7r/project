@@ -12,7 +12,7 @@ class FormForEdit extends React.Component {
     		handleCancel
     	} = this.props;
         return (
-            <div className="edit-form">
+            <div className="edit-form">	
 					
 					<input 
 						className="edit-input"
