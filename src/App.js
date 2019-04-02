@@ -173,6 +173,12 @@ class App extends Component {
 		})
 	}
 
+	sortChange = (event) => {
+		this.setState({
+			sortRules: event.target.value
+		})
+	}
+
 	render() {
 
 		const {
@@ -194,46 +200,34 @@ class App extends Component {
 		}
 
     	let sortedItems = []
-    	if (sortRules === 'date') {
-	    	let sortedDateItems = []
-
-			if (isDateSorted) {
-				sortedDateItems = filteredItems.sort((a, b) => a.date - b.date > 0 ? -1 : 1)
-			} else {
-				sortedDateItems = filteredItems.sort((a, b) => b.date - a.date > 0 ? -1 : 1)
-			}
-
-			sortedItems = sortedDateItems.slice()
-
-    	} else if (sortRules === 'alpha') {
-    		let sortedAlphabetItems = []
-
-    		if (isAlpha) {
-    			sortedAlphabetItems = filteredItems.sort((a, b) => {
-			        let taskA = a.title.toUpperCase()
-			        let taskB = b.title.toUpperCase()
-		             if (taskA < taskB) {
-		               return -1
-		             }
-		             if (taskA > taskB) {
-		               return 1
-		             }
-		             return 0
-		        })
-    		} else {
-    			sortedAlphabetItems = filteredItems.sort((a, b) => {
-			        let taskA = a.title.toUpperCase()
-			        let taskB = b.title.toUpperCase()
-		             if (taskB < taskA) {
-		               return -1
-		             }
-		             if (taskB > taskA) {
-		               return 1
-		             }
-		             return 0
-		        })
-    		}
-	        sortedItems = sortedAlphabetItems.slice()
+    	if (sortRules === 'last') {
+			sortedItems = filteredItems.sort((a, b) => a.date - b.date > 0 ? -1 : 1)
+		} else if (sortRules === 'first') {
+			sortedItems = filteredItems.sort((a, b) => b.date - a.date > 0 ? -1 : 1)
+		} else if (sortRules === 'a-z') {
+			sortedItems = filteredItems.sort((a, b) => {
+		        let taskA = a.title.toUpperCase()
+		        let taskB = b.title.toUpperCase()
+	             if (taskA < taskB) {
+	               return -1
+	             }
+	             if (taskA > taskB) {
+	               return 1
+	             }
+	             return 0
+	        })
+		} else if (sortRules === 'z-a') {
+			sortedItems = filteredItems.sort((a, b) => {
+		        let taskA = a.title.toUpperCase()
+		        let taskB = b.title.toUpperCase()
+	             if (taskB < taskA) {
+	               return -1
+	             }
+	             if (taskB > taskA) {
+	               return 1
+	             }
+	             return 0
+	        })
     	} else {
     		sortedItems = filteredItems.slice()
     	}
@@ -307,7 +301,7 @@ class App extends Component {
 				<section className="sorts-filters">
 					<form>
 					<h3> Filter by </h3>
-					<select id="filters" onChange={this.filtersChange} value={this.state.filterRules}> 
+					<select id="filters" onChange={this.filtersChange} value={filterRules}> 
 					  <option value="all"> All </option>
 					  <option value="active"> Active </option>
 					  <option value="completed"> Completed </option>
@@ -315,10 +309,10 @@ class App extends Component {
 				</form>
 				<form>
 					<h3> Sort by </h3>
-					<select id="sorts"> 
+					<select id="sorts" onChange={this.sortChange} value={sortRules}> 
 					  <option > ... </option>
-					  <option value="a-z"> A-Z </option>
-					  <option value="z-a"> Z-A </option>
+					  <option value="a-z"> A - Z </option>
+					  <option value="z-a"> Z - A </option>
 					  <option value="last"> Last </option>
 					  <option value="first"> First </option>
 					</select>
