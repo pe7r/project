@@ -25,7 +25,7 @@ class FormForItem extends React.Component {
 				/>
 				<span className="slider round"></span>
 				</label>	
-				<h2 onDoubleClick={handleClickEdit}> { item.title } </h2>
+				<h3 onDoubleClick={handleClickEdit}> { item.title } </h3>
 				<button onClick={handleClickEdit}
 						className="todo-item__button"> 🖉 </button>
 				<button className="todo-item__button"
