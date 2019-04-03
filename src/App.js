@@ -4,7 +4,6 @@ import Header from './components/Header/Header'
 import AddTask from './components/AddTask/AddTask'
 import ToDoItem from './components/ToDoItem/ToDoItem'
 import Filters from './components/Filters/Filters'
-import Sort from './components/Sort/Sort.js'
 import defaultItems from './defaultItems.js'
 
 
@@ -14,8 +13,7 @@ class App extends Component {
 		checkedTasks: [],
 		currentPage: 1,
 		filterRules: 'all',
-		isDateSorted: false,
-		isAlpha: false,
+		checkRules: null,
 		sortRules: null
 	}
 
@@ -139,30 +137,16 @@ class App extends Component {
 		})
 	}
 
-	filterActive = () => {
+	filtersChange = (event) => {
 		this.setState({
-			filterRules: 'active',
+			filterRules: event.target.value,
 			currentPage: 1
 		})
 	}
 
-	filterCompleted = () => {
+	sortChange = (event) => {
 		this.setState({
-			filterRules: 'completed',
-			currentPage: 1
-		})
-	}
-
-	showAll = () => {
-		this.setState({
-			filterRules: 'all',
-			currentPage: 1
-		})
-	}
-
-	sortDate = () => {
-		this.setState({
-			sortRules: 'date',
+			sortRules: event.target.value,
 			currentPage: 1
 		})
 	}
@@ -175,7 +159,8 @@ class App extends Component {
 			filterRules,
 			isDateSorted,
 			isAlpha,
-			sortRules
+			sortRules,
+			checkRules
 		} = this.state;
 
 		let filteredItems = []
@@ -188,46 +173,34 @@ class App extends Component {
 		}
 
     	let sortedItems = []
-    	if (sortRules === 'date') {
-	    	let sortedDateItems = []
-
-			if (isDateSorted) {
-				sortedDateItems = filteredItems.sort((a, b) => a.date - b.date > 0 ? -1 : 1)
-			} else {
-				sortedDateItems = filteredItems.sort((a, b) => b.date - a.date > 0 ? -1 : 1)
-			}
-
-			sortedItems = sortedDateItems.slice()
-
-    	} else if (sortRules === 'alpha') {
-    		let sortedAlphabetItems = []
-
-    		if (isAlpha) {
-    			sortedAlphabetItems = filteredItems.sort((a, b) => {
-			        let taskA = a.title.toUpperCase()
-			        let taskB = b.title.toUpperCase()
-		             if (taskA < taskB) {
-		               return -1
-		             }
-		             if (taskA > taskB) {
-		               return 1
-		             }
-		             return 0
-		        })
-    		} else {
-    			sortedAlphabetItems = filteredItems.sort((a, b) => {
-			        let taskA = a.title.toUpperCase()
-			        let taskB = b.title.toUpperCase()
-		             if (taskB < taskA) {
-		               return -1
-		             }
-		             if (taskB > taskA) {
-		               return 1
-		             }
-		             return 0
-		        })
-    		}
-	        sortedItems = sortedAlphabetItems.slice()
+    	if (sortRules === 'last') {
+			sortedItems = filteredItems.sort((a, b) => a.date - b.date > 0 ? -1 : 1)
+		} else if (sortRules === 'first') {
+			sortedItems = filteredItems.sort((a, b) => b.date - a.date > 0 ? -1 : 1)
+		} else if (sortRules === 'a-z') {
+			sortedItems = filteredItems.sort((a, b) => {
+		        let taskA = a.title.toUpperCase()
+		        let taskB = b.title.toUpperCase()
+	             if (taskA < taskB) {
+	               return -1
+	             }
+	             if (taskA > taskB) {
+	               return 1
+	             }
+	             return 0
+	        })
+		} else if (sortRules === 'z-a') {
+			sortedItems = filteredItems.sort((a, b) => {
+		        let taskA = a.title.toUpperCase()
+		        let taskB = b.title.toUpperCase()
+	             if (taskB < taskA) {
+	               return -1
+	             }
+	             if (taskB > taskA) {
+	               return 1
+	             }
+	             return 0
+	        })
     	} else {
     		sortedItems = filteredItems.slice()
     	}
@@ -246,16 +219,21 @@ class App extends Component {
 
 		paginatedItems = paginate(sortedItems, 10, currentPage)
 		console.log(paginatedItems)
- 
-	        const PaginationHtml = (<div className="pagination">
-	        	{ currentPage === 1 && tasks.length > 10 ? <button onClick={this.changeCurrentPageNext}> → </button> : false }
-	        	{ currentPage !== 1 && paginatedItems.length < 1 ? () => this.changeCurrentPagePrev() : false }
-	        	{ tasks.length < 11 && currentPage === 1 ? false : null}
-				{ currentPage !== 1 && sortedItems.length > 10 ? <div className="pagination">
-	        		<button onClick={this.changeCurrentPagePrev}> ← </button>
-	        	    <button onClick={this.changeCurrentPageNext}> → </button>	
-	            </div> : false }
-	        </div>);
+
+
+
+        if (currentPage !== 1 && paginatedItems.length < 1) {
+            this.changeCurrentPagePrev()
+        }
+
+        const PaginationHtml = (<div className="pagination">
+        	{ currentPage === 1 && tasks.length > 10 ? <button onClick={this.changeCurrentPageNext}> → </button> : false }
+        	{ tasks.length < 11 && currentPage === 1 ? false : null}
+			{ currentPage !== 1 && sortedItems.length > 10 ? <div className="pagination">
+        		<button onClick={this.changeCurrentPagePrev}> ← </button>
+        	    <button onClick={this.changeCurrentPageNext}> → </button>	
+            </div> : false }
+        </div>);
 
 // 1. sort. items -> sortedItems(this.state.isSorted, items)
 // 2. filter -> sortedItems -> filteredtems(true/false)
@@ -279,45 +257,38 @@ class App extends Component {
 		return (
 			<div className="app">
 				<Header />
-				<Filters 
-				onCheckAll={this.onCheckAll}
-				onUncheckAll={this.onUncheckAll}
-				deleteSelected={this.deleteSelected}
-				/>
 				<AddTask 
 				onCreate={this.addTask} 
 				/>
-				<Sort
-				isDateSorted={isDateSorted}
-				showAll={this.showAll}
-				isAlpha={isAlpha}
-				filterCompleted={this.filterCompleted}
-				filterActive={this.filterActive}
-				changeSortOrder={this.changeSortOrder}
-				sortDate={this.sortDate}
-				alphabetOrder={this.alphabetOrder}
-				onClickSortDate={this.onClickSortDate}
-				/>
 				<section className="sorts-filters">
 					<form>
-					<h3> Filter by </h3>
-					<select id="list"> 
-					  <option > ... </option>
-					  <option value="all"> All </option>
-					  <option value="active"> Active </option>
-					  <option value="completed"> Completed </option>
-					</select>
-				</form>
-				<form>
-					<h3> Sort by </h3>
-					<select id="list"> 
-					  <option > ... </option>
-					  <option value="a-z"> A-Z </option>
-					  <option value="z-a"> Z-A </option>
-					  <option value="last"> Last </option>
-					  <option value="first"> First </option>
-					</select>
-				</form>
+						<h3> Filter by </h3>
+						<select id="filters" onChange={this.filtersChange} value={filterRules}> 
+							<option value="all"> All </option>
+							<option value="active"> Active </option>
+							<option value="completed"> Completed </option>
+						</select>
+					</form>
+					<form>
+						<h3> Sort by </h3>
+						<select id="sorts" onChange={this.sortChange} value={sortRules}> 
+						    <option value="first"> First </option>
+						    <option value="last"> Last </option>
+						    <option value="a-z"> A - Z </option>
+						    <option value="z-a"> Z - A </option>
+						</select>
+					</form>
+				</section>
+				<section>
+					<form className="check">
+						<h5> With checked: </h5>
+						<select id="sorts" onChange={this.checkAction} value={checkRules}> 
+						    <option value="first"> ... </option>
+						    <option value="last"> Check All </option>
+						    <option value="a-z"> Uncheck All </option>
+						    <option value="z-a"> Delete Selected </option>
+						</select>
+					</form>
 				</section>
 				<ul className="todo-list">
 		    	    {
