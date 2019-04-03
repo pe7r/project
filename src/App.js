@@ -305,7 +305,7 @@ class App extends Component {
 		    		{ sortedItems.length > 10 
 		    			?	[...Array(Math.ceil(sortedItems.length / 10))].map((x, i) => (
 					          <button
-					            className={`pagination-number ${currentPage === i + 1 ? 'active' : ''}`}
+					            className={`pagination-number ${currentPage === i + 1 ? 'active-button' : ''}`}
 					            key={i}
 					            id={i + 1}
 					            onClick={event => this.changeCurrentPage(+event.target.id)}
@@ -315,10 +315,6 @@ class App extends Component {
 					        ))
 		    			: null
 		    		}
-		    		{	items.length > 0
-		    			? PaginationArrows
-		    			: null
-		    		}
 		    	</div>    
 			</div>
 		)
@@ -326,3 +322,8 @@ class App extends Component {
 }
 
 export default App
+
+		    		/*{	items.length > 0
+		    			? PaginationArrows
+		    			: null
+		    		}*/

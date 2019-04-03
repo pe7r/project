@@ -26,6 +26,22 @@ border: 1px solid #efefef;
 	margin-right: 5px;
 }
 
+.pagination-number {
+	background-color: grey;
+	font-family: "Impact";
+	color: white;
+	border-radius: 5px;
+	border: none;
+	padding: 8px 16px;
+	margin: 4px; 
+	cursor: pointer;
+}
+
+.active-button {
+	color: skyblue;
+	background-color: black;
+}
+
 .sorts-filters form{
 	display: inline-block;
 	margin-right: 20px;
