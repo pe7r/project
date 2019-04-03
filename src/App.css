@@ -18,7 +18,7 @@ align-items: center;
 border: 1px solid #efefef;    
 }
 
-.pagination button {
+.pagination {
 	text-align: center;
 	padding-right: 5px;
 	padding-top: 5px;

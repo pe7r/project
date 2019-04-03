@@ -3,7 +3,6 @@ import './App.css'
 import Header from './components/Header/Header'
 import AddTask from './components/AddTask/AddTask'
 import ToDoItem from './components/ToDoItem/ToDoItem'
-import Filters from './components/Filters/Filters'
 import defaultItems from './defaultItems.js'
 
 
@@ -137,6 +136,12 @@ class App extends Component {
 		})
 	}
 
+	changeCurrentPage = (actualPage) => {
+		this.setState({
+			currentPage: actualPage 
+		})
+	}
+
 	filtersChange = (event) => {
 		this.setState({
 			filterRules: event.target.value,
@@ -157,8 +162,6 @@ class App extends Component {
 			tasks,
 			currentPage,
 			filterRules,
-			isDateSorted,
-			isAlpha,
 			sortRules,
 			checkRules
 		} = this.state;
@@ -226,7 +229,7 @@ class App extends Component {
             this.changeCurrentPagePrev()
         }
 
-        const PaginationHtml = (<div className="pagination">
+        const PaginationArrows = (<div className="pagination">
         	{ currentPage === 1 && tasks.length > 10 ? <button onClick={this.changeCurrentPageNext}> → </button> : false }
         	{ tasks.length < 11 && currentPage === 1 ? false : null}
 			{ currentPage !== 1 && sortedItems.length > 10 ? <div className="pagination">
@@ -283,10 +286,10 @@ class App extends Component {
 					<form className="check">
 						<h5> With checked: </h5>
 						<select id="sorts" onChange={this.checkAction} value={checkRules}> 
-						    <option value="first"> ... </option>
-						    <option value="last"> Check All </option>
-						    <option value="a-z"> Uncheck All </option>
-						    <option value="z-a"> Delete Selected </option>
+						    <option value=""> ... </option>
+						    <option value="check"> Check All </option>
+						    <option value="uncheck"> Uncheck All </option>
+						    <option value="delete"> Delete Selected </option>
 						</select>
 					</form>
 				</section>
@@ -297,9 +300,23 @@ class App extends Component {
 		    	    	: <h2> No tasks yet... </h2>
 		    	    }
 		    	</ul>
+
 		    	<div>
+		    		{ sortedItems.length > 10 
+		    			?	[...Array(Math.ceil(sortedItems.length / 10))].map((x, i) => (
+					          <button
+					            className={`pagination-number ${currentPage === i + 1 ? 'active' : ''}`}
+					            key={i}
+					            id={i + 1}
+					            onClick={event => this.changeCurrentPage(+event.target.id)}
+					          >
+					            {i + 1}
+					          </button>
+					        ))
+		    			: null
+		    		}
 		    		{	items.length > 0
-		    			? PaginationHtml
+		    			? PaginationArrows
 		    			: null
 		    		}
 		    	</div>    
