@@ -38,7 +38,7 @@ class FormForItem extends React.Component {
     	} = this.props;
         return (
             <div className="todo-item"
-            	 onMouseEnter={this.handleHoverOn}
+            	 onMouseOver={this.handleHoverOn}
             	 onMouseLeave={this.handleHoverOff}
             >
 				<input 
