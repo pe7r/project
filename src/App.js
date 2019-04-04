@@ -40,7 +40,16 @@ class App extends Component {
 		console.log(this.state.checkedTasks)
 	}
 
-
+	markChecked = date => {
+		console.log('markChecked');
+    const checked = [...this.state.checkedTasks];
+    if (!checked.includes(date)) {
+      this.setState({ checkedTasks: [...checked, date] });
+    } else {
+      checked.splice(checked.indexOf(date), 1);
+      this.setState({ checkedTasks: checked });
+    }
+  };
 	/*onCheckAll = (item) => {
 		const checkedTasks = [...this.state.tasks]
 		checkedTasks.forEach((item,i) => {
@@ -253,6 +262,8 @@ class App extends Component {
 			onDelete={this.onDelete}
 			onComplete={this.onComplete}
 			onChange={this.onChange}
+			checkedTasks={this.state.checkedTasks}
+			markChecked={this.markChecked}
 			/>)
 
 				

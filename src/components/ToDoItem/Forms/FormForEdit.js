@@ -3,6 +3,10 @@ import '../ToDoItem.css'
 
 class FormForEdit extends React.Component {
     render() {
+
+    	let disabledStyle = {
+    		color: 'grey'
+    	}
     	const {
     		title,
     		item,
@@ -21,12 +25,19 @@ class FormForEdit extends React.Component {
 						onChange={handleInputChange}
 						maxLength="40"
 					/>
-					<button className="todo-item__button"
+					{
+						title.length > 0 
+						? <button className="todo-item__button"
 							onClick={() => {
 								handleChange(item, title)
 								handleEdit()
 							}}
 							> Save </button>
+						: <button className="todo-item__button"
+							disabled
+							style={disabledStyle}
+							> Save </button>
+					}
 					<button className="todo-item__button"
 							onClick={handleCancel}> Cancel </button>
 				</div>

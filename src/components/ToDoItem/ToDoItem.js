@@ -43,7 +43,9 @@ class ToDoItem extends React.Component {
 			onComplete,
 			onCheck,
 			onChange,
-			onDelete
+			onDelete,
+			checkedTasks,
+			markChecked
 		} = this.props;
 		const {
 			title,
@@ -73,6 +75,8 @@ class ToDoItem extends React.Component {
 			onDelete={onDelete}
 			handleClickEdit={this.handleClickEdit}
 			handleCheck={this.handleCheck}
+			checkedTasks={checkedTasks}
+			markChecked={markChecked}
 			/>
 		)
 		}

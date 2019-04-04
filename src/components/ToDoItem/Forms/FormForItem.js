@@ -9,14 +9,16 @@ class FormForItem extends React.Component {
     		onComplete,
     		onDelete,
     		onCheck,
-    		handleClickEdit
+    		handleClickEdit,
+    		checkedTasks,
+    		markChecked
     	} = this.props;
         return (
             <div className="todo-item">
 				<input 
 					type="checkbox" 
-					checked={checked}
-					onChange={() => onCheck(item)}
+					checked={checkedTasks.includes(item)}
+					onChange={event => markChecked(item)}
 				/>
 				<label className="switch">
 				<input type="checkbox"
