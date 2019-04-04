@@ -45,27 +45,20 @@ class App extends Component {
 	            checkedItems.push(tasks[i])
 		    }
 		})
-    this.setState({ checkedTasks: [...this.state.checkedTasks, ...checkedItems] })
+    this.setState({ checkedTasks: [...checkedTasks, ...checkedItems] })
     }
 
-
-
-	onUncheckAll = (item) => {
-		const checkedTasks = [...this.state.tasks]
-		checkedTasks.forEach((item,i) => {
-			this.props.checked = false
+	uncheckAll = () => {
+		const { tasks, checkedTasks } = this.state;
+		const checkedItems = [...checkedTasks]
+		tasks.forEach((item,i) => {
+			if (checkedTasks.includes(item)) {
+				checkedItems.splice(checkedItems.indexOf(item), 1)
+			}
 		})
 		this.setState({
-			checkedTasks: checkedTasks
+			checkedTasks: checkedItems
 		})
-		console.log(this.state.checkedTasks)
-	}
-
-	deleteSelected = (checked) => {
-		const leftTasks = this.state.tasks.filter(task => task.checked !== true)
-		this.setState({
-			tasks: leftTasks
-		}) 
 	}
 
 	onDelete = (date) => {
@@ -160,7 +153,7 @@ class App extends Component {
 		if (this.state.checkRules === 'check') {
 			this.checkAll()
 		} else if (this.state.checkRules === 'uncheck') {
-			console.log('uncheck');
+			this.uncheckAll()
 		} else if (this.state.checkRules === 'delete') {
 			console.log('delete');
 		}
