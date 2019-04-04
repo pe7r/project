@@ -8,9 +8,10 @@
     color: #333333;
 }
 
-.todo-item h3 {
+.todo-item h2 {
     width: 50%;
     word-wrap: break-word;
+    text-align: center;
 }
 
 .todo-item__button {
@@ -90,4 +91,12 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+.edit-delete {
+  visibility: hidden;
+}
+
+.edit-delete-active {
+  visibility: visible;
 }

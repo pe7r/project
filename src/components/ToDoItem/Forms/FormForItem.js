@@ -2,7 +2,32 @@ import React from 'react'
 import '../ToDoItem.css'
 
 class FormForItem extends React.Component {
+	state = {
+		showButtons: false
+	}
+
+	handleHoverOn = () => {
+    	this.setState({showButtons: true})
+    }
+
+    handleHoverOff = () => {
+    	this.setState({showButtons: false})
+    }
+
     render() {
+
+
+    	const buttons = (<section className={`edit-delete ${this.state.showButtons ? 'edit-delete-active' : ''}`}>
+						<button className="todo-item__button"
+								onClick={handleClickEdit}
+						> 🖉 </button>
+						<button className="todo-item__button"
+								onClick={() => onDelete(item.date)}>
+						✖
+						</button>
+					  </section>)
+
+
     	const {
     		item,
     		onComplete,
@@ -12,7 +37,10 @@ class FormForItem extends React.Component {
     		checkedTasks
     	} = this.props;
         return (
-            <div className="todo-item">
+            <div className="todo-item"
+            	 onMouseEnter={this.handleHoverOn}
+            	 onMouseLeave={this.handleHoverOff}
+            >
 				<input 
 					type="checkbox" 
 					checked={checkedTasks.includes(item)}
@@ -25,13 +53,10 @@ class FormForItem extends React.Component {
 				/>
 				<span className="slider round"></span>
 				</label>	
-				<h3 onDoubleClick={handleClickEdit}> { item.title } </h3>
-				<button onClick={handleClickEdit}
-						className="todo-item__button"> 🖉 </button>
-				<button className="todo-item__button"
-						onClick={() => onDelete(item.date)}>
-				✖
-				</button>
+				<h2 onDoubleClick={handleClickEdit}> { item.title } </h2>
+				{
+					buttons
+				}
 			</div>
         )
     }
