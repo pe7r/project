@@ -12,8 +12,9 @@ class App extends Component {
 		checkedTasks: [],
 		currentPage: 1,
 		filterRules: 'all',
-		checkRules: null,
-		sortRules: null
+		checkRules: '',
+		checkAction: '',
+		sortRules: ''
 	}
 
 	addTask = newTask => {
@@ -27,30 +28,27 @@ class App extends Component {
 
 
 	onCheck = date => {
-		const check = [...this.state.checkedTasks];
+		const check = [...this.state.checkedTasks]
 		if (!check.includes(date)) {
-		  this.setState({ checkedTasks: [...check, date] });
+		  this.setState({ checkedTasks: [...check, date] })
 		} else {
-		  check.splice(check.indexOf(date), 1);
-		  this.setState({ checkedTasks: check });
+		  check.splice(check.indexOf(date), 1)
+		  this.setState({ checkedTasks: check })
 		}
-	};
+	}
 
     checkAll = () => {
-
+    	const { tasks, checkedTasks } = this.state;
+    	const checkedItems = []
+    	tasks.forEach((item, i) => {
+	        if (!checkedTasks.includes(item)) {
+	            checkedItems.push(tasks[i])
+		    }
+		})
+    this.setState({ checkedTasks: [...this.state.checkedTasks, ...checkedItems] })
     }
 
 
-	/*onCheckAll = (item) => {
-		const checkedTasks = [...this.state.tasks]
-		checkedTasks.forEach((item,i) => {
-			this.props.checked = true
-		})
-		this.setState({
-			checkedTasks: checkedTasks
-		})
-		console.log(this.state.checkedTasks)
-	}*/
 
 	onUncheckAll = (item) => {
 		const checkedTasks = [...this.state.tasks]
@@ -155,6 +153,20 @@ class App extends Component {
 		})
 	}
 
+	checkAction = (event) => {
+		this.setState({
+			checkRules: event.target.value
+		},() => {
+		if (this.state.checkRules === 'check') {
+			this.checkAll()
+		} else if (this.state.checkRules === 'uncheck') {
+			console.log('uncheck');
+		} else if (this.state.checkRules === 'delete') {
+			console.log('delete');
+		}
+		})
+	}
+
 	render() {
 
 		console.table(this.state.checkedTasks)
@@ -166,6 +178,7 @@ class App extends Component {
 			sortRules,
 			checkRules
 		} = this.state;
+
 
 		let filteredItems = []
 		if (filterRules === 'active') {
@@ -323,8 +336,3 @@ class App extends Component {
 }
 
 export default App
-
-		    		/*{	items.length > 0
-		    			? PaginationArrows
-		    			: null
-		    		}*/

@@ -4,14 +4,12 @@ import '../ToDoItem.css'
 class FormForItem extends React.Component {
     render() {
     	const {
-    		checked,
     		item,
     		onComplete,
     		onDelete,
     		onCheck,
     		handleClickEdit,
-    		checkedTasks,
-    		markChecked
+    		checkedTasks
     	} = this.props;
         return (
             <div className="todo-item">
