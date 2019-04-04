@@ -232,20 +232,7 @@ class App extends Component {
 
         if (currentPage !== 1 && paginatedItems.length < 1) {
             this.changeCurrentPagePrev()
-        }
-
-        const PaginationArrows = (<div className="pagination">
-        	{ currentPage === 1 && tasks.length > 10 ? <button onClick={this.changeCurrentPageNext}> → </button> : false }
-        	{ tasks.length < 11 && currentPage === 1 ? false : null}
-			{ currentPage !== 1 && sortedItems.length > 10 ? <div className="pagination">
-        		<button onClick={this.changeCurrentPagePrev}> ← </button>
-        	    <button onClick={this.changeCurrentPageNext}> → </button>	
-            </div> : false }
-        </div>);
-
-// 1. sort. items -> sortedItems(this.state.isSorted, items)
-// 2. filter -> sortedItems -> filteredtems(true/false)
-// 3. paginate -> filteredItems -> paginatedItems(currentPage/1/2/3)	
+        }	
 
 
 		let items = [];
