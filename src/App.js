@@ -24,32 +24,23 @@ class App extends Component {
 		})
 	}
 
-	onCheck = (date) => {
-		this.setState(prevState => {
-			const updatedTasks = prevState.tasks.map(task => {
-				if (task.date === date) {
-					updatedTasks.push(task)
-					console.log(updatedTasks)
-				}
-				return task
-			})
-			return {
-				checkedTasks: updatedTasks
-			}
-		})
-		console.log(this.state.checkedTasks)
-	}
 
-	markChecked = date => {
-		console.log('markChecked');
-    const checked = [...this.state.checkedTasks];
-    if (!checked.includes(date)) {
-      this.setState({ checkedTasks: [...checked, date] });
-    } else {
-      checked.splice(checked.indexOf(date), 1);
-      this.setState({ checkedTasks: checked });
+
+	onCheck = date => {
+		const check = [...this.state.checkedTasks];
+		if (!check.includes(date)) {
+		  this.setState({ checkedTasks: [...check, date] });
+		} else {
+		  check.splice(check.indexOf(date), 1);
+		  this.setState({ checkedTasks: check });
+		}
+	};
+
+    checkAll = () => {
+
     }
-  };
+
+
 	/*onCheckAll = (item) => {
 		const checkedTasks = [...this.state.tasks]
 		checkedTasks.forEach((item,i) => {
@@ -91,7 +82,6 @@ class App extends Component {
 			const completedTasks = prevState.tasks.map(task => {
 				if (task.date === date) {
 					task.completed = !task.completed
-					console.log(task)
 				}
 				return task
 			})
@@ -167,6 +157,8 @@ class App extends Component {
 
 	render() {
 
+		console.table(this.state.checkedTasks)
+
 		const {
 			tasks,
 			currentPage,
@@ -216,7 +208,6 @@ class App extends Component {
     	} else {
     		sortedItems = filteredItems.slice()
     	}
-    	console.log(sortedItems);
 
 
 
@@ -230,7 +221,6 @@ class App extends Component {
 		}
 
 		paginatedItems = paginate(sortedItems, 10, currentPage)
-		console.log(paginatedItems)
 
 
 

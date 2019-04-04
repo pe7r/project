@@ -18,7 +18,7 @@ class FormForItem extends React.Component {
 				<input 
 					type="checkbox" 
 					checked={checkedTasks.includes(item)}
-					onChange={event => markChecked(item)}
+					onChange={event => onCheck(item, event)}
 				/>
 				<label className="switch">
 				<input type="checkbox"
