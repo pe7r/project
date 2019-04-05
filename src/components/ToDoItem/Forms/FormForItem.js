@@ -2,22 +2,8 @@ import React from 'react'
 import '../ToDoItem.css'
 
 class FormForItem extends React.Component {
-	state = {
-		showButtons: false
-	}
-
-	handleHoverOn = () => {
-    	this.setState({showButtons: true})
-    }
-
-    handleHoverOff = () => {
-    	this.setState({showButtons: false})
-    }
-
     render() {
-
-
-    	const buttons = (<section className={`edit-delete ${this.state.showButtons ? 'edit-delete-active' : ''}`}>
+    	const buttons = (<section className={`edit-delete`}>
 						<button className="todo-item__button"
 								onClick={handleClickEdit}
 						> 🖉 </button>
@@ -26,7 +12,6 @@ class FormForItem extends React.Component {
 						✖
 						</button>
 					  </section>)
-
 
     	const {
     		item,
@@ -37,10 +22,7 @@ class FormForItem extends React.Component {
     		checkedTasks
     	} = this.props;
         return (
-            <div className="todo-item"
-            	 onMouseOver={this.handleHoverOn}
-            	 onMouseLeave={this.handleHoverOff}
-            >
+            <div className="todo-item">
 				<input 
 					type="checkbox" 
 					checked={checkedTasks.includes(item)}

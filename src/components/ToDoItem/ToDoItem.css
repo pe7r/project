@@ -8,6 +8,10 @@
     color: #333333;
 }
 
+.todo-item:hover .edit-delete {
+    visibility: visible;
+}
+
 .todo-item h2 {
     width: 50%;
     word-wrap: break-word;
@@ -95,8 +99,4 @@ input:checked + .slider:before {
 
 .edit-delete {
   visibility: hidden;
-}
-
-.edit-delete-active {
-  visibility: visible;
 }
