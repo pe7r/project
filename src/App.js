@@ -49,15 +49,8 @@ class App extends Component {
     }
 
 	uncheckAll = () => {
-		const { tasks, checkedTasks } = this.state;
-		const checkedItems = [...checkedTasks]
-		tasks.forEach((item,i) => {
-			if (checkedTasks.includes(item)) {
-				checkedItems.splice(checkedItems.indexOf(item), 1)
-			}
-		})
 		this.setState({
-			checkedTasks: checkedItems
+			checkedTasks: []
 		})
 	}
 
@@ -155,14 +148,13 @@ class App extends Component {
 		} else if (this.state.checkRules === 'uncheck') {
 			this.uncheckAll()
 		} else if (this.state.checkRules === 'delete') {
-			console.log('delete');
+			this.deleteSelected()
 		}
 		})
+
 	}
 
 	render() {
-
-		console.table(this.state.checkedTasks)
 
 		const {
 			tasks,
