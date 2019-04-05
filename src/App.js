@@ -309,7 +309,7 @@ class App extends Component {
 		    	    }
 		    	</ul>
 
-		    	<div>
+		    	<div className="pagination">
 		    		{ sortedItems.length > 10 
 		    			?	[...Array(Math.ceil(sortedItems.length / 10))].map((x, i) => (
 					          <button
