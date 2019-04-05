@@ -167,10 +167,13 @@ class App extends Component {
 		},() => {
 		if (this.state.checkRules === 'check') {
 			this.checkAll()
+			this.setState({ checkRules: '' })
 		} else if (this.state.checkRules === 'uncheck') {
 			this.uncheckAll()
+			this.setState({ checkRules: '' })
 		} else if (this.state.checkRules === 'delete') {
 			this.deleteSelected()
+			this.setState({ checkRules: '' })
 		}
 		})
 
