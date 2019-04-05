@@ -3,22 +3,30 @@ import '../ToDoItem.css'
 
 class FormForItem extends React.Component {
     render() {
+    	const buttons = (<section className={`edit-delete`}>
+						<button className="todo-item__button"
+								onClick={handleClickEdit}
+						> 🖉 </button>
+						<button className="todo-item__button"
+								onClick={() => onDelete(item.date)}>
+						✖
+						</button>
+					  </section>)
+
     	const {
-    		checked,
     		item,
     		onComplete,
     		onDelete,
     		onCheck,
     		handleClickEdit,
-    		checkedTasks,
-    		markChecked
+    		checkedTasks
     	} = this.props;
         return (
             <div className="todo-item">
 				<input 
 					type="checkbox" 
 					checked={checkedTasks.includes(item)}
-					onChange={event => markChecked(item)}
+					onChange={event => onCheck(item, event)}
 				/>
 				<label className="switch">
 				<input type="checkbox"
@@ -27,13 +35,10 @@ class FormForItem extends React.Component {
 				/>
 				<span className="slider round"></span>
 				</label>	
-				<h3 onDoubleClick={handleClickEdit}> { item.title } </h3>
-				<button onClick={handleClickEdit}
-						className="todo-item__button"> 🖉 </button>
-				<button className="todo-item__button"
-						onClick={() => onDelete(item.date)}>
-				✖
-				</button>
+				<h2 onDoubleClick={handleClickEdit}> { item.title } </h2>
+				{
+					buttons
+				}
 			</div>
         )
     }

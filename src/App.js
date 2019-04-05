@@ -12,8 +12,9 @@ class App extends Component {
 		checkedTasks: [],
 		currentPage: 1,
 		filterRules: 'all',
-		checkRules: null,
-		sortRules: null
+		checkRules: '',
+		checkAction: '',
+		sortRules: ''
 	}
 
 	addTask = newTask => {
@@ -24,59 +25,33 @@ class App extends Component {
 		})
 	}
 
-	onCheck = (date) => {
-		this.setState(prevState => {
-			const updatedTasks = prevState.tasks.map(task => {
-				if (task.date === date) {
-					updatedTasks.push(task)
-					console.log(updatedTasks)
-				}
-				return task
-			})
-			return {
-				checkedTasks: updatedTasks
-			}
-		})
-		console.log(this.state.checkedTasks)
+
+
+	onCheck = date => {
+		const check = [...this.state.checkedTasks]
+		if (!check.includes(date)) {
+		  this.setState({ checkedTasks: [...check, date] })
+		} else {
+		  check.splice(check.indexOf(date), 1)
+		  this.setState({ checkedTasks: check })
+		}
 	}
 
-	markChecked = date => {
-		console.log('markChecked');
-    const checked = [...this.state.checkedTasks];
-    if (!checked.includes(date)) {
-      this.setState({ checkedTasks: [...checked, date] });
-    } else {
-      checked.splice(checked.indexOf(date), 1);
-      this.setState({ checkedTasks: checked });
+    checkAll = () => {
+    	const { tasks, checkedTasks } = this.state;
+    	const checkedItems = []
+    	tasks.forEach((item, i) => {
+	        if (!checkedTasks.includes(item)) {
+	            checkedItems.push(tasks[i])
+		    }
+		})
+    this.setState({ checkedTasks: [...checkedTasks, ...checkedItems] })
     }
-  };
-	/*onCheckAll = (item) => {
-		const checkedTasks = [...this.state.tasks]
-		checkedTasks.forEach((item,i) => {
-			this.props.checked = true
-		})
-		this.setState({
-			checkedTasks: checkedTasks
-		})
-		console.log(this.state.checkedTasks)
-	}*/
 
-	onUncheckAll = (item) => {
-		const checkedTasks = [...this.state.tasks]
-		checkedTasks.forEach((item,i) => {
-			this.props.checked = false
-		})
+	uncheckAll = () => {
 		this.setState({
-			checkedTasks: checkedTasks
+			checkedTasks: []
 		})
-		console.log(this.state.checkedTasks)
-	}
-
-	deleteSelected = (checked) => {
-		const leftTasks = this.state.tasks.filter(task => task.checked !== true)
-		this.setState({
-			tasks: leftTasks
-		}) 
 	}
 
 	onDelete = (date) => {
@@ -91,7 +66,6 @@ class App extends Component {
 			const completedTasks = prevState.tasks.map(task => {
 				if (task.date === date) {
 					task.completed = !task.completed
-					console.log(task)
 				}
 				return task
 			})
@@ -165,6 +139,21 @@ class App extends Component {
 		})
 	}
 
+	checkAction = (event) => {
+		this.setState({
+			checkRules: event.target.value
+		},() => {
+		if (this.state.checkRules === 'check') {
+			this.checkAll()
+		} else if (this.state.checkRules === 'uncheck') {
+			this.uncheckAll()
+		} else if (this.state.checkRules === 'delete') {
+			this.deleteSelected()
+		}
+		})
+
+	}
+
 	render() {
 
 		const {
@@ -174,6 +163,7 @@ class App extends Component {
 			sortRules,
 			checkRules
 		} = this.state;
+
 
 		let filteredItems = []
 		if (filterRules === 'active') {
@@ -216,7 +206,6 @@ class App extends Component {
     	} else {
     		sortedItems = filteredItems.slice()
     	}
-    	console.log(sortedItems);
 
 
 
@@ -230,26 +219,12 @@ class App extends Component {
 		}
 
 		paginatedItems = paginate(sortedItems, 10, currentPage)
-		console.log(paginatedItems)
 
 
 
         if (currentPage !== 1 && paginatedItems.length < 1) {
             this.changeCurrentPagePrev()
-        }
-
-        const PaginationArrows = (<div className="pagination">
-        	{ currentPage === 1 && tasks.length > 10 ? <button onClick={this.changeCurrentPageNext}> → </button> : false }
-        	{ tasks.length < 11 && currentPage === 1 ? false : null}
-			{ currentPage !== 1 && sortedItems.length > 10 ? <div className="pagination">
-        		<button onClick={this.changeCurrentPagePrev}> ← </button>
-        	    <button onClick={this.changeCurrentPageNext}> → </button>	
-            </div> : false }
-        </div>);
-
-// 1. sort. items -> sortedItems(this.state.isSorted, items)
-// 2. filter -> sortedItems -> filteredtems(true/false)
-// 3. paginate -> filteredItems -> paginatedItems(currentPage/1/2/3)	
+        }	
 
 
 		let items = [];
@@ -333,8 +308,3 @@ class App extends Component {
 }
 
 export default App
-
-		    		/*{	items.length > 0
-		    			? PaginationArrows
-		    			: null
-		    		}*/
