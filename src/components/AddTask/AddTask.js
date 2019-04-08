@@ -57,6 +57,7 @@ class AddTask extends React.Component {
 				onChange={this.handleInputChange}
 				maxLength="40"
 				onKeyPress={this.handleKeyPress}
+				className="add-task--input"
 				/>
     			<button onClick={this.submit}>Add task</button>
 			</div>
