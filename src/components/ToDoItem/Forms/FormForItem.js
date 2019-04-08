@@ -3,15 +3,6 @@ import '../ToDoItem.css'
 
 class FormForItem extends React.Component {
     render() {
-    	const buttons = (<section className={`edit-delete`}>
-						<button className="todo-item__button"
-								onClick={handleClickEdit}
-						> 🖉 </button>
-						<button className="todo-item__button"
-								onClick={() => onDelete(item.date)}>
-						✖
-						</button>
-					  </section>)
 
     	const {
     		item,
@@ -21,6 +12,17 @@ class FormForItem extends React.Component {
     		handleClickEdit,
     		checkedTasks
     	} = this.props;
+
+    	    	const buttons = (<section className={`edit-delete`}>
+						<button className="todo-item__button"
+								onClick={handleClickEdit}
+						> 🖉 </button>
+						<button className="todo-item__button"
+								onClick={() => onDelete(item.date)}>
+						✖
+						</button>
+					  </section>)
+    	    	
         return (
             <div className="todo-item">
 				<input 

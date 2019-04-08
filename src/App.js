@@ -54,6 +54,28 @@ class App extends Component {
 		})
 	}
 
+	deleteSelected = () => {
+	const { tasks, checkedTasks } = this.state;
+
+	const deletedItems = []
+	const checkedItems = []
+
+	tasks.forEach(task => {
+		if (checkedTasks.includes(task)) deletedItems.push(task)
+		});
+	const newTasks = tasks.filter(task => !deletedItems.includes(task))
+
+	newTasks.forEach(task => {
+		if (checkedTasks.includes(task)) {
+			checkedItems.push(task)
+		}
+	})
+	this.setState({
+	   tasks: newTasks,
+	   checkedTasks: checkedItems
+	 })
+	}
+
 	onDelete = (date) => {
 		const newTasks = this.state.tasks.filter(task => task.date !== date)
 		this.setState({
@@ -150,6 +172,7 @@ class App extends Component {
 		} else if (this.state.checkRules === 'delete') {
 			this.deleteSelected()
 		}
+		this.setState({ checkRules: '' })
 		})
 
 	}
@@ -287,7 +310,7 @@ class App extends Component {
 		    	    }
 		    	</ul>
 
-		    	<div>
+		    	<div className="pagination">
 		    		{ sortedItems.length > 10 
 		    			?	[...Array(Math.ceil(sortedItems.length / 10))].map((x, i) => (
 					          <button
